@@ -89,6 +89,11 @@
 
             <!-- Navigation Menu Items -->
             <nav class="space-y-1">
+                                <button onclick="switchTab('crank')" id="tab-crank" class="nav-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:text-amber-700 hover:bg-amber-50 flex items-center space-x-3 transition">
+                    <i class="fa-solid fa-ring w-4 text-center text-amber-600"></i>
+                    <span class="font-bold text-slate-800">กลไกข้อเหวี่ยง &amp; ก้านสูบ (โครงสร้าง 1)</span>
+                    <span class="ml-auto px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-100 text-amber-800">New</span>
+                </button>
                 <button onclick="switchTab('troubleshoot')" id="tab-troubleshoot" class="nav-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-blue-600 text-white flex items-center space-x-3 transition shadow-sm">
                     <i class="fa-solid fa-stethoscope w-4 text-center"></i>
                     <span>30 อาการเสีย &amp; วินิจฉัย</span>
@@ -151,7 +156,7 @@
             <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs space-y-2">
                 <span class="font-bold text-slate-700 block">คู่มือ Excel ฉบับเต็ม:</span>
                 <p class="text-[11px] text-slate-500">รวม 9 แผ่นงานอย่างละเอียด ครบทุกพารามิเตอร์</p>
-                <a href="https://drive.google.com/file/d/10umktH8rwM9Q5S1EMWurXvMVY4KE9QW1/view?usp=drivesdk" target="_blank" class="w-full py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-center font-medium block transition">
+                <a href="https://drive.google.com/file/d/12WXHHCdykr1BRp_SU60g4ENcRDQLawKS/view?usp=drivesdk" target="_blank" class="w-full py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-center font-medium block transition">
                     <i class="fa-solid fa-file-excel mr-1"></i> ดาวน์โหลด Excel
                 </a>
             </div>
@@ -790,6 +795,289 @@
                 </div>
             </section>
 
+        
+            <!-- TAB: CRANK-CONNECTING ROD MECHANISM (CORE STRUCTURE 1) -->
+            <section id="view-crank" class="tab-content hidden space-y-6">
+                <!-- Header Banner -->
+                <div class="bg-gradient-to-r from-amber-900 via-slate-900 to-blue-950 p-6 rounded-2xl text-white shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4 border border-amber-500/30">
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <span class="px-2.5 py-0.5 bg-amber-500/20 text-amber-300 border border-amber-400/30 rounded-full text-xs font-bold tracking-wide">
+                                CORE MECHANISM 1 : โครงสร้างแกนกลางที่ 1
+                            </span>
+                            <span class="text-xs text-slate-300">| Crank-Connecting Rod &amp; Piston Assembly</span>
+                        </div>
+                        <h2 class="text-xl font-black mt-2 text-white flex items-center space-x-2">
+                            <i class="fa-solid fa-ring text-amber-400"></i>
+                            <span>กลไกเพลาข้อเหวี่ยง ก้านสูบ และลูกสูบ (สถาปัตยกรรมแม่บท &amp; คูโบต้า)</span>
+                        </h2>
+                        <p class="text-xs text-slate-200 mt-1 max-w-2xl leading-relaxed">
+                            ระบบแกนกลางในการแปลงพลังงานเชิงเส้นจากการระเบิด (Reciprocating Motion) ให้เป็นแรงบิดหมุน (Rotational Torque) ตลอด 720° CAD พร้อมเจาะลึกนวัตกรรมคูโบต้า Ladder Frame Crankcase, Dual Dynamic Balancers, ตารางพิกัดความเผื่อ และคู่มือขันแน่นระดับโรงงาน
+                        </p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-2 flex-shrink-0">
+                        <a href="https://drive.google.com/file/d/12WXHHCdykr1BRp_SU60g4ENcRDQLawKS/view?usp=drivesdk" target="_blank" class="px-4 py-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 rounded-xl text-xs font-bold flex items-center justify-center space-x-2 shadow-lg transition">
+                            <i class="fa-solid fa-file-excel text-base"></i>
+                            <span>โหลด Excel โครงสร้าง 1</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 1. Interactive Force Flow Pipeline (7 Stages) -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-3 gap-2">
+                        <div>
+                            <span class="text-xs font-bold text-amber-600 uppercase tracking-wide">ลำดับขั้นการส่งถ่ายแรงดัน (Gas Pressure Force Path)</span>
+                            <h3 class="text-base font-bold text-slate-900 mt-0.5">แผนผังการไหลของแรงระเบิด 7 ลำดับขั้นสู่แรงบิดหมุน</h3>
+                        </div>
+                        <span class="text-xs text-slate-500 bg-slate-100 px-3 py-1 rounded-lg">คลิกที่แต่ละขั้นตอนเพื่อดูรายละเอียดทางวิศวกรรม</span>
+                    </div>
+
+                    <!-- Pipeline Steps Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5 pt-2">
+                        <div onclick="selectForceStep(0)" id="force-step-0" class="force-card p-3 rounded-xl border-2 border-red-500 bg-red-50/50 cursor-pointer hover:shadow-md transition text-center space-y-1">
+                            <span class="text-[10px] font-bold text-red-600 block">ขั้นที่ 1</span>
+                            <i class="fa-solid fa-fire text-red-500 text-lg"></i>
+                            <div class="text-xs font-bold text-slate-800">ก๊าซระเบิด</div>
+                            <div class="text-[10px] text-slate-500 font-mono">Pmax 120-220 bar</div>
+                        </div>
+                        <div onclick="selectForceStep(1)" id="force-step-1" class="force-card p-3 rounded-xl border border-slate-200 bg-slate-50 cursor-pointer hover:shadow-md transition text-center space-y-1">
+                            <span class="text-[10px] font-bold text-amber-600 block">ขั้นที่ 2</span>
+                            <i class="fa-solid fa-shapes text-amber-500 text-lg"></i>
+                            <div class="text-xs font-bold text-slate-800">หัวลูกสูบ</div>
+                            <div class="text-[10px] text-slate-500 font-mono">แรงกด 4-8 ตัน</div>
+                        </div>
+                        <div onclick="selectForceStep(2)" id="force-step-2" class="force-card p-3 rounded-xl border border-slate-200 bg-slate-50 cursor-pointer hover:shadow-md transition text-center space-y-1">
+                            <span class="text-[10px] font-bold text-emerald-600 block">ขั้นที่ 3</span>
+                            <i class="fa-solid fa-bolt text-emerald-500 text-lg"></i>
+                            <div class="text-xs font-bold text-slate-800">สลักลูกสูบ</div>
+                            <div class="text-[10px] text-slate-500 font-mono">แรงเฉือน &gt;100 MPa</div>
+                        </div>
+                        <div onclick="selectForceStep(3)" id="force-step-3" class="force-card p-3 rounded-xl border border-slate-200 bg-slate-50 cursor-pointer hover:shadow-md transition text-center space-y-1">
+                            <span class="text-[10px] font-bold text-blue-600 block">ขั้นที่ 4</span>
+                            <i class="fa-solid fa-arrows-split-up-and-left text-blue-500 text-lg"></i>
+                            <div class="text-xs font-bold text-slate-800">ก้านสูบ</div>
+                            <div class="text-[10px] text-slate-500 font-mono">42CrMo4 I-Beam</div>
+                        </div>
+                        <div onclick="selectForceStep(4)" id="force-step-4" class="force-card p-3 rounded-xl border border-slate-200 bg-slate-50 cursor-pointer hover:shadow-md transition text-center space-y-1">
+                            <span class="text-[10px] font-bold text-purple-600 block">ขั้นที่ 5</span>
+                            <i class="fa-solid fa-circle-notch text-purple-500 text-lg"></i>
+                            <div class="text-xs font-bold text-slate-800">ชาร์ปก้าน</div>
+                            <div class="text-[10px] text-slate-500 font-mono">ฟิล์มน้ำมัน 2-5µm</div>
+                        </div>
+                        <div onclick="selectForceStep(5)" id="force-step-5" class="force-card p-3 rounded-xl border border-slate-200 bg-slate-50 cursor-pointer hover:shadow-md transition text-center space-y-1">
+                            <span class="text-[10px] font-bold text-orange-600 block">ขั้นที่ 6</span>
+                            <i class="fa-solid fa-circle-dot text-orange-500 text-lg"></i>
+                            <div class="text-xs font-bold text-slate-800">ข้อก้าน</div>
+                            <div class="text-[10px] text-slate-500 font-mono">แรงบิดหมุน T=F×r</div>
+                        </div>
+                        <div onclick="selectForceStep(6)" id="force-step-6" class="force-card p-3 rounded-xl border border-slate-200 bg-slate-50 cursor-pointer hover:shadow-md transition text-center space-y-1">
+                            <span class="text-[10px] font-bold text-indigo-600 block">ขั้นที่ 7</span>
+                            <i class="fa-solid fa-dharmachakra text-indigo-500 text-lg"></i>
+                            <div class="text-xs font-bold text-slate-800">ล้อช่วยแรง</div>
+                            <div class="text-[10px] text-slate-500 font-mono">สะสมพลังงานจลน์</div>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Details Box -->
+                    <div id="force-detail-box" class="p-4 rounded-xl bg-slate-900 text-white space-y-2 border border-slate-700">
+                        <div class="flex items-center justify-between">
+                            <span id="force-detail-title" class="font-bold text-amber-400 text-sm">ขั้นตอนที่ 1: ก๊าซระเบิด (Combustion Gas Pressure)</span>
+                            <span id="force-detail-badge" class="px-2 py-0.5 rounded text-[11px] font-mono bg-red-500/20 text-red-300 border border-red-500/30">Pmax 120-220 bar</span>
+                        </div>
+                        <p id="force-detail-desc" class="text-xs text-slate-300 leading-relaxed">
+                            เกิดจากการเผาไหม้แบบฉับพลันของน้ำมันดีเซลที่จุดติดไฟเอง (Auto-ignition) ก๊าซร้อนจัดขยายตัวอย่างรวดเร็ว สร้างแรงดันไฮดรอลิกมหาศาลกดกระแทกลงบนหัวลูกสูบ ถือเป็นต้นกำเนิดพลังงานจลน์ทั้งหมดของเครื่องยนต์
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2 border-t border-slate-800 text-[11px]">
+                            <div><strong class="text-slate-400">อุณหภูมิห้องเผาไหม้:</strong> <span id="force-detail-temp" class="text-white">1,800°C - 2,200°C</span></div>
+                            <div><strong class="text-slate-400">พฤติกรรมความเค้น:</strong> <span id="force-detail-stress" class="text-white">แรงกดกระแทกแบบไดนามิก</span></div>
+                            <div><strong class="text-slate-400">จุดวิกฤต:</strong> <span id="force-detail-fail" class="text-red-400">หากเกิด Diesel Knock จะส่งผลให้ลูกสูบทะลุ</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Kubota Architectural Mastery: Ladder Frame & Balancers -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Ladder Frame vs Tunnel Type -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                            <div>
+                                <span class="text-xs font-bold text-emerald-600 uppercase tracking-wide">นวัตกรรมเฉพาะคูโบต้า (V3307 / V3800)</span>
+                                <h3 class="text-base font-bold text-slate-900 mt-0.5">เสื้อสูบแบบขั้นบันได (Ladder Frame Crankcase)</h3>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">Rigidity +35%</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            แทรกเตอร์คูโบต้าตระกูล <strong>M7040 (V3307-DI)</strong> และ <strong>M9540 (V3800DI-T)</strong> ได้ยกเลิกเสื้อสูบแบบอุโมงค์ (Tunnel Type) แบบเดิม และพัฒนาเป็น <strong>เสื้อสูบแบบขั้นบันไดลิงประกบ 2 ชิ้น (Upper + Lower Crankcase)</strong>
+                        </p>
+                        <div class="space-y-2 text-xs">
+                            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                                <strong class="text-slate-900">1. Upper Crankcase (เสื้อสูบส่วนบน):</strong> เป็นโครงสร้างรองรับกระบอกสูบและแบริ่งเพลาข้อเหวี่ยงครึ่งบน พร้อมช่องทางเดินน้ำมันหล่อเลี้ยง
+                            </div>
+                            <div class="p-3 rounded-xl bg-emerald-50/50 border border-emerald-200">
+                                <strong class="text-emerald-900">2. Lower Crankcase (โครงสร้างขั้นบันไดลิง):</strong> หล่อรวมประกับชาร์บอกทุกจุดให้เป็นสะพานโครงเหล็กชิ้นเดียวกัน ยึดด้วยโบลท์ความแข็งแรงสูง ป้องกันประกับชาร์บอกบิดตัวขณะรับโหลดหนักจัด
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900">
+                            <strong>ข้อดีเชิงช่าง:</strong> แข็งแกร่งกว่าแบบเดิม ซับเสียงได้ดีเยี่ยม และถอดซ่อมบำรุงเปลี่ยนชาร์ปได้ง่ายกว่าแบบอุโมงค์หลายเท่า
+                        </div>
+                    </div>
+
+                    <!-- Dual Balancer Shafts -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                            <div>
+                                <span class="text-xs font-bold text-blue-600 uppercase tracking-wide">เทคโนโลยีลดแรงสั่นสะเทือน (-75%)</span>
+                                <h3 class="text-base font-bold text-slate-900 mt-0.5">เพลาสมดุลคู่ (Dual Dynamic Balancer Shafts)</h3>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200">&lt; 0.5 Grms</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            เครื่องยนต์ 4 สูบทั่วไปมีแรงเฉื่อยอันดับสอง (2nd Harmonics) ทำให้เกิดการสั่นสะท้าน คูโบต้าแก้ปัญหานี้ด้วยการติดตั้ง <strong>เพลาสมดุลคู่ 2 เพลาซ้าย-ขวา หมุนสวนทางกันด้วยความเร็ว 2 เท่าของความเร็วรอบเครื่องยนต์ (2x Crankshaft Speed)</strong>
+                        </p>
+                        <div class="grid grid-cols-2 gap-3 text-center">
+                            <div class="p-3 rounded-xl bg-slate-100 border border-slate-200">
+                                <span class="text-[11px] text-slate-500 block">ก่อนติดตั้งเพลาสมดุล</span>
+                                <span class="text-lg font-black text-red-600 font-mono">2.0 Grms</span>
+                                <span class="text-[10px] text-slate-500 block">สั่นสะท้านแรง ผู้ขับล้า</span>
+                            </div>
+                            <div class="p-3 rounded-xl bg-emerald-100/60 border border-emerald-200">
+                                <span class="text-[11px] text-emerald-700 block">หลังติดตั้ง Dual Balancer</span>
+                                <span class="text-lg font-black text-emerald-700 font-mono">&lt; 0.5 Grms</span>
+                                <span class="text-[10px] text-emerald-800 font-semibold block">สั่นลดลง 75% นุ่มนวล</span>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 space-y-1">
+                            <p><strong>ชุดเฟืองขับหลัง (Rear Gear Train):</strong> ย้ายชุดเฟืองไทม์มิ่งไปไว้ฝั่งล้อช่วยแรง เพื่อลดการบิดงอของเพลาข้อเหวี่ยงและลดเสียงขบฟันเฟือง</p>
+                            <p><strong>กระโปรงลูกสูบ MoS2:</strong> เคลือบโมลิบดีนัมไดซัลไฟด์ ยืดอายุการเปลี่ยนถ่ายน้ำมันเครื่องยาวนานถึง <strong>500 ชั่วโมง</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Master Clearances & Kubota Torque Specifications Table -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-3 gap-2">
+                        <div>
+                            <span class="text-xs font-bold text-amber-600 uppercase tracking-wide">สเปกโรงงาน &amp; คู่มือศูนย์บริการ</span>
+                            <h3 class="text-base font-bold text-slate-900 mt-0.5">ตารางพิกัดความเผื่อและแรงบิดขันมาตรฐาน (Tolerances &amp; Torques)</h3>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <input type="text" id="crankSpecSearch" onkeyup="filterCrankSpecs()" placeholder="ค้นหาสเปก เช่น ปากแหวน, ชาร์ป, ฝาสูบ..." class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg bg-slate-50 focus:bg-white focus:outline-none focus:border-amber-600">
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-slate-900 text-white">
+                                <tr>
+                                    <th class="p-3 rounded-tl-xl">รายการชิ้นส่วน / จุดขัน</th>
+                                    <th class="p-3">รุ่นเครื่องยนต์ / พิกัด</th>
+                                    <th class="p-3 text-center">ค่ามาตรฐาน (Standard)</th>
+                                    <th class="p-3 text-center">ค่าจำกัดการสึกหรอ (Limit)</th>
+                                    <th class="p-3 text-center">แรงบิดขัน (Torque)</th>
+                                    <th class="p-3 rounded-tr-xl">ข้อกำหนดพิเศษช่างยนต์</th>
+                                </tr>
+                            </thead>
+                            <tbody id="crankSpecBody" class="divide-y divide-slate-100">
+                                <!-- Populated dynamically or static rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 4. Mechanical Knock & Failure Diagnostic Matrix -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-3 gap-2">
+                        <div>
+                            <span class="text-xs font-bold text-red-600 uppercase tracking-wide">คู่มือช่างวินิจฉัยเสียงผิดปกติ (Mechanical Knock Diagnostics)</span>
+                            <h3 class="text-base font-bold text-slate-900 mt-0.5">เมทริกซ์ 10 อาการเสียเชิงกลและการจำแนกเสียงเคาะ</h3>
+                        </div>
+                        <span class="text-xs text-slate-500 bg-slate-100 px-3 py-1 rounded-lg">แยกแยะระหว่างเสียงชาร์ปก้าน, ชาร์บอก, ลูกสูบเคาะ และสลักสูบ</span>
+                    </div>
+
+                    <div id="knockGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Knock items populated via JS -->
+                    </div>
+                </div>
+
+                <!-- 5. Step-by-Step Measurement & Assembly SOP -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <div class="border-b border-slate-100 pb-3">
+                        <span class="text-xs font-bold text-blue-600 uppercase tracking-wide">ขั้นตอนปฏิบัติงานมาตรฐาน (SOP: Standard Operating Procedures)</span>
+                        <h3 class="text-base font-bold text-slate-900 mt-0.5">6 ขั้นตอนการตรวจวัดละเอียดและการประกอบโอเวอร์ฮอล</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- SOP 1 -->
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-800">SOP-01</span>
+                                <span class="text-xs text-slate-400 font-mono">กำลังอัด</span>
+                            </div>
+                            <h4 class="text-xs font-bold text-slate-900">การวัดกำลังอัด Dry vs Wet Test</h4>
+                            <p class="text-[11px] text-slate-600 leading-relaxed">
+                                วัด Dry Test สตาร์ท 4-6 รอบ หากต่ำกว่า 26 kg/cm² ให้หยอดน้ำมัน 5 cc แล้ววัดซ้ำ (Wet Test) ถ้าค่าพุ่งสูงขึ้นแปลว่าแหวนสูบหรือปลอกสูบสึกหรอ ถ้าเท่าเดิมแสดงว่าวาล์วรั่ว
+                            </p>
+                        </div>
+                        <!-- SOP 2 -->
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">SOP-02</span>
+                                <span class="text-xs text-slate-400 font-mono">Bore Gauge</span>
+                            </div>
+                            <h4 class="text-xs font-bold text-slate-900">การวัดความรี (Ovality) &amp; เทเปอร์</h4>
+                            <p class="text-[11px] text-slate-600 leading-relaxed">
+                                ใช้เกจวัดกระบอกสูบสอดวัด 3 ระดับ (บน กลาง ล่าง) 2 ทิศทาง (ขนาน A และตั้งฉาก B กับเพลา) ความไม่กลมและเทเปอร์ต้อง &lt; 0.015 mm (ห้ามเกิน 0.05 mm)
+                            </p>
+                        </div>
+                        <!-- SOP 3 -->
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800">SOP-03</span>
+                                <span class="text-xs text-slate-400 font-mono">Plastigauge</span>
+                            </div>
+                            <h4 class="text-xs font-bold text-slate-900">การใช้พลาสติเกจวัดชาร์ป</h4>
+                            <p class="text-[11px] text-slate-600 leading-relaxed">
+                                วางแถบพลาสติเกจบนคอเพลาแห้งสนิท ขันโบลท์ตามแรงบิดปอนด์ ห้ามหมุนเพลาเด็ดขาด คลายโบลท์เทียบความกว้างแถบพลาสติก ชาร์ปก้าน 0.035-0.075 mm / ชาร์บอก 0.040-0.082 mm
+                            </p>
+                        </div>
+                        <!-- SOP 4 -->
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-100 text-purple-800">SOP-04</span>
+                                <span class="text-xs text-slate-400 font-mono">End Play</span>
+                            </div>
+                            <h4 class="text-xs font-bold text-slate-900">การวัดระยะรุนเพลาข้อเหวี่ยง</h4>
+                            <p class="text-[11px] text-slate-600 leading-relaxed">
+                                ติดตั้งไดอัลเกจสัมผัสหน้าแปลนเพลา ใช้ไขควงงัดเพลาไปหน้า-หลังสุด อ่านค่าระยะรุนตามแนวแกน มาตรฐาน 0.10 - 0.25 mm (จำกัดสูงสุด 0.40 mm) หากเกินให้เปลี่ยนแผ่นชิมกันรุน
+                            </p>
+                        </div>
+                        <!-- SOP 5 -->
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-100 text-red-800">SOP-05</span>
+                                <span class="text-xs text-slate-400 font-mono">Ring Stagger</span>
+                            </div>
+                            <h4 class="text-xs font-bold text-slate-900">กฎการเรียงปากแหวน 120° / 180°</h4>
+                            <p class="text-[11px] text-slate-600 leading-relaxed">
+                                หันด้านมีมาร์ก 'TOP' ขึ้นบน จัดปากแหวน 3 วงเยื้องมุม 120° ห้ามปากแหวนตรงกัน ห้ามตรงกับแนวสลักสูบ และห้ามตรงกับแนวกดด้านข้าง (Thrust side) ป้องกันกำลังอัดรั่ว
+                            </p>
+                        </div>
+                        <!-- SOP 6 -->
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-100 text-indigo-800">SOP-06</span>
+                                <span class="text-xs text-slate-400 font-mono">Piston Install</span>
+                            </div>
+                            <h4 class="text-xs font-bold text-slate-900">การสวมลูกสูบด้วย Ring Compressor</h4>
+                            <p class="text-[11px] text-slate-600 leading-relaxed">
+                                ชโลมน้ำมันเครื่องทั่วลูกสูบและปลอกสูบ ใช้ปลอกรัดแหวนให้แนบสนิท หันลูกศรมาร์กหัวลูกสูบไปหน้ารถ ใช้ด้ามค้อนไม้เคาะส่งเบาๆ ระวังปลายก้านสูบกระแทกคอเพลา
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
         </main>
     </div>
 
@@ -1054,11 +1342,188 @@
             document.getElementById('resHP').innerText = '(' + hp.toFixed(1) + ' HP)';
         }
 
+        
+        // CRANK MECHANISM INTERACTIVE DATA
+        const forceSteps = [
+            {
+                title: "ขั้นตอนที่ 1: ก๊าซระเบิด (Combustion Gas Pressure)",
+                badge: "Pmax 120-220 bar",
+                desc: "เกิดจากการเผาไหม้แบบฉับพลันของน้ำมันดีเซลที่จุดติดไฟเอง (Auto-ignition) ก๊าซร้อนจัดขยายตัวอย่างรวดเร็ว สร้างแรงดันไฮดรอลิกมหาศาลกดกระแทกลงบนหัวลูกสูบ ถือเป็นต้นกำเนิดพลังงานจลน์ทั้งหมดของเครื่องยนต์",
+                temp: "1,800°C - 2,200°C",
+                stress: "แรงกดกระแทกแบบไดนามิก (Impact Compressive Load)",
+                fail: "หากเกิด Diesel Knock รุนแรงจะส่งผลให้ลูกสูบแตกร้าวหรือทะลุ"
+            },
+            {
+                title: "ขั้นตอนที่ 2: หัวลูกสูบ (Piston Crown & Bowl)",
+                badge: "แรงกด 4-8 ตัน",
+                desc: "หัวลูกสูบรับแรงดันก๊าซระเบิดโดยตรง กระจายความร้อน 70% ออกสู่แหวนลูกสูบและผนังปลอกสูบ พร้อมถ่ายทอดแรงกดแนวแกนลงสู่บอสสลักสูบและกระโปรงลูกสูบเคลือบ MoS2",
+                temp: "300°C - 400°C (ที่ยอดลูกสูบ)",
+                stress: "แรงกดอัดแนวแกน (Axial Compression) และความเค้นทางความร้อน (Thermal Stress)",
+                fail: "กระโปรงลูกสูบขยายตัวบวมครูดปลอกสูบ (Scuffing) หรือหัวลูกสูบละลาย"
+            },
+            {
+                title: "ขั้นตอนที่ 3: สลักลูกสูบ (Wrist Pin / Gudgeon Pin)",
+                badge: "แรงเฉือน > 100 MPa",
+                desc: "สลักสูบเหล็กกล้า 16MnCr5 ชุบแข็งผิวคาร์บูไรซิ่ง ทำหน้าที่เป็นข้อต่อหมุนอิสระ (Full-floating) ถ่ายทอดแรงผลักจากลูกสูบสู่ปลายเล็กก้านสูบอย่างมั่นคง",
+                temp: "150°C - 200°C",
+                stress: "แรงดัด (Bending Stress) และแรงเฉือน (Shear Stress)",
+                fail: "ระยะหลวมเกินพิกัดทำให้เกิดเสียงเคาะแหลมคม Wrist Pin Knock ตอนเดินเบา"
+            },
+            {
+                title: "ขั้นตอนที่ 4: ก้านสูบ (Connecting Rod Shank)",
+                badge: "42CrMo4 Forged I-Beam",
+                desc: "ก้านสูบแกว่งตัวแปลงการเคลื่อนที่เชิงเส้นเส้นตรงเป็นการแกว่งเชิงมุม ถ่ายทอดแรงมหาศาล ปลายใหญ่ตัดหักแบบ Fracture-Split ยึดติดแน่นไม่ขยับหนีศูนย์",
+                temp: "120°C - 160°C",
+                stress: "แรงกดสลับแรงดึง และแรงโก่งงอ (Buckling Load)",
+                fail: "ก้านสูบคดงอทันทีหากมีน้ำเข้าห้องเผาไหม้ (Hydraulic Lock)"
+            },
+            {
+                title: "ขั้นตอนที่ 5: ชาร์ปก้านสูบ (Connecting Rod Bearing)",
+                badge: "ฟิล์มน้ำมัน 2-5 ไมครอน",
+                desc: "แบริ่งโลหะ 3 ชั้น Tri-metal รองรับแรงกดกระแทกผ่านฟิล์มน้ำมันเครื่องไฮโดรไดนามิก ป้องกันเนื้อโลหะก้านสูบสัมผัสกับคอเพลาข้อเหวี่ยงโดยตรง",
+                temp: "100°C - 130°C",
+                stress: "แรงดันไฮโดรไดนามิก (Hydrodynamic Pressure) สูงกว่า 50 MPa",
+                fail: "ชาร์ปละลาย (Spun Bearing) และส่งเสียงเคาะ Rod Knock หนักแน่น"
+            },
+            {
+                title: "ขั้นตอนที่ 6: ข้อก้านเพลาข้อเหวี่ยง (Crankpin Journal)",
+                badge: "แรงบิดหมุน T = F × r",
+                desc: "ข้อก้านเพลาข้อเหวี่ยงเยื้องศูนย์จากแกนกลาง (Crank Throw = Stroke / 2) แปลงแรงกดแนวเอียงของก้านสูบให้กลายเป็นแรงบิดหมุนต่อเนื่อง (Rotational Torque)",
+                temp: "90°C - 120°C",
+                stress: "แรงสัมผัสและการบิดงอ (Torsional Stress)",
+                fail: "เกิดรอยขูดขีดร่องลึก หรือรอยแตกล้าที่มุมมน Fillet Radius"
+            },
+            {
+                title: "ขั้นตอนที่ 7: เพลาข้อเหวี่ยง & ล้อช่วยแรง (Crankshaft & Flywheel)",
+                badge: "สะสมโมเมนตัมพลังงานจลน์",
+                desc: "เพลาข้อเหวี่ยงรวมแรงบิดจากทุกสูบส่งออกสู่เกียร์ขับเคลื่อน ล้อช่วยแรงทำหน้าที่สะสมพลังงานจลน์เพื่อขับเคลื่อนลูกสูบในอีก 3 จังหวะที่เหลือ (ดูด, อัด, คาย) ให้หมุนเรียบสม่ำเสมอ",
+                temp: "80°C - 110°C",
+                stress: "แรงเฉื่อย แรงเหวี่ยงหนีศูนย์ และแรงสั่นสะเทือนเชิงมุม",
+                fail: "เพลาข้อเหวี่ยงหักล้าจากแรงสั่นสะเทือน หรือฟันเฟืองล้อช่วยแรงรูด"
+            }
+        ];
+
+        function selectForceStep(idx) {
+            document.querySelectorAll('.force-card').forEach((el, i) => {
+                if (i === idx) {
+                    el.classList.add('border-2', 'border-amber-500', 'bg-amber-50/70', 'shadow-md');
+                    el.classList.remove('border-slate-200', 'bg-slate-50', 'border-red-500', 'bg-red-50/50');
+                } else {
+                    el.classList.remove('border-2', 'border-amber-500', 'bg-amber-50/70', 'shadow-md', 'border-red-500', 'bg-red-50/50');
+                    el.classList.add('border', 'border-slate-200', 'bg-slate-50');
+                }
+            });
+            const d = forceSteps[idx];
+            document.getElementById('force-detail-title').innerText = d.title;
+            document.getElementById('force-detail-badge').innerText = d.badge;
+            document.getElementById('force-detail-desc').innerText = d.desc;
+            document.getElementById('force-detail-temp').innerText = d.temp;
+            document.getElementById('force-detail-stress').innerText = d.stress;
+            document.getElementById('force-detail-fail').innerText = d.fail;
+        }
+
+        const crankSpecsData = [
+            { item: "ระยะห่างลูกสูบกับกระบอกสูบ", model: "ลูกสูบ 87 mm (Bore ทั่วไป)", std: "0.080 - 0.150 mm", limit: "0.250 mm", torque: "-", note: "ชิดไปลูกสูบติด ห่างไปลูกสูบเคาะ (Piston Slap)" },
+            { item: "ปากแหวนอัดตัวบน (Top Ring Gap)", model: "วัดในปลอกสูบลึก 15 mm", std: "0.250 - 0.400 mm", limit: "1.250 mm", torque: "-", note: "ชิดไปปลายแหวนชนกันจนแหวนหัก ห่างไปกำลังอัดรั่ว" },
+            { item: "ปากแหวนอัดตัวที่สอง (2nd Ring Gap)", model: "วัดในปลอกสูบลึก 15 mm", std: "0.350 - 0.500 mm", limit: "1.250 mm", torque: "-", note: "หันมาร์ก TOP ขึ้นบนเสมอ ปาดน้ำมันและซีลกำลังอัด" },
+            { item: "ปากแหวนกวาดน้ำมัน (Oil Ring Gap)", model: "วัดเฉพาะแหวนเหล็ก", std: "0.200 - 0.450 mm", limit: "1.250 mm", torque: "-", note: "ปากสปริงลอนต้องอยู่ตรงข้ามปากแหวน 180°" },
+            { item: "ระยะห่างชาร์ปก้านสูบ (Rod Bearing Clr)", model: "วัดด้วย Plastigauge", std: "0.035 - 0.075 mm", limit: "0.100 mm", torque: "-", note: "หลวมเกินไปแรงดันน้ำมันตก เกิดเสียง Rod Knock" },
+            { item: "ระยะห่างชาร์บอก (Main Bearing Clr)", model: "วัดด้วย Plastigauge", std: "0.040 - 0.082 mm", limit: "0.120 mm", torque: "-", note: "หลวมเกินไปแรงดันตกทั้งเครื่องยนต์ เสี่ยงชาร์ปละลาย" },
+            { item: "ระยะรุนเพลาข้อเหวี่ยง (End Play)", model: "วัดด้วย Dial Indicator", std: "0.100 - 0.250 mm", limit: "0.400 mm", torque: "-", note: "เกินกำหนดให้เปลี่ยนแผ่นชิมกันรุน (Thrust Washers)" },
+            { item: "ความรีและเทเปอร์กระบอกสูบ", model: "Bore Gauge 3 ระดับ", std: "< 0.015 mm", limit: "0.050 mm", torque: "-", note: "เกินกำหนดต้องคว้านกระบอกสูบ ตีปลอกใหม่" },
+            { item: "โบลท์ฝาสูบ V3307 / V3800", model: "M7040, M9540 (M12x1.5)", std: "-", limit: "-", torque: "14.0 - 15.0 kgf·m (147 N·m)", note: "ชโลมน้ำมัน ขันวนก้นหอยจากกลางออกนอก 3 สเต็ป" },
+            { item: "โบลท์ฝาสูบ D1703 / V2403", model: "L3408, L4508 (M11x1.25)", std: "-", limit: "-", torque: "9.5 - 10.0 kgf·m (98 N·m)", note: "ชโลมน้ำมัน ห้ามใช้บล็อกลมขันเด็ดขาด" },
+            { item: "โบลท์ประกับก้านสูบ (Rod Bolts)", model: "ทุกรุ่นคูโบต้า (M9x1.0)", std: "-", limit: "-", torque: "4.5 - 5.0 kgf·m (49 N·m)", note: "ชโลมน้ำมัน ขันสลับซ้าย-ขวา ตรวจมาร์กประกบคู่" },
+            { item: "โบลท์เสื้อสูบขั้นบันได (Ladder Frame)", model: "V3307 / V3800 (M10x1.25)", std: "-", limit: "-", torque: "5.0 - 5.5 kgf·m (54 N·m)", note: "ทากาวปะเก็นเหลวที่หน้าแปลนประกบ" },
+            { item: "น็อตยึดล้อช่วยแรง (Flywheel Bolts)", model: "ทุกรุ่นคูโบต้า (M12x1.25)", std: "-", limit: "-", torque: "10.0 - 11.0 kgf·m (108 N·m)", note: "ทาน้ำยากันคลาย Loctite ขันทะแยงมุมกากบาท" },
+            { item: "น็อตพูลเลย์หน้าเพลาข้อเหวี่ยง", model: "ตระกูล V3 และ 03 (M24x2.0)", std: "-", limit: "-", torque: "14.0 - 16.0 kgf·m (157 N·m)", note: "ล็อกล้อช่วยแรงก่อนขัน ป้องกันลิ่มเพลาแตก" }
+        ];
+
+        function renderCrankSpecs(items) {
+            const tbody = document.getElementById('crankSpecBody');
+            if (!tbody) return;
+            tbody.innerHTML = items.map((r, i) => `
+                <tr class="${i % 2 === 0 ? 'bg-white' : 'bg-slate-50/70'} hover:bg-amber-50/40 transition">
+                    <td class="p-3 font-bold text-slate-900">${r.item}</td>
+                    <td class="p-3 text-slate-600">${r.model}</td>
+                    <td class="p-3 text-center font-mono font-semibold text-emerald-700">${r.std}</td>
+                    <td class="p-3 text-center font-mono font-semibold text-red-600">${r.limit}</td>
+                    <td class="p-3 text-center font-mono font-bold text-blue-700">${r.torque}</td>
+                    <td class="p-3 text-slate-500">${r.note}</td>
+                </tr>
+            `).join('');
+        }
+
+        function filterCrankSpecs() {
+            const query = (document.getElementById('crankSpecSearch').value || '').toLowerCase();
+            const filtered = crankSpecsData.filter(d => 
+                d.item.toLowerCase().includes(query) ||
+                d.model.toLowerCase().includes(query) ||
+                d.torque.toLowerCase().includes(query) ||
+                d.note.toLowerCase().includes(query)
+            );
+            renderCrankSpecs(filtered);
+        }
+
+        const knockData = [
+            {
+                code: "MK-01", name: "เสียงเคาะชาร์ปก้านสูบ (Rod Knock)", sound: "เสียงเคาะโลหะหนักแน่น 'ตึ้กๆๆ' ดังเป็นจังหวะชัดเจน",
+                trigger: "ดังรุนแรงขึ้นเมื่อเร่งรอบแล้วยกคันเร่ง (Deceleration)", cause: "ชาร์ปก้านสูบละลาย หรือระยะหลวมเกิน 0.10 mm จากแรงดันน้ำมันตก",
+                action: "หยุดเครื่องทันที! ถอดอ่าง เจียรคอเพลาข้อเหวี่ยง เปลี่ยนชาร์ปใหม่", color: "red"
+            },
+            {
+                code: "MK-02", name: "เสียงเคาะชาร์บอก (Main Bearing Knock)", sound: "เสียงเคาะทึบและลึกมาก 'ตึง...ตึง' ใต้กึ่งกลางเสื้อสูบ",
+                trigger: "ดังสม่ำเสมอตลอดเวลา ยิ่งมีโหลดฉุดหนักเสียงยิ่งดังสะท้าน", cause: "ชาร์บอกเพลาข้อเหวี่ยงสึกหรอรุนแรงหรือละลาย เพลาข้อเหวี่ยงคด",
+                action: "โอเวอร์ฮอลใหญ่ ถอดตรวจแนวเพลาข้อเหวี่ยง วัดแบริ่งทุกจุด", color: "red"
+            },
+            {
+                code: "MK-03", name: "เสียงกระโปรงลูกสูบเคาะ (Piston Slap)", sound: "เสียงเคาะกระทบเบาๆ 'แป๊กๆๆ' เหมือนเสียงเคาะกระทะ",
+                trigger: "ดังชัดเจนตอนสตาร์ทเครื่องยนต์ขณะเย็น เสียงจะเบาลงเมื่อเครื่องร้อน", cause: "ระยะห่างกระโปรงลูกสูบกับปลอกสูบหลวมเกิน 0.20 mm สารเคลือบ MoS2 หลุดลอก",
+                action: "หากดังรุนแรงต้องคว้านกระบอกสูบเปลี่ยนลูกสูบไซส์โอเวอร์ไซส์", color: "amber"
+            },
+            {
+                code: "MK-04", name: "เสียงสลักลูกสูบหลวม (Wrist Pin Knock)", sound: "เสียงเคาะแหลมคม 'คลิ๊กๆๆ' สองครั้งต่อรอบการหมุน",
+                trigger: "ดังชัดเจนที่สุดตอนเดินเบา หรือเร่งเครื่องเบาๆ ไม่มีโหลด", cause: "รูสลักลูกสูบหลวม หรือบูชปลายเล็กก้านสูบสึกหรอ ขาดการหล่อลื่น",
+                action: "ถอดก้านสูบออกมาอัดเปลี่ยนบูชปลายก้านและเปลี่ยนสลักสูบใหม่", color: "blue"
+            },
+            {
+                code: "MK-05", name: "ชาร์ปละลายหมุนตาม (Spun Bearing)", sound: "เกิดเสียงเคาะดังลั่นกระทันหัน ตามด้วยรอบตกและเครื่องดับจับตาย",
+                trigger: "เกิดขึ้นเฉียบพลันขณะใช้งานรอบสูงหรือโหลดหนักจัด", cause: "ขาดน้ำมันเครื่องจนฟิล์มหล่อลื่นพังทลาย โลหะเชื่อมติดกันจนเดือยล็อกขาด",
+                action: "เปลี่ยนก้านสูบใหม่ เจียรคอเพลาข้ามไซส์ หรือเปลี่ยนเพลาข้อเหวี่ยง", color: "red"
+            },
+            {
+                code: "MK-08", name: "ก้านสูบคดงอ (Bent Connecting Rod)", sound: "เครื่องยนต์สั่นกระพือ สตาร์ทติดยาก กำลังอัดตก ควันขาวออกท่อ",
+                trigger: "สังเกตเห็นหลังลุยน้ำท่วม หรือมีน้ำมันไหลเข้ากระบอกสูบ", cause: "น้ำเข้าท่อไอดีเกิดสภาวะไฮดรอลิกล็อก (Hydraulic Lock) ก๊าซไม่ยุบตัว",
+                action: "ห้ามสตาร์ทเครื่องเด็ดขาดถ้าน้ำเข้าไอดี! ถอดเปลี่ยนก้านสูบใหม่ทันที", color: "red"
+            }
+        ];
+
+        function renderKnockData() {
+            const grid = document.getElementById('knockGrid');
+            if (!grid) return;
+            grid.innerHTML = knockData.map(item => `
+                <div class="p-4 rounded-xl border border-${item.color}-200 bg-${item.color}-50/30 hover:shadow-md transition space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-${item.color}-100 text-${item.color}-800 font-mono">${item.code}</span>
+                        <span class="text-[11px] font-bold text-slate-500">${item.trigger}</span>
+                    </div>
+                    <h4 class="text-xs font-bold text-slate-900">${item.name}</h4>
+                    <p class="text-[11px] text-slate-700"><strong class="text-slate-900">เสียงที่ได้ยิน:</strong> ${item.sound}</p>
+                    <p class="text-[11px] text-slate-600"><strong class="text-red-600">สาเหตุรากเหง้า:</strong> ${item.cause}</p>
+                    <div class="p-2 rounded-lg bg-white border border-slate-200 text-[11px] text-slate-800">
+                        <strong class="text-emerald-700">แนวทางแก้ไข:</strong> ${item.action}
+                    </div>
+                </div>
+            `).join('');
+        }
+
         // Init
         renderDiagnostics(troubleshoots);
         renderDTC(dtcs);
         calculateCR();
         calculatePower();
+        renderCrankSpecs(crankSpecsData);
+        renderKnockData();
     </script>
 </body>
 </html>
