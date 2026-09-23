@@ -109,13 +109,17 @@
                     <i class="fa-solid fa-image w-4 text-center text-blue-600"></i>
                     <span>คลังไดอะแกรม &amp; รูปเปล่า</span>
                 </button>
+                                <button onclick="switchTab('kubota')" id="tab-kubota" class="nav-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-600 hover:text-blue-700 hover:bg-blue-50 flex items-center space-x-3 transition">
+                    <i class="fa-solid fa-tractor w-4 text-center text-emerald-600"></i>
+                    <span class="font-semibold text-emerald-700">เครื่องยนต์คูโบต้า (Kubota Agri)</span>
+                </button>
                 <button onclick="switchTab('arch')" id="tab-arch" class="nav-btn w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-600 hover:text-blue-700 hover:bg-blue-50 flex items-center space-x-3 transition">
                     <i class="fa-solid fa-sitemap w-4 text-center text-blue-600"></i>
                     <span>2 โครงสร้าง + 6 ระบบ</span>
                 </button>
             </nav>
 
-            <!-- Multi-Hub Switcher Section -->
+            <!-- Multi-Hub Hub Switcher Section -->
             <div class="pt-4 border-t border-slate-200">
                 <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2 px-1">หมวดหมู่ในศูนย์รวม:</span>
                 <div class="space-y-1.5 text-xs">
@@ -133,12 +137,12 @@
                         </span>
                         <span class="text-[10px] text-slate-400">Coming</span>
                     </div>
-                    <div class="p-2 rounded-lg bg-slate-50 border border-slate-200 text-slate-600 flex items-center justify-between">
+                    <div onclick="switchTab('kubota')" class="p-2 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 font-semibold flex items-center justify-between cursor-pointer hover:bg-emerald-100 transition">
                         <span class="flex items-center space-x-2">
                             <i class="fa-solid fa-tractor text-emerald-600"></i>
-                            <span>3. เครื่องจักรการเกษตร</span>
+                            <span>3. เครื่องจักรการเกษตร (Kubota)</span>
                         </span>
-                        <span class="text-[10px] text-slate-400">Coming</span>
+                        <span class="text-[10px] bg-emerald-600 text-white px-1.5 py-0.5 rounded">Active</span>
                     </div>
                 </div>
             </div>
@@ -461,6 +465,331 @@
                 </div>
             </section>
 
+                    <!-- TAB 7: KUBOTA AGRICULTURAL ENGINES MASTERCLASS -->
+            <section id="view-kubota" class="tab-content hidden space-y-6">
+                <!-- Header Banner -->
+                <div class="bg-gradient-to-r from-emerald-800 via-teal-800 to-slate-900 p-6 rounded-2xl text-white shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <span class="px-2.5 py-0.5 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 rounded-full text-xs font-bold tracking-wide">
+                                AGRICULTURAL MACHINERY MASTERCLASS
+                            </span>
+                            <span class="text-xs text-slate-300">| แทรกเตอร์ &amp; เครื่องจักรการเกษตร</span>
+                        </div>
+                        <h2 class="text-xl font-bold mt-2 text-white flex items-center space-x-2">
+                            <i class="fa-solid fa-tractor text-emerald-400"></i>
+                            <span>คู่มือวิศวกรรมเครื่องยนต์ดีเซลคูโบต้า (Kubota E-TVCS &amp; E-CDIS Series)</span>
+                        </h2>
+                        <p class="text-xs text-slate-200 mt-1 max-w-2xl leading-relaxed">
+                            เจาะลึกระบบการเผาไหม้ E-TVCS, E-CDIS, โครงสร้างเสื้อสูบขั้นบันได (Ladder Frame), ชุดเฟืองขับหลัง (Rear Gear Train), เพลาสมดุลคู่ (Dual Balancer), และคู่มือตั้งวาล์ว-วัดกำลังอัดตามสเปกศูนย์บริการ
+                        </p>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <span class="px-3 py-1.5 bg-white/10 backdrop-blur rounded-xl text-xs font-mono font-bold text-yellow-300 border border-white/10 block text-center">
+                            B-Series • L-Series • M-Series
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 1. Technology Pillars: E-TVCS vs E-CDIS -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- E-TVCS Card -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                            <div>
+                                <span class="text-xs font-bold text-emerald-600 uppercase tracking-wide">ห้องเผาไหม้ช่วยหมุนวน 3 ทิศทาง</span>
+                                <h3 class="text-base font-bold text-slate-900 mt-0.5">E-TVCS (Three Vortex Combustion System)</h3>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">IDI Technology</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            <strong>E-TVCS (Three Vortex Combustion System)</strong> คือระบบห้องเผาไหม้ช่วยรูปทรงกลมที่พัฒนาขึ้นเพื่อสิ่งแวดล้อม (E: Environmental) โดยอากาศที่ถูกอัดตัวจะหมุนวนเป็นกระแสวน 3 ทาง (Three Vortex) ภายในห้องเผาไหม้ช่วย ทำให้น้ำมันดีเซลที่ฉีดออกมาผสมกับออกซิเจนได้อย่างรวดเร็ว เผาไหม้สะอาด ลดควันดำ และลดก๊าซมลพิษ
+                        </p>
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2 text-xs">
+                            <div class="font-bold text-slate-800">จุดเด่นทางวิศวกรรม:</div>
+                            <ul class="list-disc list-inside text-slate-600 space-y-1">
+                                <li>การเผาไหม้นุ่มนวล เสียงเครื่องยนต์เดินเงียบ ไม่น็อคกระแทก</li>
+                                <li>ใช้หัวฉีดแบบเข็มบานปลาย (Pintle Type Nozzle) ทำงานร่วมกับหัวเผา (Glow Plug)</li>
+                                <li>สตาร์ทติดง่ายแม้ในสภาพอากาศเย็นจัด</li>
+                            </ul>
+                        </div>
+                        <div class="text-[11px] text-slate-400 font-mono">
+                            <strong>รุ่นที่ใช้งาน:</strong> B2410, B2420, L2808, L3208, L3408, L3608, L4508, M5000
+                        </div>
+                    </div>
+
+                    <!-- E-CDIS Card -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                            <div>
+                                <span class="text-xs font-bold text-blue-600 uppercase tracking-wide">ระบบฉีดตรงกลางหัวลูกสูบ 4 วาล์ว</span>
+                                <h3 class="text-base font-bold text-slate-900 mt-0.5">E-CDIS (Center Direct Injection System)</h3>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200">DI Technology</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            <strong>E-CDIS (Center Direct Injection System)</strong> เทคโนโลยีหัวฉีดตรงกลางหัวลูกสูบ ทำงานร่วมกับโครงสร้าง <strong>4 วาล์วต่อสูบ (16 Valves)</strong> และหัวฉีดแบบ 6 ทิศทาง ทำให้น้ำมันกระจายตัวทั่วถึงทั้งห้องเผาไหม้บนหลุมหัวลูกสูบ เผาไหม้หมดจด ให้แรงบิดมหาศาลที่รอบต่ำ
+                        </p>
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2 text-xs">
+                            <div class="font-bold text-slate-800">จุดเด่นทางวิศวกรรม:</div>
+                            <ul class="list-disc list-inside text-slate-600 space-y-1">
+                                <li><strong>ประหยัดน้ำมันขึ้น 10%</strong> เมื่อเทียบกับระบบเดิม</li>
+                                <li><strong>แรงบิดสูงสุดเพิ่มขึ้น 7%</strong> ดึงกำลังในรอบต่ำ (Low-end Torque) ได้ยอดเยี่ยม</li>
+                                <li>หัวฉีด DI แบบสองจังหวะ (Two-stage Injector) สปริง 2 ชั้น ลดแรงกระแทกในห้องเผาไหม้</li>
+                            </ul>
+                        </div>
+                        <div class="text-[11px] text-slate-400 font-mono">
+                            <strong>รุ่นที่ใช้งาน:</strong> V3307-DI (M7040), V3800DI-T (M9540), M8540, M105S, M108S
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Master Specification Table for Kubota Engines -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                        <div>
+                            <h3 class="text-base font-bold text-slate-900 flex items-center space-x-2">
+                                <i class="fa-solid fa-table-list text-emerald-600"></i>
+                                <span>ตารางสเปกทางวิศวกรรมและค่าบริการมาตรฐานเครื่องยนต์คูโบต้า (Master Service Specs)</span>
+                            </h3>
+                            <p class="text-xs text-slate-500 mt-0.5">ระยะห่างวาล์ว, กำลังอัด, แรงดันเปิดหัวฉีด และองศาการฉีดน้ำมันทุกรุ่น</p>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-xs">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
+                                    <th class="py-3 px-3">รุ่นเครื่องยนต์ / แทรกเตอร์</th>
+                                    <th class="py-3 px-3">ระบบเผาไหม้</th>
+                                    <th class="py-3 px-3">ระยะห่างวาล์ว (mm)</th>
+                                    <th class="py-3 px-3">กำลังอัดมาตรฐาน (kg/cm²)</th>
+                                    <th class="py-3 px-3">กำลังอัดต่ำสุดที่ยอมได้</th>
+                                    <th class="py-3 px-3">แรงดันหัวฉีด (kg/cm²)</th>
+                                    <th class="py-3 px-3">องศาการฉีด (BTDC)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr class="hover:bg-slate-50/80">
+                                    <td class="py-2.5 px-3 font-bold text-slate-800">B2420</td>
+                                    <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-semibold text-[11px]">E-TVCS (IDI)</span></td>
+                                    <td class="py-2.5 px-3 font-mono">0.145 - 0.185</td>
+                                    <td class="py-2.5 px-3 font-mono font-semibold text-blue-700">38.0 - 42.0</td>
+                                    <td class="py-2.5 px-3 font-mono text-red-600 font-bold">23.0</td>
+                                    <td class="py-2.5 px-3 font-mono">140</td>
+                                    <td class="py-2.5 px-3 font-mono">16° - 18°</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/80">
+                                    <td class="py-2.5 px-3 font-bold text-slate-800">L2808 - L3608</td>
+                                    <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-semibold text-[11px]">E-TVCS (IDI)</span></td>
+                                    <td class="py-2.5 px-3 font-mono">0.18 - 0.22</td>
+                                    <td class="py-2.5 px-3 font-mono font-semibold text-blue-700">36.0 - 41.0</td>
+                                    <td class="py-2.5 px-3 font-mono text-red-600 font-bold">26.0</td>
+                                    <td class="py-2.5 px-3 font-mono">140 - 150</td>
+                                    <td class="py-2.5 px-3 font-mono">17° - 19°</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/80">
+                                    <td class="py-2.5 px-3 font-bold text-slate-800">L4508</td>
+                                    <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-semibold text-[11px]">E-TVCS (IDI)</span></td>
+                                    <td class="py-2.5 px-3 font-mono">0.18 - 0.22</td>
+                                    <td class="py-2.5 px-3 font-mono font-semibold text-blue-700">36.0 - 41.0</td>
+                                    <td class="py-2.5 px-3 font-mono text-red-600 font-bold">26.0</td>
+                                    <td class="py-2.5 px-3 font-mono">190 - 200</td>
+                                    <td class="py-2.5 px-3 font-mono">7.45° - 8.95°</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/80">
+                                    <td class="py-2.5 px-3 font-bold text-slate-800">L4708</td>
+                                    <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-blue-50 text-blue-700 font-semibold text-[11px]">Direct Injection (DI)</span></td>
+                                    <td class="py-2.5 px-3 font-mono">0.18 - 0.22</td>
+                                    <td class="py-2.5 px-3 font-mono font-semibold text-blue-700">30.0 - 33.0</td>
+                                    <td class="py-2.5 px-3 font-mono text-red-600 font-bold">24.0</td>
+                                    <td class="py-2.5 px-3 font-mono">190 - 200</td>
+                                    <td class="py-2.5 px-3 font-mono">7.45° - 8.95°</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/80">
+                                    <td class="py-2.5 px-3 font-bold text-slate-800">M5000S - M6040</td>
+                                    <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-blue-50 text-blue-700 font-semibold text-[11px]">DI / E-CDIS</span></td>
+                                    <td class="py-2.5 px-3 font-mono">0.18 - 0.22</td>
+                                    <td class="py-2.5 px-3 font-mono font-semibold text-blue-700">36.0 - 41.0 / 30-33</td>
+                                    <td class="py-2.5 px-3 font-mono text-red-600 font-bold">26.0 / 24.0</td>
+                                    <td class="py-2.5 px-3 font-mono">140-150 / 190-205</td>
+                                    <td class="py-2.5 px-3 font-mono">17°-19° / 6°-7.5°</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/80">
+                                    <td class="py-2.5 px-3 font-bold text-slate-800">M7040 (V3307-DI)</td>
+                                    <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-blue-50 text-blue-700 font-semibold text-[11px]">E-CDIS 4-Valve</span></td>
+                                    <td class="py-2.5 px-3 font-mono">0.13 - 0.17</td>
+                                    <td class="py-2.5 px-3 font-mono font-semibold text-blue-700">40.0</td>
+                                    <td class="py-2.5 px-3 font-mono text-red-600 font-bold">29.6</td>
+                                    <td class="py-2.5 px-3 font-mono">190 - 200</td>
+                                    <td class="py-2.5 px-3 font-mono">3.5° - 5.5°</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/80">
+                                    <td class="py-2.5 px-3 font-bold text-slate-800">M8540 - M9540 (V3800DI-T)</td>
+                                    <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-blue-50 text-blue-700 font-semibold text-[11px]">E-CDIS Turbo 16V</span></td>
+                                    <td class="py-2.5 px-3 font-mono">0.23 - 0.27</td>
+                                    <td class="py-2.5 px-3 font-mono font-semibold text-blue-700">35.4</td>
+                                    <td class="py-2.5 px-3 font-mono text-red-600 font-bold">26.1</td>
+                                    <td class="py-2.5 px-3 font-mono">190 - 200</td>
+                                    <td class="py-2.5 px-3 font-mono">12.5° - 13.5°</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/80">
+                                    <td class="py-2.5 px-3 font-bold text-slate-800">M105S - M108S</td>
+                                    <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded bg-blue-50 text-blue-700 font-semibold text-[11px]">E-CDIS Turbo 16V</span></td>
+                                    <td class="py-2.5 px-3 font-mono">0.18 - 0.22</td>
+                                    <td class="py-2.5 px-3 font-mono font-semibold text-blue-700">30.0 - 33.0</td>
+                                    <td class="py-2.5 px-3 font-mono text-red-600 font-bold">24.0</td>
+                                    <td class="py-2.5 px-3 font-mono">190 - 200</td>
+                                    <td class="py-2.5 px-3 font-mono">7.45° - 8.95°</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 3. Kubota Advanced Engineering Features (Ladder Frame, Balancer, Rear Gears) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Feature 1: Ladder Frame -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                        <div class="flex items-center space-x-2 text-emerald-600 font-bold text-sm">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <span>โครงสร้างเสื้อสูบขั้นบันได (Ladder Frame)</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            เครื่องยนต์รุ่น V3007DI และ V3307DI ใช้เสื้อสูบแบบประกบ 2 ชิ้น (Upper Part + Lower Part) โดยแท่นรองเพลาข้อเหวี่ยงเป็นแบบขั้นบันไดลิง ช่วยลดจำนวนชิ้นส่วน กระจายแรงระเบิดด้านข้าง ลดเสียงการสั่นสะเทือน และลดแรงเสียดทานที่แบริ่งเพลาข้อเหวี่ยงอย่างมีนัยสำคัญ
+                        </p>
+                        <div class="text-[11px] bg-slate-50 p-2.5 rounded-lg text-slate-500 border border-slate-200">
+                            <strong>เปรียบเทียบ:</strong> ดีกว่าแบบอุโมงค์ (Tunnel Type ใน V3300) และแบบแขวน (Hangar Type ใน D1708) ทั้งในด้านการลดเสียงและการถอดประกอบ
+                        </div>
+                    </div>
+
+                    <!-- Feature 2: Dual Balancer Shafts -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                        <div class="flex items-center space-x-2 text-blue-600 font-bold text-sm">
+                            <i class="fa-solid fa-scale-balanced"></i>
+                            <span>เพลาสมดุลคู่ (Dual Balancer Shafts)</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            ติดตั้งเพลาสมดุลซ้าย-ขวา 2 เพลา หมุนสวนทางกันด้วยความเร็วรอบเป็น 2 เท่าของเพลาข้อเหวี่ยง ออกแบบมาเพื่อหักล้างแรงเฉื่อยอันดับสอง (2nd Harmonics of Revolution) ในเครื่องยนต์ 4 สูบ ช่วยลดอัตราเร่งการสั่นสะเทือนจาก 2.0 Grms เหลือเพียงต่ำกว่า 0.5 Grms ลดความเหนื่อยล้าของผู้ขับขี่แทรกเตอร์ตลอดวัน
+                        </p>
+                    </div>
+
+                    <!-- Feature 3: Rear Gear Train & MoS2 -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                        <div class="flex items-center space-x-2 text-indigo-600 font-bold text-sm">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>ชุดเฟืองหลัง &amp; ลูกสูบเคลือบ MoS2</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            <strong>Rear Gear Train:</strong> ย้ายชุดเฟืองขับไทม์มิ่งไปไว้ด้านหลังฝั่งเดียวกับล้อช่วยแรง ซึ่งเป็นจุดที่มีการบิดงอและสั่นสะเทือนต่ำสุด ลดเสียงเฟืองขบ<br>
+                            <strong>MoS2 Coated Skirt:</strong> กระโปรงลูกสูบเคลือบสารโมลิบดีนัมไดซัลไฟด์ ร่วมกับการขัดปลอกสูบแบบ Plateau Honing ช่วยลดแรงเสียดทาน ขยายอายุการเปลี่ยนถ่ายน้ำมันเครื่องเป็น 500 ชั่วโมง
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 4. Step-by-Step Field Diagnostic Protocols -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                    <h3 class="text-base font-bold text-slate-900 flex items-center space-x-2 border-b border-slate-100 pb-3">
+                        <i class="fa-solid fa-clipboard-check text-emerald-600"></i>
+                        <span>คู่มือขั้นตอนการตรวจเช็กและตั้งค่าตามมาตรฐานช่างศูนย์บริการคูโบต้า (Kubota Service Guide)</span>
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-slate-700">
+                        <!-- Step 1: Valve Lash Adjustment -->
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                            <h4 class="font-bold text-blue-800 text-sm flex items-center space-x-1.5">
+                                <span class="w-5 h-5 bg-blue-600 text-white rounded-full flex items-center justify-center text-[10px]">1</span>
+                                <span>ขั้นตอนการปรับตั้งระยะห่างวาล์ว (Valve Clearance Adjustment)</span>
+                            </h4>
+                            <ol class="list-decimal list-inside space-y-1.5 text-slate-600 leading-relaxed">
+                                <li>หมุนมาร์ก <strong>1TC</strong> บนล้อช่วยแรงให้ตรงกับมาร์กที่เสื้อครอบล้อช่วยแรง</li>
+                                <li>หมุนโยกล้อช่วยแรงตามเข็มและทวนเข็ม 15° เพื่อตรวจสอบว่าสูบที่ 1 อยู่ที่ <strong>"ตำแหน่งอัดสุด"</strong> (กระเดื่องวาล์วทั้งสองต้องขยับให้ตัวได้)</li>
+                                <li>ใช้ฟิลเลอร์เกจตั้งระยะห่างวาล์วตามตาราง (เครื่องยนต์ 4 สูบ: ตั้งสูบ 1 ไอดี/ไอเสีย, สูบ 2 ไอดี, สูบ 3 ไอเสีย)</li>
+                                <li>หมุนล้อช่วยแรงไปอีก 1 รอบ (360°) สูบที่ 1 จะไปอยู่ที่ตำแหน่ง <strong>"โอเวอร์แลป"</strong> แล้วตั้งวาล์วส่วนที่เหลือ (สูบ 2 ไอเสีย, สูบ 3 ไอดี, สูบ 4 ไอดี/ไอเสีย)</li>
+                                <li>หมุนเครื่องยนต์ 2-3 รอบเพื่อตรวจสอบความแม่นยำซ้ำอีกครั้ง</li>
+                            </ol>
+                        </div>
+
+                        <!-- Step 2: Cylinder Compression Test -->
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                            <h4 class="font-bold text-blue-800 text-sm flex items-center space-x-1.5">
+                                <span class="w-5 h-5 bg-blue-600 text-white rounded-full flex items-center justify-center text-[10px]">2</span>
+                                <span>ขั้นตอนการวัดกำลังอัดกระบอกสูบ (Cylinder Compression Test)</span>
+                            </h4>
+                            <ol class="list-decimal list-inside space-y-1.5 text-slate-600 leading-relaxed">
+                                <li>ถอดขั้วสายไฟออกจาก <strong>โซลินอยด์ดับเครื่องยนต์ (Stop Solenoid)</strong> เพื่อตัดการจ่ายน้ำมัน</li>
+                                <li>ถอดชุดหัวเผา (Glow Plugs) ออกทั้ง 4 สูบ</li>
+                                <li>ติดตั้งอะแดปเตอร์และเกจวัดกำลังอัดเข้าที่ช่องเกลียวหัวเผา</li>
+                                <li>ใช้แบตเตอรี่ที่มีประจุเต็ม บิดกุญแจสตาร์ทให้เครื่องยนต์หมุนฉุด 4-6 ครั้ง จนเข็มเกจขึ้นสูงสุด</li>
+                                <li><strong>เกณฑ์มาตรฐาน:</strong> ค่าปกติ <strong>36.0 - 41.0 kg/cm²</strong> (ค่าต่ำสุดที่ยอมรับได้ <strong>26.0 kg/cm²</strong> หากต่ำกว่านี้ต้องถอดเช็กแหวนและบ่าวาล์ว)</li>
+                            </ol>
+                        </div>
+
+                        <!-- Step 3: Fuel Injection Pump Operation -->
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                            <h4 class="font-bold text-blue-800 text-sm flex items-center space-x-1.5">
+                                <span class="w-5 h-5 bg-blue-600 text-white rounded-full flex items-center justify-center text-[10px]">3</span>
+                                <span>กลไกปั๊มน้ำมันเชื้อเพลิงและลิ้นส่ง (Injection Pump &amp; Delivery Valve)</span>
+                            </h4>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-600 leading-relaxed">
+                                <li><strong>จังหวะดูด:</strong> ลูกเบี้ยวต่ำลง สปริงดึงลูกปั๊มเลื่อนลง ดูดน้ำมันเข้าผ่านช่องควบคุม (Control Port)</li>
+                                <li><strong>จังหวะจ่าย:</strong> ลูกเบี้ยวหมุนขึ้นดันลูกปั๊มปิดช่องน้ำมัน สร้างแรงดันมหาศาลดัน <strong>Delivery Valve</strong> ยกตัวขึ้น จ่ายน้ำมันไปยังหัวฉีด</li>
+                                <li><strong>จังหวะหยุดจ่าย:</strong> ร่องเฉียง (Helix Groove) บนลูกปั๊มเปิดตรงกับช่องทางน้ำมัน แรงดันตกฉับพลัน Delivery Valve ปิดสนิท พร้อม <strong>สร้างแรงดูดถอยหลัง (Retraction)</strong> ป้องกันไม่ให้หัวฉีดฉีดหยด</li>
+                                <li><strong>Control Rack (เฟืองฟันหวี):</strong> สไลด์หมุนลูกปั๊มเพื่อปรับปริมาณการฉีดจากเดินเบาถึงเร่งสุด</li>
+                            </ul>
+                        </div>
+
+                        <!-- Step 4: Lubrication & Cooling Inspection -->
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                            <h4 class="font-bold text-blue-800 text-sm flex items-center space-x-1.5">
+                                <span class="w-5 h-5 bg-blue-600 text-white rounded-full flex items-center justify-center text-[10px]">4</span>
+                                <span>การตรวจสอบระบบหล่อลื่นและระบายความร้อน (Lube &amp; Cooling Tests)</span>
+                            </h4>
+                            <ul class="list-disc list-inside space-y-1.5 text-slate-600 leading-relaxed">
+                                <li><strong>แรงดันน้ำมันเครื่อง:</strong> ถอดสวิตช์แรงดัน ต่อเกจวัด เดินเบาต้อง &gt; <strong>1.0 kg/cm²</strong> (ยอมได้ 0.5) / รอบสูงสุด <strong>3.0 - 4.5 kg/cm²</strong> (ยอมได้ 2.5)</li>
+                                <li><strong>ฝาหม้อน้ำควบคุมแรงดัน:</strong> ใช้ Cap Tester อัดลมที่ 0.9 kg/cm² เวลาที่แรงดันลดลงถึง 0.6 kg/cm² ต้อง <strong>มากกว่า 10 วินาที</strong></li>
+                                <li><strong>การทดสอบหม้อน้ำรั่ว:</strong> เติมน้ำเต็ม อัดแรงดันทดสอบ <strong>1.4 kg/cm²</strong> ต้องไม่มีหยดน้ำรั่วซึม</li>
+                                <li><strong>การเปิดของวาล์วน้ำ (Thermostat):</strong> แขวนต้มในน้ำ เริ่มเปิดที่ <strong>69.5°C - 72.5°C</strong> และเปิดสุดระยะยก 6 mm ที่ <strong>85°C</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Cylinder Head Tightening Torque & Sequence -->
+                <div class="bg-slate-900 text-white p-6 rounded-2xl shadow-sm space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                        <h4 class="text-sm font-bold text-yellow-300 flex items-center space-x-2">
+                            <i class="fa-solid fa-wrench"></i>
+                            <span>ลำดับการขันน็อตฝาสูบและค่าแรงบิดมาตรฐาน (Cylinder Head Torque Specs)</span>
+                        </h4>
+                        <span class="text-xs font-mono text-slate-400">Model: V3007DI / V3307DI / V3800DI</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                        <div>
+                            <p class="text-slate-300 leading-relaxed">
+                                <strong>ข้อปฏิบัติสำคัญ:</strong><br>
+                                1. ชโลมน้ำมันเครื่องบางๆ ที่เกลียวและใต้หัวน็อตโบล์ทฝาสูบก่อนประกอบทุกครั้ง<br>
+                                2. ขันตามลำดับจากตรงกลางวนออกสู่ด้านนอก (14 ➔ 10 ➔ 6 ➔ 2 ➔ 4 ➔ 8 ➔ 12 ➔ 16...)<br>
+                                3. แบ่งการขันออกเป็น 3 ขั้นตอน: ขันแตะหน้า ➔ ขันตามค่าทอร์ก 50% ➔ ขันเต็มพิกัด 100%
+                            </p>
+                            <div class="mt-3 p-3 bg-slate-800/80 rounded-xl border border-slate-700">
+                                <span class="text-slate-400 block text-[11px]">ค่าแรงขันโบล์ทฝาสูบมาตรฐาน (Torque):</span>
+                                <span class="text-lg font-bold text-emerald-400 font-mono">14.0 - 15.0 kgf·m (101.3 - 108.5 ft-lbs)</span>
+                            </div>
+                        </div>
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex flex-col justify-center text-xs space-y-2">
+                            <span class="font-bold text-blue-400">เกณฑ์ความคลาดเคลื่อนชิ้นส่วนกลไกที่ยอมรับได้:</span>
+                            <ul class="space-y-1 text-slate-300">
+                                <li>• ความโก่งงอของผิวหน้าฝาสูบ: <strong>&lt; 0.05 mm</strong> (เกินนี้ต้องไสหรือเปลี่ยน)</li>
+                                <li>• ระยะห่างปากแหวนอัดตัวที่ 1: <strong>0.25 - 0.40 mm</strong> (ค่าจำกัด 1.25 mm)</li>
+                                <li>• ระยะห่างร่องแหวนลูกสูบ: <strong>0.093 - 0.128 mm</strong> (ค่าจำกัด 0.20 mm)</li>
+                                <li>• ความยาวอิสระของสปริงวาล์ว: <strong>41.7 - 42.2 mm</strong> (ค่าจำกัด 41.2 mm)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
         </main>
     </div>
 
@@ -477,7 +806,7 @@
                 id: "FT-01", category: "สีควันไอเสีย", symptom: "ควันดำหนาแน่นขณะเร่งโหลด (Dense Black Smoke)",
                 root_cause: "มวลอากาศไม่พอกับปริมาณน้ำมัน (Rich Mixture) อัตราส่วน Lambda < 1.15",
                 system: "ระบบประจุไอดี / เทอร์โบชาร์จเจอร์",
-                diagnostic: "1. วัดแรงดันบูสต์เทอร์โบ\\n2. ตรวจเกจวัดกรองอากาศ\\n3. สโมกเทสต์หารอยรั่วท่ออินเตอร์คูลเลอร์",
+                diagnostic: "1. วัดแรงดันบูสต์เทอร์โบ\n2. ตรวจเกจวัดกรองอากาศ\n3. สโมกเทสต์หารอยรั่วท่ออินเตอร์คูลเลอร์",
                 action: "เปลี่ยนไส้กรองอากาศ, ซ่อมท่ออินเตอร์คูลเลอร์ที่แตก, ปรับตั้งเวสต์เกต",
                 prevention: "ตรวจเป่ากรองอากาศสม่ำเสมอ ตรวจเช็กแคลมป์รัดท่อลม"
             },
@@ -485,7 +814,7 @@
                 id: "FT-02", category: "สีควันไอเสีย", symptom: "ควันดำตลอดเวลาแม้เดินเบา (Continuous Black Smoke at Idle)",
                 root_cause: "หัวฉีดจ่ายน้ำมันรั่วซึม ปลายหัวฉีดสึกหรอ ฉีดเป็นหยดไม่เป็นฝอย",
                 system: "ระบบเชื้อเพลิงคอมมอนเรล",
-                diagnostic: "1. ดูค่า Injector Balance Rates ด้วยเครื่องสแกน\\n2. ทำ Back Leak Test",
+                diagnostic: "1. ดูค่า Injector Balance Rates ด้วยเครื่องสแกน\n2. ทำ Back Leak Test",
                 action: "ถอดหัวฉีดส่งเช็กปั๊ม-หัวฉีด เปลี่ยนชุดปลายเข็มและวาล์วคอนโทรล",
                 prevention: "เติมน้ำมันดีเซลที่สะอาด มีสารชะล้างหัวฉีด"
             },
@@ -493,7 +822,7 @@
                 id: "FT-03", category: "สีควันไอเสีย", symptom: "ควันขาวฟุ้งตอนสตาร์ทช่วงเช้า (White Smoke on Cold Start)",
                 root_cause: "อุณหภูมิในห้องเผาไหม้ต่ำเกินไป ละอองน้ำมันไม่ระเบิดแต่ระเหยออกท่อไอเสีย",
                 system: "ระบบสตาร์ท / กำลังอัด",
-                diagnostic: "1. วัดความต้านทานหัวเผา (< 1-2 Ohm)\\n2. วัดกำลังอัด",
+                diagnostic: "1. วัดความต้านทานหัวเผา (< 1-2 Ohm)\n2. วัดกำลังอัด",
                 action: "เปลี่ยนหัวเผาตัวที่ขาด หรือเปลี่ยนรีเลย์ควบคุมหัวเผา",
                 prevention: "ทดสอบการทำงานของระบบหัวเผาก่อนเข้าฤดูหนาว"
             },
@@ -501,7 +830,7 @@
                 id: "FT-04", category: "สีควันไอเสีย", symptom: "ควันขาวตลอดเวลา มีกลิ่นหวาน (Continuous Sweet White Smoke)",
                 root_cause: "น้ำหล่อเย็นเล็ดลอดเข้าห้องเผาไหม้ ระเหยกลายเป็นไอน้ำพุ่งออกปลายท่อ",
                 system: "ระบบระบายความร้อน / ปะเก็นฝาสูบ",
-                diagnostic: "1. ตรวจระดับน้ำหล่อเย็น\\n2. ใช้ชุดทดสอบเคมี Combustion Leak Test ดูก๊าซในหม้อน้ำ",
+                diagnostic: "1. ตรวจระดับน้ำหล่อเย็น\n2. ใช้ชุดทดสอบเคมี Combustion Leak Test ดูก๊าซในหม้อน้ำ",
                 action: "เปิดฝาสูบ เปลี่ยนปะเก็นฝาสูบ ไสปรับระนาบฝาสูบใหม่หากโก่ง",
                 prevention: "ห้ามเติมน้ำเย็นจัดขณะเครื่องกำลังร้อนจัด ป้องกันฝาสูบร้าว"
             },
@@ -509,7 +838,7 @@
                 id: "FT-05", category: "สีควันไอเสีย", symptom: "ควันขาวกลิ่นดีเซลฉุน แสบตา (Pungent Unburned White Smoke)",
                 root_cause: "องศาการฉีดน้ำมันล่าช้ามาก (Retarded Timing) หรือมีน้ำปนในน้ำมันดีเซล",
                 system: "ระบบเชื้อเพลิง / ไทม์มิ่ง",
-                diagnostic: "1. ตรวจมาร์กเฟืองไทม์มิ่ง\\n2. ส่องดูน้ำในถ้วยกรองดักน้ำ\\n3. ดูกราฟองศาฉีดผ่าน OBD",
+                diagnostic: "1. ตรวจมาร์กเฟืองไทม์มิ่ง\n2. ส่องดูน้ำในถ้วยกรองดักน้ำ\n3. ดูกราฟองศาฉีดผ่าน OBD",
                 action: "ตั้งมาร์กไทม์มิ่งใหม่, ถ่ายเดรนน้ำออกจากถังน้ำมันและกรองดักน้ำ",
                 prevention: "หมั่นเดรนน้ำก้นถังพักน้ำมันเชื้อเพลิงทุกสัปดาห์"
             },
@@ -517,7 +846,7 @@
                 id: "FT-06", category: "สีควันไอเสีย", symptom: "ควันสีขาวอมฟ้าตลอดเวลา (Continuous Blue Smoke)",
                 root_cause: "น้ำมันเครื่องเล็ดลอดขึ้นจากห้องแคร้งก์เข้าสู่ห้องเผาไหม้เนื่องจากแหวนลูกสูบหัก/ตาย",
                 system: "กลไกเพลาข้อเหวี่ยงและลูกสูบ",
-                diagnostic: "1. วัดกำลังอัดแบบ Wet & Dry Compression Test\\n2. ส่องกล้อง Borescope ดูรอยกระบอกสูบ",
+                diagnostic: "1. วัดกำลังอัดแบบ Wet & Dry Compression Test\n2. ส่องกล้อง Borescope ดูรอยกระบอกสูบ",
                 action: "รื้อโอเวอร์ฮอล คว้านกระบอกสูบ ตีปลอกใหม่ เปลี่ยนลูกสูบและแหวน",
                 prevention: "ใช้น้ำมันเครื่องเกรดมาตรฐาน ห้ามปล่อยให้น้ำมันเครื่องแห้ง"
             },
@@ -525,7 +854,7 @@
                 id: "FT-07", category: "สีควันไอเสีย", symptom: "ควันฟ้าตอนสตาร์ทหรือเหยียบคันเร่งหลังเดินเบานาน (Blue Smoke After Decel)",
                 root_cause: "ยางหมวกวาล์วเสื่อมสภาพ น้ำมันเครื่องไหลย้อยลงตามก้านวาล์วลงห้องเผาไหม้",
                 system: "กลไกควบคุมวาล์ว",
-                diagnostic: "1. สังเกตควันสีฟ้าชัดเจนตอนเหยียบคันเร่งครั้งแรกหลังจอดติดเครื่องนาน\\n2. ถอดดูคราบน้ำมันที่พอร์ตวาล์ว",
+                diagnostic: "1. สังเกตควันสีฟ้าชัดเจนตอนเหยียบคันเร่งครั้งแรกหลังจอดติดเครื่องนาน\n2. ถอดดูคราบน้ำมันที่พอร์ตวาล์ว",
                 action: "เปลี่ยนยางหมวกวาล์ว (Valve Stem Seals) ใหม่ยกชุด",
                 prevention: "เปลี่ยนถ่ายน้ำมันเครื่องตรงเวลา ป้องกันยางหมวกวาล์วแข็งกรอบ"
             },
@@ -533,7 +862,7 @@
                 id: "FT-09", category: "การสตาร์ท", symptom: "บิดกุญแจแล้วเงียบสนิท ไม่มีเสียงใดๆ (No Crank / Silent)",
                 root_cause: "ไม่มีกระแสไฟฟ้าไหลเข้าโซลินอยด์สตาร์ท หรือแบตเตอรี่ไฟหมดเกลี้ยง",
                 system: "ระบบสตาร์ทและไฟฟ้า",
-                diagnostic: "1. วัดแรงดันแบตเตอรี่ (ต้อง > 12.4V)\\n2. ตรวจฟิวส์สตาร์ทและรีเลย์",
+                diagnostic: "1. วัดแรงดันแบตเตอรี่ (ต้อง > 12.4V)\n2. ตรวจฟิวส์สตาร์ทและรีเลย์",
                 action: "ชาร์จแบตเตอรี่, ขัดขั้วแบตเตอรี่ให้แน่น, เปลี่ยนสวิตช์กุญแจหรือรีเลย์สตาร์ท",
                 prevention: "ติดตั้งเครื่องชาร์จแบตเตอรี่อัตโนมัติ (Trickle Charger)"
             },
@@ -541,7 +870,7 @@
                 id: "FT-11", category: "การสตาร์ท", symptom: "ไดหมุนปกติแต่เครื่องไม่ติด มีลมในระบบ (Air in Fuel)",
                 root_cause: "มีฟองอากาศเล็ดลอดเข้าสู่ท่อทางเดินน้ำมันด้านแรงดันต่ำ ทำให้ปั๊มสร้างแรงดันไม่ได้",
                 system: "ระบบเชื้อเพลิง",
-                diagnostic: "1. สังเกตฟองอากาศในสายยางใส\\n2. กดปั๊มแย๊กมือดูว่ายวบหรือไม่",
+                diagnostic: "1. สังเกตฟองอากาศในสายยางใส\n2. กดปั๊มแย๊กมือดูว่ายวบหรือไม่",
                 action: "หาจุดรั่วตามข้อต่อท่อน้ำมัน โอริงกรองดักน้ำ แล้วทำการแย๊กไล่ลม (Bleeding)",
                 prevention: "เปลี่ยนโอริงและแหวนทองแดงรองน็อตทุกครั้งที่เปลี่ยนกรอง"
             },
@@ -549,7 +878,7 @@
                 id: "FT-15", category: "กำลังและสมรรถนะ", symptom: "เครื่องยนต์ไม่มีแรง บูสต์ไม่ขึ้น อัตราเร่งตก (Low Power / Turbo Lag)",
                 root_cause: "ก๊าซไอเสียรั่วก่อนเข้าเทอร์โบ หรือเวสต์เกตค้างเปิด หรือท่อไอดีรั่ว",
                 system: "ระบบไอดีและไอเสีย",
-                diagnostic: "1. ตรวจสอบการเคลื่อนที่ของแกนเวสต์เกต/VGT Actuator\\n2. ตรวจรอยรั่วท่อไอเสีย",
+                diagnostic: "1. ตรวจสอบการเคลื่อนที่ของแกนเวสต์เกต/VGT Actuator\n2. ตรวจรอยรั่วท่อไอเสีย",
                 action: "เปลี่ยนประเก็นท่อร่วมไอเสีย, ซ่อมเวสต์เกต, ล้างเขม่าครีบแปรผันเทอร์โบ",
                 prevention: "หลีกเลี่ยงการเดินเครื่องตัวเปล่าเป็นเวลานาน"
             },
@@ -565,7 +894,7 @@
                 id: "FT-24", category: "ความร้อนและของเหลว", symptom: "น้ำมันเครื่องกลายเป็นสีกาแฟใส่นม (Emulsified / Milky Oil)",
                 root_cause: "น้ำหล่อเย็นรั่วผสมกับน้ำมันเครื่อง เกิดการกวนจนเป็นอิมัลชัน",
                 system: "ระบบหล่อลื่น / ระบายความร้อน",
-                diagnostic: "1. ชักก้านวัดน้ำมันเครื่องดูสี\\n2. ทดสอบแรงดันน้ำมันในออยล์คูลเลอร์",
+                diagnostic: "1. ชักก้านวัดน้ำมันเครื่องดูสี\n2. ทดสอบแรงดันน้ำมันในออยล์คูลเลอร์",
                 action: "เปลี่ยนแผงไส้ออยล์คูลเลอร์ใหม่ หรือเปลี่ยนปะเก็นฝาสูบ พร้อมฟลัชชิ่งระบบน้ำมัน",
                 prevention: "ใช้น้ำยาหล่อเย็นที่มีสารยับยั้งการกัดกร่อนโลหะ"
             },
@@ -573,7 +902,7 @@
                 id: "FT-27", category: "เสียงผิดปกติเชิงกล", symptom: "เสียงเคาะตึ้กๆ ดังหนักแน่นใต้ท้องเครื่อง (Deep Heavy Knock / Rod Knock)",
                 root_cause: "ชาร์ปอกหรือชาร์ปก้านละลาย เกิดช่องว่างกระแทกเพลาข้อเหวี่ยงตามรอบ",
                 system: "กลไกเพลาข้อเหวี่ยงและก้านสูบ",
-                diagnostic: "1. ใช้หูฟังสเต็ทโทสโคปฟังตำแหน่งท้องอ่าง\\n2. ถอดกรองน้ำมันเครื่องตัดดูเศษทองแดง",
+                diagnostic: "1. ใช้หูฟังสเต็ทโทสโคปฟังตำแหน่งท้องอ่าง\n2. ถอดกรองน้ำมันเครื่องตัดดูเศษทองแดง",
                 action: "**หยุดเครื่องทันที!** รื้ออ่างน้ำมันเครื่อง เจียรคอเพลาข้อเหวี่ยง เปลี่ยนชาร์ปใหม่",
                 prevention: "ห้ามเดินเครื่องขณะไฟแรงดันน้ำมันเครื่องโชว์แม้แต่วินาทีเดียว"
             }
@@ -725,7 +1054,7 @@
             document.getElementById('resHP').innerText = '(' + hp.toFixed(1) + ' HP)';
         }
 
-        // Initialize App
+        // Init
         renderDiagnostics(troubleshoots);
         renderDTC(dtcs);
         calculateCR();
