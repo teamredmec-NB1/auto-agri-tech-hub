@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="th" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diesel Engine Engineering & Diagnostic Masterclass</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0F2942',
+                        accent: '#2B5B84',
+                        highlight: '#3B82F6'
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=JetBrains+Mono:wght@400;600&display=swap');
+        body {
+            font-family: 'Prompt', sans-serif;
+        }
+        code, pre, .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="p-2 bg-blue-600 rounded-lg text-white font-bold shadow-lg shadow-blue-500/30">
+                    <i class="fa-solid fa-gears text-xl"></i>
+                </span>
+                <div>
+                    <h1 class="text-lg font-bold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
+                        Diesel Engine Masterclass
+                    </h1>
+                    <p class="text-xs text-slate-400">2 โครงสร้างหลัก + 6 ระบบสนับสนุน | วิศวกรรม & การวินิจฉัย</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <a href="https://github.com" target="_blank" class="px-3 py-1.5 rounded-lg border border-slate-700 hover:bg-slate-800 text-xs font-medium flex items-center space-x-2 transition">
+                    <i class="fa-brands fa-github text-sm"></i>
+                    <span>GitHub Repo</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Navigation Tabs -->
+    <div class="bg-slate-900 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-2 overflow-x-auto py-2">
+            <button onclick="switchTab('troubleshoot')" id="tab-troubleshoot" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium bg-blue-600 text-white flex items-center space-x-2 whitespace-nowrap">
+                <i class="fa-solid fa-stethoscope"></i>
+                <span>ระบบวินิจฉัยปัญหา (30 อาการ)</span>
+            </button>
+            <button onclick="switchTab('dtc')" id="tab-dtc" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 flex items-center space-x-2 whitespace-nowrap">
+                <i class="fa-solid fa-microchip"></i>
+                <span>ค้นหารหัส DTC / J1939</span>
+            </button>
+            <button onclick="switchTab('sim')" id="tab-sim" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 flex items-center space-x-2 whitespace-nowrap">
+                <i class="fa-solid fa-arrows-spin"></i>
+                <span>จำลอง 4 จังหวะ (720°)</span>
+            </button>
+            <button onclick="switchTab('calc')" id="tab-calc" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 flex items-center space-x-2 whitespace-nowrap">
+                <i class="fa-solid fa-calculator"></i>
+                <span>คำนวณวิศวกรรม (CR / BMEP / Power)</span>
+            </button>
+            <button onclick="switchTab('arch')" id="tab-arch" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 flex items-center space-x-2 whitespace-nowrap">
+                <i class="fa-solid fa-sitemap"></i>
+                <span>โครงสร้าง & สถาปัตยกรรม</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- VIEW 1: TROUBLESHOOTING MATRIX -->
+        <section id="view-troubleshoot" class="tab-content space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-900 p-6 rounded-2xl border border-slate-800">
+                <div>
+                    <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+                        <i class="fa-solid fa-wrench text-blue-400"></i>
+                        <span>ค้นหาอาการเสียและการหาสาเหตุรากเหง้า (Root Cause Diagnostics)</span>
+                    </h2>
+                    <p class="text-sm text-slate-400 mt-1">พิมพ์คำค้นหา เช่น ควันดำ, สตาร์ทไม่ติด, ชาร์ปละลาย, น้ำมันเครื่อง หรือเลือกหมวดหมู่</p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <input type="text" id="diagSearchInput" onkeyup="filterDiagnostics()" placeholder="พิมพ์ค้นหาอาการเสีย..." class="bg-slate-950 border border-slate-700 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-blue-500 w-64">
+                    <select id="diagCatSelect" onchange="filterDiagnostics()" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+                        <option value="ALL">ทุกหมวดหมู่อาการ</option>
+                        <option value="สีควันไอเสีย">สีควันไอเสีย</option>
+                        <option value="การสตาร์ท">การสตาร์ท</option>
+                        <option value="กำลังและสมรรถนะ">กำลังและสมรรถนะ</option>
+                        <option value="ความร้อนและของเหลว">ความร้อนและของเหลว</option>
+                        <option value="เสียงผิดปกติเชิงกล">เสียงผิดปกติเชิงกล</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Diagnostic Cards Grid -->
+            <div id="diagGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Javascript will render cards here -->
+            </div>
+        </section>
+
+        <!-- VIEW 2: DTC & J1939 LOOKUP -->
+        <section id="view-dtc" class="tab-content hidden space-y-6">
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+                <div class="max-w-xl">
+                    <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+                        <i class="fa-solid fa-code text-cyan-400"></i>
+                        <span>ระบบค้นหารหัสวิเคราะห์ปัญหา OBD-II และ SAE J1939</span>
+                    </h2>
+                    <p class="text-sm text-slate-400 mt-1">ค้นหาด้วยรหัส P-Code (เช่น P0087) หรือ SPN (เช่น SPN 102)</p>
+                    <div class="mt-4 flex gap-2">
+                        <input type="text" id="dtcInput" onkeyup="filterDTC()" placeholder="พิมพ์รหัส DTC เช่น P0087, P0299, P0524..." class="bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500 flex-grow font-mono uppercase">
+                    </div>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto bg-slate-900 rounded-2xl border border-slate-800">
+                <table class="w-full text-left border-collapse text-sm">
+                    <thead>
+                        <tr class="border-b border-slate-800 bg-slate-800/50 text-slate-300 font-semibold">
+                            <th class="py-3 px-4">DTC (OBD-II)</th>
+                            <th class="py-3 px-4">SAE J1939</th>
+                            <th class="py-3 px-4">คำอธิบายอาการเสีย</th>
+                            <th class="py-3 px-4">ระบบที่เกี่ยวข้อง</th>
+                            <th class="py-3 px-4">ขั้นตอนการตรวจเช็กและแก้ไข</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dtcTableBody" class="divide-y divide-slate-800/60 font-sans">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- VIEW 3: 4-STROKE SIMULATOR -->
+        <section id="view-sim" class="tab-content hidden space-y-6">
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+                <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+                    <i class="fa-solid fa-compass text-amber-400"></i>
+                    <span>เครื่องจำลองวัฏจักร 4 จังหวะตลอด 720 องศาเพลาข้อเหวี่ยง (4-Stroke Simulator)</span>
+                </h2>
+                <p class="text-sm text-slate-400 mt-1">เลื่อนแถบสไลเดอร์เพื่อดูตำแหน่งลูกสูบ สถานะวาล์ว ความดัน และอุณหภูมิในห้องเผาไหม้</p>
+
+                <!-- Slider & Controls -->
+                <div class="mt-8 space-y-4">
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-slate-400">มุมเพลาข้อเหวี่ยง (Crank Angle Degrees: CAD):</span>
+                        <span id="cadValue" class="text-2xl font-bold text-blue-400 font-mono">0° CAD</span>
+                    </div>
+                    <input type="range" id="cadSlider" min="0" max="720" value="0" step="5" oninput="updateSimulator(this.value)" class="w-full h-3 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                    <div class="flex justify-between text-xs text-slate-500 font-mono">
+                        <span>0° (TDC ดูด)</span>
+                        <span>180° (BDC อัด)</span>
+                        <span>360° (TDC จุดระเบิด)</span>
+                        <span>540° (BDC คาย)</span>
+                        <span>720° (TDC ครบวัฏจักร)</span>
+                    </div>
+                </div>
+
+                <!-- Simulation Dashboard Cards -->
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="bg-slate-950 p-5 rounded-xl border border-slate-800">
+                        <span class="text-xs text-slate-400">จังหวะการทำงาน (Active Stroke)</span>
+                        <div id="simStroke" class="text-lg font-bold text-blue-400 mt-2">1. จังหวะดูด (Intake)</div>
+                        <p id="simPistonDir" class="text-xs text-slate-500 mt-1">ลูกสูบเคลื่อนที่ลง (TDC -> BDC)</p>
+                    </div>
+                    <div class="bg-slate-950 p-5 rounded-xl border border-slate-800">
+                        <span class="text-xs text-slate-400">สถานะวาล์ว (Valve States)</span>
+                        <div id="simValves" class="text-sm font-semibold text-slate-200 mt-2 space-y-1">
+                            <div>ไอดี: <span class="text-green-400 font-bold">เปิดเต็มที่</span></div>
+                            <div>ไอเสีย: <span class="text-rose-400 font-bold">ปิดสนิท</span></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-950 p-5 rounded-xl border border-slate-800">
+                        <span class="text-xs text-slate-400">แรงดันในกระบอกสูบ (Pressure)</span>
+                        <div id="simPressure" class="text-xl font-bold text-amber-400 mt-2 font-mono">~ 1.0 - 2.5 bar</div>
+                        <p class="text-xs text-slate-500 mt-1">รวมแรงดันบูสต์เทอร์โบ</p>
+                    </div>
+                    <div class="bg-slate-950 p-5 rounded-xl border border-slate-800">
+                        <span class="text-xs text-slate-400">อุณหภูมิในกระบอกสูบ (Gas Temp)</span>
+                        <div id="simTemp" class="text-xl font-bold text-rose-400 mt-2 font-mono">35°C - 50°C</div>
+                        <p class="text-xs text-slate-500 mt-1">อากาศหลังผ่านอินเตอร์คูลเลอร์</p>
+                    </div>
+                </div>
+
+                <div class="mt-4 p-4 bg-slate-950 rounded-xl border border-slate-800">
+                    <span class="text-xs font-semibold text-blue-400 uppercase tracking-wider">ปรากฏการณ์ทางกายภาพ (Physics Event):</span>
+                    <p id="simDescription" class="text-sm text-slate-300 mt-1">
+                        วาล์วไอดีเปิด ลูกสูบเลื่อนลงจากศูนย์ตายบนสู่ศูนย์ตายล่าง สร้างแรงสุญญากาศนำพาอากาศบริสุทธิ์ที่มีมวลออกซิเจนหนาแน่นเข้าสู่กระบอกสูบ
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 4: ENGINEERING CALCULATOR -->
+        <section id="view-calc" class="tab-content hidden space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Calc 1: Compression Ratio -->
+                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+                    <h3 class="text-lg font-bold text-white flex items-center space-x-2">
+                        <i class="fa-solid fa-compress text-blue-400"></i>
+                        <span>1. คำนวณอัตราส่วนกำลังอัด (Compression Ratio - CR)</span>
+                    </h3>
+                    <div class="grid grid-cols-2 gap-3 text-sm">
+                        <div>
+                            <label class="text-xs text-slate-400">ขนาดกระบอกสูบ Bore (mm)</label>
+                            <input type="number" id="calcBore" value="85" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-lg p-2 text-white">
+                        </div>
+                        <div>
+                            <label class="text-xs text-slate-400">ระยะชัก Stroke (mm)</label>
+                            <input type="number" id="calcStroke" value="95" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-lg p-2 text-white">
+                        </div>
+                        <div>
+                            <label class="text-xs text-slate-400">ปริมาตรห้องเผาไหม้ Vc (cc)</label>
+                            <input type="number" id="calcVc" value="32" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-lg p-2 text-white">
+                        </div>
+                        <div>
+                            <label class="text-xs text-slate-400">จำนวนกระบอกสูบ (Cylinders)</label>
+                            <input type="number" id="calcCyl" value="4" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-lg p-2 text-white">
+                        </div>
+                    </div>
+                    <button onclick="calculateCR()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-500 rounded-xl font-medium text-sm transition">คำนวณอัตราส่วนกำลังอัด</button>
+                    <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 flex justify-between items-center">
+                        <span class="text-sm text-slate-400">อัตราส่วนกำลังอัด (CR):</span>
+                        <span id="resCR" class="text-xl font-bold text-emerald-400 font-mono">-</span>
+                    </div>
+                </div>
+
+                <!-- Calc 2: Power & Torque -->
+                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+                    <h3 class="text-lg font-bold text-white flex items-center space-x-2">
+                        <i class="fa-solid fa-bolt text-amber-400"></i>
+                        <span>2. คำนวณกำลังแรงม้า & แรงบิด (Brake Power)</span>
+                    </h3>
+                    <div class="grid grid-cols-2 gap-3 text-sm">
+                        <div>
+                            <label class="text-xs text-slate-400">ความเร็วรอบ Engine Speed (RPM)</label>
+                            <input type="number" id="calcRPM" value="1500" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-lg p-2 text-white">
+                        </div>
+                        <div>
+                            <label class="text-xs text-slate-400">แรงบิด Torque (N-m)</label>
+                            <input type="number" id="calcTorque" value="650" class="w-full mt-1 bg-slate-950 border border-slate-700 rounded-lg p-2 text-white">
+                        </div>
+                    </div>
+                    <button onclick="calculatePower()" class="w-full py-2.5 bg-amber-600 hover:bg-amber-500 rounded-xl font-medium text-sm transition">คำนวณกำลังเบรก</button>
+                    <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 flex justify-between items-center">
+                        <span class="text-sm text-slate-400">กำลังเพลา (Brake Power):</span>
+                        <div class="text-right">
+                            <span id="resKW" class="text-xl font-bold text-amber-400 font-mono">- kW</span>
+                            <span id="resHP" class="text-sm text-slate-400 font-mono ml-2">(- HP)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 5: ARCHITECTURE OVERVIEW -->
+        <section id="view-arch" class="tab-content hidden space-y-6">
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+                <h2 class="text-xl font-bold text-white mb-4">สถาปัตยกรรม 2 โครงสร้างหลัก + 6 ระบบสนับสนุน</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+                        <h4 class="font-bold text-blue-400">1. กลไกเพลาข้อเหวี่ยงและก้านสูบ (Crank-Connecting Rod)</h4>
+                        <p class="text-xs text-slate-300 mt-2">หน้าที่: แปลงแรงดันก๊าซระเบิด (Pmax 120-220 bar) เป็นแรงบิดหมุนต่อเนื่อง และสะสมพลังงานจลน์ด้วยล้อช่วยแรง (Flywheel)</p>
+                        <p class="text-xs text-slate-500 mt-1">ชิ้นส่วน: ลูกสูบ, แหวนอัด, สลักสูบ, ก้านสูบ, ชาร์ปอก/ชาร์ปก้าน, เพลาข้อเหวี่ยง</p>
+                    </div>
+                    <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+                        <h4 class="font-bold text-cyan-400">2. กลไกควบคุมวาล์ว (Valve Train Mechanism)</h4>
+                        <p class="text-xs text-slate-300 mt-2">หน้าที่: กำหนดจังหวะการหายใจเข้า-ออกของกระบอกสูบให้สัมพันธ์กับองศาเพลาข้อเหวี่ยงอย่างแม่นยำ</p>
+                        <p class="text-xs text-slate-500 mt-1">ชิ้นส่วน: เพลาลูกเบี้ยว, ลูกกระทุ้ง, กระเดื่องวาล์ว, วาล์วไอดี-ไอเสีย, สปริงวาล์ว</p>
+                    </div>
+                    <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+                        <h4 class="font-bold text-emerald-400">3. ระบบประจุไอดี (Air Intake System)</h4>
+                        <p class="text-xs text-slate-300 mt-2">หน้าที่: ป้อนอากาศบริสุทธิ์ที่มีมวลออกซิเจนสูงสุดผ่านเทอร์โบชาร์จเจอร์และอินเตอร์คูลเลอร์</p>
+                    </div>
+                    <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+                        <h4 class="font-bold text-rose-400">4. ระบบไอเสียและบำบัดมลพิษ (Exhaust & Aftertreatment)</h4>
+                        <p class="text-xs text-slate-300 mt-2">หน้าที่: ระบายก๊าซเสียขับเทอร์ไบน์ ควบคุมแรงดันย้อนกลับ และบำบัดมลพิษด้วย DPF / SCR AdBlue</p>
+                    </div>
+                    <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+                        <h4 class="font-bold text-amber-400">5. ระบบเชื้อเพลิงคอมมอนเรล (Common Rail Fuel System)</h4>
+                        <p class="text-xs text-slate-300 mt-2">หน้าที่: สร้างแรงดันน้ำมัน 1,600 - 2,500+ bar ฉีดเป็นละอองฝอยละเอียดระดับไมครอนอย่างแม่นยำ</p>
+                    </div>
+                    <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+                        <h4 class="font-bold text-violet-400">6. ระบบหล่อลื่น (Engine Lubrication System)</h4>
+                        <p class="text-xs text-slate-300 mt-2">หน้าที่: สร้างฟิล์มน้ำมันไฮโดรไดนามิกแยกผิวโลหะ ระบายความร้อนชะล้างเขม่าและป้องกันการสึกหรอ</p>
+                    </div>
+                    <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+                        <h4 class="font-bold text-sky-400">7. ระบบระบายความร้อน (Engine Cooling System)</h4>
+                        <p class="text-xs text-slate-300 mt-2">หน้าที่: รักษาสมดุลความร้อนของเครื่องยนต์ให้อยู่ในช่วงอุณหภูมิทำงานคงที่ 80°C - 95°C</p>
+                    </div>
+                    <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+                        <h4 class="font-bold text-indigo-400">8. ระบบสตาร์ทและควบคุมไฟฟ้า (Starting & ECU Control)</h4>
+                        <p class="text-xs text-slate-300 mt-2">หน้าที่: หมุนฉุดเครื่องยนต์ในเสี้ยววินาที ประมวลผลเซนเซอร์ และระบบตัดดับนิรภัย (Overspeed / Low Oil)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+        <p>Diesel Engine Engineering Masterclass & Diagnostic Compendium | Open Source Project for GitHub Pages</p>
+    </footer>
+
+    <!-- App Logic Scripts -->
+    <script>
+        const troubleshoots = [{"id": "FT-01", "category": "\u0e2a\u0e35\u0e04\u0e27\u0e31\u0e19\u0e44\u0e2d\u0e40\u0e2a\u0e35\u0e22", "symptom": "\u0e04\u0e27\u0e31\u0e19\u0e14\u0e33\u0e2b\u0e19\u0e32\u0e41\u0e19\u0e48\u0e19\u0e02\u0e13\u0e30\u0e40\u0e23\u0e48\u0e07\u0e42\u0e2b\u0e25\u0e14 (Dense Black Smoke)", "root_cause": "\u0e21\u0e27\u0e25\u0e2d\u0e32\u0e01\u0e32\u0e28\u0e44\u0e21\u0e48\u0e1e\u0e2d\u0e01\u0e31\u0e1a\u0e1b\u0e23\u0e34\u0e21\u0e32\u0e13\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19 (Rich Mixture) \u0e2d\u0e31\u0e15\u0e23\u0e32\u0e2a\u0e48\u0e27\u0e19 Lambda < 1.15", "system": "\u0e23\u0e30\u0e1a\u0e1a\u0e1b\u0e23\u0e30\u0e08\u0e38\u0e44\u0e2d\u0e14\u0e35 / \u0e40\u0e17\u0e2d\u0e23\u0e4c\u0e42\u0e1a\u0e0a\u0e32\u0e23\u0e4c\u0e08\u0e40\u0e08\u0e2d\u0e23\u0e4c", "diagnostic": "1. \u0e27\u0e31\u0e14\u0e41\u0e23\u0e07\u0e14\u0e31\u0e19\u0e1a\u0e39\u0e2a\u0e15\u0e4c\u0e40\u0e17\u0e2d\u0e23\u0e4c\u0e42\u0e1a\n2. \u0e15\u0e23\u0e27\u0e08\u0e40\u0e01\u0e08\u0e27\u0e31\u0e14\u0e01\u0e23\u0e2d\u0e07\u0e2d\u0e32\u0e01\u0e32\u0e28\n3. \u0e2a\u0e42\u0e21\u0e01\u0e40\u0e17\u0e2a\u0e15\u0e4c\u0e2b\u0e32\u0e23\u0e2d\u0e22\u0e23\u0e31\u0e48\u0e27\u0e17\u0e48\u0e2d\u0e2d\u0e34\u0e19\u0e40\u0e15\u0e2d\u0e23\u0e4c\u0e04\u0e39\u0e25\u0e40\u0e25\u0e2d\u0e23\u0e4c", "action": "\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e44\u0e2a\u0e49\u0e01\u0e23\u0e2d\u0e07\u0e2d\u0e32\u0e01\u0e32\u0e28, \u0e0b\u0e48\u0e2d\u0e21\u0e17\u0e48\u0e2d\u0e2d\u0e34\u0e19\u0e40\u0e15\u0e2d\u0e23\u0e4c\u0e04\u0e39\u0e25\u0e40\u0e25\u0e2d\u0e23\u0e4c\u0e17\u0e35\u0e48\u0e41\u0e15\u0e01, \u0e1b\u0e23\u0e31\u0e1a\u0e15\u0e31\u0e49\u0e07\u0e40\u0e27\u0e2a\u0e15\u0e4c\u0e40\u0e01\u0e15", "prevention": "\u0e15\u0e23\u0e27\u0e08\u0e40\u0e1b\u0e48\u0e32\u0e01\u0e23\u0e2d\u0e07\u0e2d\u0e32\u0e01\u0e32\u0e28\u0e2a\u0e21\u0e48\u0e33\u0e40\u0e2a\u0e21\u0e2d \u0e15\u0e23\u0e27\u0e08\u0e40\u0e0a\u0e47\u0e01\u0e41\u0e04\u0e25\u0e21\u0e1b\u0e4c\u0e23\u0e31\u0e14\u0e17\u0e48\u0e2d\u0e25\u0e21"}, {"id": "FT-02", "category": "\u0e2a\u0e35\u0e04\u0e27\u0e31\u0e19\u0e44\u0e2d\u0e40\u0e2a\u0e35\u0e22", "symptom": "\u0e04\u0e27\u0e31\u0e19\u0e14\u0e33\u0e15\u0e25\u0e2d\u0e14\u0e40\u0e27\u0e25\u0e32\u0e41\u0e21\u0e49\u0e40\u0e14\u0e34\u0e19\u0e40\u0e1a\u0e32 (Continuous Black Smoke at Idle)", "root_cause": "\u0e2b\u0e31\u0e27\u0e09\u0e35\u0e14\u0e08\u0e48\u0e32\u0e22\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e23\u0e31\u0e48\u0e27\u0e0b\u0e36\u0e21 \u0e1b\u0e25\u0e32\u0e22\u0e2b\u0e31\u0e27\u0e09\u0e35\u0e14\u0e2a\u0e36\u0e01\u0e2b\u0e23\u0e2d \u0e09\u0e35\u0e14\u0e40\u0e1b\u0e47\u0e19\u0e2b\u0e22\u0e14\u0e44\u0e21\u0e48\u0e40\u0e1b\u0e47\u0e19\u0e1d\u0e2d\u0e22", "system": "\u0e23\u0e30\u0e1a\u0e1a\u0e40\u0e0a\u0e37\u0e49\u0e2d\u0e40\u0e1e\u0e25\u0e34\u0e07\u0e04\u0e2d\u0e21\u0e21\u0e2d\u0e19\u0e40\u0e23\u0e25", "diagnostic": "1. \u0e14\u0e39\u0e04\u0e48\u0e32 Injector Balance Rates \u0e14\u0e49\u0e27\u0e22\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e2a\u0e41\u0e01\u0e19\n2. \u0e17\u0e33 Back Leak Test", "action": "\u0e16\u0e2d\u0e14\u0e2b\u0e31\u0e27\u0e09\u0e35\u0e14\u0e2a\u0e48\u0e07\u0e40\u0e0a\u0e47\u0e01\u0e1b\u0e31\u0e4a\u0e21-\u0e2b\u0e31\u0e27\u0e09\u0e35\u0e14 \u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e0a\u0e38\u0e14\u0e1b\u0e25\u0e32\u0e22\u0e40\u0e02\u0e47\u0e21\u0e41\u0e25\u0e30\u0e27\u0e32\u0e25\u0e4c\u0e27\u0e04\u0e2d\u0e19\u0e42\u0e17\u0e23\u0e25", "prevention": "\u0e40\u0e15\u0e34\u0e21\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e14\u0e35\u0e40\u0e0b\u0e25\u0e17\u0e35\u0e48\u0e2a\u0e30\u0e2d\u0e32\u0e14 \u0e21\u0e35\u0e2a\u0e32\u0e23\u0e0a\u0e30\u0e25\u0e49\u0e32\u0e07\u0e2b\u0e31\u0e27\u0e09\u0e35\u0e14"}, {"id": "FT-03", "category": "\u0e2a\u0e35\u0e04\u0e27\u0e31\u0e19\u0e44\u0e2d\u0e40\u0e2a\u0e35\u0e22", "symptom": "\u0e04\u0e27\u0e31\u0e19\u0e02\u0e32\u0e27\u0e1f\u0e38\u0e49\u0e07\u0e15\u0e2d\u0e19\u0e2a\u0e15\u0e32\u0e23\u0e4c\u0e17\u0e0a\u0e48\u0e27\u0e07\u0e40\u0e0a\u0e49\u0e32 (White Smoke on Cold Start)", "root_cause": "\u0e2d\u0e38\u0e13\u0e2b\u0e20\u0e39\u0e21\u0e34\u0e43\u0e19\u0e2b\u0e49\u0e2d\u0e07\u0e40\u0e1c\u0e32\u0e44\u0e2b\u0e21\u0e49\u0e15\u0e48\u0e33\u0e40\u0e01\u0e34\u0e19\u0e44\u0e1b \u0e25\u0e30\u0e2d\u0e2d\u0e07\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e44\u0e21\u0e48\u0e23\u0e30\u0e40\u0e1a\u0e34\u0e14\u0e41\u0e15\u0e48\u0e23\u0e30\u0e40\u0e2b\u0e22\u0e2d\u0e2d\u0e01\u0e17\u0e48\u0e2d\u0e44\u0e2d\u0e40\u0e2a\u0e35\u0e22", "system": "\u0e23\u0e30\u0e1a\u0e1a\u0e2a\u0e15\u0e32\u0e23\u0e4c\u0e17 / \u0e01\u0e33\u0e25\u0e31\u0e07\u0e2d\u0e31\u0e14", "diagnostic": "1. \u0e27\u0e31\u0e14\u0e04\u0e27\u0e32\u0e21\u0e15\u0e49\u0e32\u0e19\u0e17\u0e32\u0e19\u0e2b\u0e31\u0e27\u0e40\u0e1c\u0e32 (Glow Plug Resistance < 1-2 Ohm)\n2. \u0e27\u0e31\u0e14\u0e01\u0e33\u0e25\u0e31\u0e07\u0e2d\u0e31\u0e14", "action": "\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e2b\u0e31\u0e27\u0e40\u0e1c\u0e32\u0e15\u0e31\u0e27\u0e17\u0e35\u0e48\u0e02\u0e32\u0e14 \u0e2b\u0e23\u0e37\u0e2d\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e23\u0e35\u0e40\u0e25\u0e22\u0e4c\u0e04\u0e27\u0e1a\u0e04\u0e38\u0e21\u0e2b\u0e31\u0e27\u0e40\u0e1c\u0e32", "prevention": "\u0e17\u0e14\u0e2a\u0e2d\u0e1a\u0e01\u0e32\u0e23\u0e17\u0e33\u0e07\u0e32\u0e19\u0e02\u0e2d\u0e07\u0e23\u0e30\u0e1a\u0e1a\u0e2b\u0e31\u0e27\u0e40\u0e1c\u0e32\u0e01\u0e48\u0e2d\u0e19\u0e40\u0e02\u0e49\u0e32\u0e24\u0e14\u0e39\u0e2b\u0e19\u0e32\u0e27"}, {"id": "FT-04", "category": "\u0e2a\u0e35\u0e04\u0e27\u0e31\u0e19\u0e44\u0e2d\u0e40\u0e2a\u0e35\u0e22", "symptom": "\u0e04\u0e27\u0e31\u0e19\u0e02\u0e32\u0e27\u0e15\u0e25\u0e2d\u0e14\u0e40\u0e27\u0e25\u0e32 \u0e21\u0e35\u0e01\u0e25\u0e34\u0e48\u0e19\u0e2b\u0e27\u0e32\u0e19 (Continuous Sweet White Smoke)", "root_cause": "\u0e19\u0e49\u0e33\u0e2b\u0e25\u0e48\u0e2d\u0e40\u0e22\u0e47\u0e19\u0e40\u0e25\u0e47\u0e14\u0e25\u0e2d\u0e14\u0e40\u0e02\u0e49\u0e32\u0e2b\u0e49\u0e2d\u0e07\u0e40\u0e1c\u0e32\u0e44\u0e2b\u0e21\u0e49 \u0e23\u0e30\u0e40\u0e2b\u0e22\u0e01\u0e25\u0e32\u0e22\u0e40\u0e1b\u0e47\u0e19\u0e44\u0e2d\u0e19\u0e49\u0e33\u0e1e\u0e38\u0e48\u0e07\u0e2d\u0e2d\u0e01\u0e1b\u0e25\u0e32\u0e22\u0e17\u0e48\u0e2d", "system": "\u0e23\u0e30\u0e1a\u0e1a\u0e23\u0e30\u0e1a\u0e32\u0e22\u0e04\u0e27\u0e32\u0e21\u0e23\u0e49\u0e2d\u0e19 / \u0e1b\u0e30\u0e40\u0e01\u0e47\u0e19\u0e1d\u0e32\u0e2a\u0e39\u0e1a", "diagnostic": "1. \u0e15\u0e23\u0e27\u0e08\u0e23\u0e30\u0e14\u0e31\u0e1a\u0e19\u0e49\u0e33\u0e2b\u0e25\u0e48\u0e2d\u0e40\u0e22\u0e47\u0e19\n2. \u0e43\u0e0a\u0e49\u0e0a\u0e38\u0e14\u0e17\u0e14\u0e2a\u0e2d\u0e1a\u0e40\u0e04\u0e21\u0e35 Combustion Leak Test \u0e14\u0e39\u0e01\u0e4a\u0e32\u0e0b\u0e43\u0e19\u0e2b\u0e21\u0e49\u0e2d\u0e19\u0e49\u0e33", "action": "\u0e40\u0e1b\u0e34\u0e14\u0e1d\u0e32\u0e2a\u0e39\u0e1a \u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e1b\u0e30\u0e40\u0e01\u0e47\u0e19\u0e1d\u0e32\u0e2a\u0e39\u0e1a \u0e44\u0e2a\u0e1b\u0e23\u0e31\u0e1a\u0e23\u0e30\u0e19\u0e32\u0e1a\u0e1d\u0e32\u0e2a\u0e39\u0e1a\u0e43\u0e2b\u0e21\u0e48\u0e2b\u0e32\u0e01\u0e42\u0e01\u0e48\u0e07", "prevention": "\u0e2b\u0e49\u0e32\u0e21\u0e40\u0e15\u0e34\u0e21\u0e19\u0e49\u0e33\u0e40\u0e22\u0e47\u0e19\u0e08\u0e31\u0e14\u0e02\u0e13\u0e30\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e01\u0e33\u0e25\u0e31\u0e07\u0e23\u0e49\u0e2d\u0e19\u0e08\u0e31\u0e14 \u0e1b\u0e49\u0e2d\u0e07\u0e01\u0e31\u0e19\u0e1d\u0e32\u0e2a\u0e39\u0e1a\u0e23\u0e49\u0e32\u0e27"}, {"id": "FT-05", "category": "\u0e2a\u0e35\u0e04\u0e27\u0e31\u0e19\u0e44\u0e2d\u0e40\u0e2a\u0e35\u0e22", "symptom": "\u0e04\u0e27\u0e31\u0e19\u0e02\u0e32\u0e27\u0e01\u0e25\u0e34\u0e48\u0e19\u0e14\u0e35\u0e40\u0e0b\u0e25\u0e09\u0e38\u0e19 \u0e41\u0e2a\u0e1a\u0e15\u0e32 (Pungent Unburned White Smoke)", "root_cause": "\u0e2d\u0e07\u0e28\u0e32\u0e01\u0e32\u0e23\u0e09\u0e35\u0e14\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e25\u0e48\u0e32\u0e0a\u0e49\u0e32\u0e21\u0e32\u0e01 (Retarded Timing) \u0e2b\u0e23\u0e37\u0e2d\u0e21\u0e35\u0e19\u0e49\u0e33\u0e1b\u0e19\u0e43\u0e19\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e14\u0e35\u0e40\u0e0b\u0e25", "system": "\u0e23\u0e30\u0e1a\u0e1a\u0e40\u0e0a\u0e37\u0e49\u0e2d\u0e40\u0e1e\u0e25\u0e34\u0e07 / \u0e44\u0e17\u0e21\u0e4c\u0e21\u0e34\u0e48\u0e07", "diagnostic": "1. \u0e15\u0e23\u0e27\u0e08\u0e21\u0e32\u0e23\u0e4c\u0e01\u0e40\u0e1f\u0e37\u0e2d\u0e07\u0e44\u0e17\u0e21\u0e4c\u0e21\u0e34\u0e48\u0e07\n2. \u0e2a\u0e48\u0e2d\u0e07\u0e14\u0e39\u0e19\u0e49\u0e33\u0e43\u0e19\u0e16\u0e49\u0e27\u0e22\u0e01\u0e23\u0e2d\u0e07\u0e14\u0e31\u0e01\u0e19\u0e49\u0e33\n3. \u0e14\u0e39\u0e01\u0e23\u0e32\u0e1f\u0e2d\u0e07\u0e28\u0e32\u0e09\u0e35\u0e14\u0e1c\u0e48\u0e32\u0e19 OBD", "action": "\u0e15\u0e31\u0e49\u0e07\u0e21\u0e32\u0e23\u0e4c\u0e01\u0e44\u0e17\u0e21\u0e4c\u0e21\u0e34\u0e48\u0e07\u0e43\u0e2b\u0e21\u0e48, \u0e16\u0e48\u0e32\u0e22\u0e40\u0e14\u0e23\u0e19\u0e19\u0e49\u0e33\u0e2d\u0e2d\u0e01\u0e08\u0e32\u0e01\u0e16\u0e31\u0e07\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e41\u0e25\u0e30\u0e01\u0e23\u0e2d\u0e07\u0e14\u0e31\u0e01\u0e19\u0e49\u0e33", "prevention": "\u0e2b\u0e21\u0e31\u0e48\u0e19\u0e40\u0e14\u0e23\u0e19\u0e19\u0e49\u0e33\u0e01\u0e49\u0e19\u0e16\u0e31\u0e07\u0e1e\u0e31\u0e01\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e40\u0e0a\u0e37\u0e49\u0e2d\u0e40\u0e1e\u0e25\u0e34\u0e07\u0e17\u0e38\u0e01\u0e2a\u0e31\u0e1b\u0e14\u0e32\u0e2b\u0e4c"}, {"id": "FT-06", "category": "\u0e2a\u0e35\u0e04\u0e27\u0e31\u0e19\u0e44\u0e2d\u0e40\u0e2a\u0e35\u0e22", "symptom": "\u0e04\u0e27\u0e31\u0e19\u0e2a\u0e35\u0e02\u0e32\u0e27\u0e2d\u0e21\u0e1f\u0e49\u0e32\u0e15\u0e25\u0e2d\u0e14\u0e40\u0e27\u0e25\u0e32 (Continuous Blue Smoke)", "root_cause": "\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e40\u0e25\u0e47\u0e14\u0e25\u0e2d\u0e14\u0e02\u0e36\u0e49\u0e19\u0e08\u0e32\u0e01\u0e2b\u0e49\u0e2d\u0e07\u0e41\u0e04\u0e23\u0e49\u0e07\u0e01\u0e4c\u0e40\u0e02\u0e49\u0e32\u0e2a\u0e39\u0e48\u0e2b\u0e49\u0e2d\u0e07\u0e40\u0e1c\u0e32\u0e44\u0e2b\u0e21\u0e49\u0e40\u0e19\u0e37\u0e48\u0e2d\u0e07\u0e08\u0e32\u0e01\u0e41\u0e2b\u0e27\u0e19\u0e25\u0e39\u0e01\u0e2a\u0e39\u0e1a\u0e2b\u0e31\u0e01/\u0e15\u0e32\u0e22", "system": "\u0e01\u0e25\u0e44\u0e01\u0e40\u0e1e\u0e25\u0e32\u0e02\u0e49\u0e2d\u0e40\u0e2b\u0e27\u0e35\u0e48\u0e22\u0e07\u0e41\u0e25\u0e30\u0e25\u0e39\u0e01\u0e2a\u0e39\u0e1a", "diagnostic": "1. \u0e27\u0e31\u0e14\u0e01\u0e33\u0e25\u0e31\u0e07\u0e2d\u0e31\u0e14\u0e41\u0e1a\u0e1a Wet & Dry Compression Test\n2. \u0e2a\u0e48\u0e2d\u0e07\u0e01\u0e25\u0e49\u0e2d\u0e07 Borescope \u0e14\u0e39\u0e23\u0e2d\u0e22\u0e01\u0e23\u0e30\u0e1a\u0e2d\u0e01\u0e2a\u0e39\u0e1a", "action": "\u0e23\u0e37\u0e49\u0e2d\u0e42\u0e2d\u0e40\u0e27\u0e2d\u0e23\u0e4c\u0e2e\u0e2d\u0e25 \u0e04\u0e27\u0e49\u0e32\u0e19\u0e01\u0e23\u0e30\u0e1a\u0e2d\u0e01\u0e2a\u0e39\u0e1a \u0e15\u0e35\u0e1b\u0e25\u0e2d\u0e01\u0e43\u0e2b\u0e21\u0e48 \u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e25\u0e39\u0e01\u0e2a\u0e39\u0e1a\u0e41\u0e25\u0e30\u0e41\u0e2b\u0e27\u0e19", "prevention": "\u0e43\u0e0a\u0e49\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e40\u0e01\u0e23\u0e14\u0e21\u0e32\u0e15\u0e23\u0e10\u0e32\u0e19 \u0e2b\u0e49\u0e32\u0e21\u0e1b\u0e25\u0e48\u0e2d\u0e22\u0e43\u0e2b\u0e49\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e41\u0e2b\u0e49\u0e07"}, {"id": "FT-07", "category": "\u0e2a\u0e35\u0e04\u0e27\u0e31\u0e19\u0e44\u0e2d\u0e40\u0e2a\u0e35\u0e22", "symptom": "\u0e04\u0e27\u0e31\u0e19\u0e1f\u0e49\u0e32\u0e15\u0e2d\u0e19\u0e2a\u0e15\u0e32\u0e23\u0e4c\u0e17\u0e2b\u0e23\u0e37\u0e2d\u0e40\u0e2b\u0e22\u0e35\u0e22\u0e1a\u0e04\u0e31\u0e19\u0e40\u0e23\u0e48\u0e07\u0e2b\u0e25\u0e31\u0e07\u0e40\u0e14\u0e34\u0e19\u0e40\u0e1a\u0e32\u0e19\u0e32\u0e19 (Blue Smoke After Decel)", "root_cause": "\u0e22\u0e32\u0e07\u0e2b\u0e21\u0e27\u0e01\u0e27\u0e32\u0e25\u0e4c\u0e27\u0e40\u0e2a\u0e37\u0e48\u0e2d\u0e21\u0e2a\u0e20\u0e32\u0e1e \u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e44\u0e2b\u0e25\u0e22\u0e49\u0e2d\u0e22\u0e25\u0e07\u0e15\u0e32\u0e21\u0e01\u0e49\u0e32\u0e19\u0e27\u0e32\u0e25\u0e4c\u0e27\u0e25\u0e07\u0e2b\u0e49\u0e2d\u0e07\u0e40\u0e1c\u0e32\u0e44\u0e2b\u0e21\u0e49", "system": "\u0e01\u0e25\u0e44\u0e01\u0e04\u0e27\u0e1a\u0e04\u0e38\u0e21\u0e27\u0e32\u0e25\u0e4c\u0e27", "diagnostic": "1. \u0e2a\u0e31\u0e07\u0e40\u0e01\u0e15\u0e04\u0e27\u0e31\u0e19\u0e2a\u0e35\u0e1f\u0e49\u0e32\u0e0a\u0e31\u0e14\u0e40\u0e08\u0e19\u0e15\u0e2d\u0e19\u0e40\u0e2b\u0e22\u0e35\u0e22\u0e1a\u0e04\u0e31\u0e19\u0e40\u0e23\u0e48\u0e07\u0e04\u0e23\u0e31\u0e49\u0e07\u0e41\u0e23\u0e01\u0e2b\u0e25\u0e31\u0e07\u0e08\u0e2d\u0e14\u0e15\u0e34\u0e14\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e19\u0e32\u0e19\n2. \u0e16\u0e2d\u0e14\u0e14\u0e39\u0e04\u0e23\u0e32\u0e1a\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e17\u0e35\u0e48\u0e1e\u0e2d\u0e23\u0e4c\u0e15\u0e27\u0e32\u0e25\u0e4c\u0e27", "action": "\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e22\u0e32\u0e07\u0e2b\u0e21\u0e27\u0e01\u0e27\u0e32\u0e25\u0e4c\u0e27 (Valve Stem Seals) \u0e43\u0e2b\u0e21\u0e48\u0e22\u0e01\u0e0a\u0e38\u0e14", "prevention": "\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e16\u0e48\u0e32\u0e22\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e15\u0e23\u0e07\u0e40\u0e27\u0e25\u0e32 \u0e1b\u0e49\u0e2d\u0e07\u0e01\u0e31\u0e19\u0e22\u0e32\u0e07\u0e2b\u0e21\u0e27\u0e01\u0e27\u0e32\u0e25\u0e4c\u0e27\u0e41\u0e02\u0e47\u0e07\u0e01\u0e23\u0e2d\u0e1a"}, {"id": "FT-08", "category": "\u0e2a\u0e35\u0e04\u0e27\u0e31\u0e19\u0e44\u0e2d\u0e40\u0e2a\u0e35\u0e22", "symptom": "\u0e04\u0e27\u0e31\u0e19\u0e40\u0e17\u0e32\u0e40\u0e02\u0e21\u0e48\u0e32\u0e1b\u0e19\u0e25\u0e30\u0e2d\u0e2d\u0e07\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19 (Grey Oily Smoke)", "root_cause": "\u0e0b\u0e35\u0e25\u0e41\u0e01\u0e19\u0e40\u0e17\u0e2d\u0e23\u0e4c\u0e42\u0e1a\u0e0a\u0e32\u0e23\u0e4c\u0e08\u0e40\u0e08\u0e2d\u0e23\u0e4c\u0e1d\u0e31\u0e48\u0e07\u0e44\u0e2d\u0e40\u0e2a\u0e35\u0e22\u0e41\u0e15\u0e01 \u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e23\u0e31\u0e48\u0e27\u0e42\u0e14\u0e19\u0e04\u0e27\u0e32\u0e21\u0e23\u0e49\u0e2d\u0e19\u0e17\u0e48\u0e2d\u0e44\u0e2d\u0e40\u0e2a\u0e35\u0e22", "system": "\u0e23\u0e30\u0e1a\u0e1a\u0e1b\u0e23\u0e30\u0e08\u0e38\u0e44\u0e2d\u0e14\u0e35\u0e41\u0e25\u0e30\u0e44\u0e2d\u0e40\u0e2a\u0e35\u0e22", "diagnostic": "1. \u0e16\u0e2d\u0e14\u0e17\u0e48\u0e2d\u0e44\u0e2d\u0e40\u0e2a\u0e35\u0e22\u0e2b\u0e25\u0e31\u0e07\u0e40\u0e17\u0e2d\u0e23\u0e4c\u0e42\u0e1a\u0e15\u0e23\u0e27\u0e08\u0e14\u0e39\u0e04\u0e23\u0e32\u0e1a\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e40\u0e22\u0e34\u0e49\u0e21\n2. \u0e02\u0e22\u0e31\u0e1a\u0e41\u0e01\u0e19\u0e40\u0e17\u0e2d\u0e23\u0e4c\u0e42\u0e1a\u0e14\u0e39\u0e23\u0e30\u0e22\u0e30\u0e04\u0e25\u0e2d\u0e19", "action": "\u0e16\u0e2d\u0e14\u0e40\u0e17\u0e2d\u0e23\u0e4c\u0e42\u0e1a\u0e0a\u0e32\u0e23\u0e4c\u0e08\u0e40\u0e08\u0e2d\u0e23\u0e4c\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e0a\u0e38\u0e14\u0e0b\u0e48\u0e2d\u0e21\u0e2b\u0e23\u0e37\u0e2d\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e40\u0e17\u0e2d\u0e23\u0e4c\u0e42\u0e1a\u0e43\u0e2b\u0e21\u0e48", "prevention": "\u0e27\u0e2d\u0e23\u0e4c\u0e21\u0e14\u0e32\u0e27\u0e19\u0e4c\u0e40\u0e14\u0e34\u0e19\u0e40\u0e1a\u0e32\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07 3-5 \u0e19\u0e32\u0e17\u0e35\u0e01\u0e48\u0e2d\u0e19\u0e14\u0e31\u0e1a \u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e23\u0e30\u0e1a\u0e32\u0e22\u0e04\u0e27\u0e32\u0e21\u0e23\u0e49\u0e2d\u0e19\u0e41\u0e01\u0e19\u0e40\u0e17\u0e2d\u0e23\u0e4c\u0e42\u0e1a"}, {"id": "FT-09", "category": "\u0e01\u0e32\u0e23\u0e2a\u0e15\u0e32\u0e23\u0e4c\u0e17", "symptom": "\u0e1a\u0e34\u0e14\u0e01\u0e38\u0e0d\u0e41\u0e08\u0e41\u0e25\u0e49\u0e27\u0e40\u0e07\u0e35\u0e22\u0e1a\u0e2a\u0e19\u0e34\u0e17 \u0e44\u0e21\u0e48\u0e21\u0e35\u0e40\u0e2a\u0e35\u0e22\u0e07\u0e43\u0e14\u0e46 (No Crank / Silent)", "root_cause": "\u0e44\u0e21\u0e48\u0e21\u0e35\u0e01\u0e23\u0e30\u0e41\u0e2a\u0e44\u0e1f\u0e1f\u0e49\u0e32\u0e44\u0e2b\u0e25\u0e40\u0e02\u0e49\u0e32\u0e42\u0e0b\u0e25\u0e34\u0e19\u0e2d\u0e22\u0e14\u0e4c\u0e2a\u0e15\u0e32\u0e23\u0e4c\u0e17 \u0e2b\u0e23\u0e37\u0e2d\u0e41\u0e1a\u0e15\u0e40\u0e15\u0e2d\u0e23\u0e35\u0e48\u0e44\u0e1f\u0e2b\u0e21\u0e14\u0e40\u0e01\u0e25\u0e35\u0e49\u0e22\u0e07", "system": "\u0e23\u0e30\u0e1a\u0e1a\u0e2a\u0e15\u0e32\u0e23\u0e4c\u0e17\u0e41\u0e25\u0e30\u0e44\u0e1f\u0e1f\u0e49\u0e32", "diagnostic": "1. \u0e27\u0e31\u0e14\u0e41\u0e23\u0e07\u0e14\u0e31\u0e19\u0e41\u0e1a\u0e15\u0e40\u0e15\u0e2d\u0e23\u0e35\u0e48 (\u0e15\u0e49\u0e2d\u0e07 > 12.4V)\n2. \u0e15\u0e23\u0e27\u0e08\u0e1f\u0e34\u0e27\u0e2a\u0e4c\u0e2a\u0e15\u0e32\u0e23\u0e4c\u0e17\u0e41\u0e25\u0e30\u0e23\u0e35\u0e40\u0e25\u0e22\u0e4c", "action": "\u0e0a\u0e32\u0e23\u0e4c\u0e08\u0e41\u0e1a\u0e15\u0e40\u0e15\u0e2d\u0e23\u0e35\u0e48, \u0e02\u0e31\u0e14\u0e02\u0e31\u0e49\u0e27\u0e41\u0e1a\u0e15\u0e40\u0e15\u0e2d\u0e23\u0e35\u0e48\u0e43\u0e2b\u0e49\u0e41\u0e19\u0e48\u0e19, \u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e2a\u0e27\u0e34\u0e15\u0e0a\u0e4c\u0e01\u0e38\u0e0d\u0e41\u0e08\u0e2b\u0e23\u0e37\u0e2d\u0e23\u0e35\u0e40\u0e25\u0e22\u0e4c\u0e2a\u0e15\u0e32\u0e23\u0e4c\u0e17", "prevention": "\u0e15\u0e34\u0e14\u0e15\u0e31\u0e49\u0e07\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e0a\u0e32\u0e23\u0e4c\u0e08\u0e41\u0e1a\u0e15\u0e40\u0e15\u0e2d\u0e23\u0e35\u0e48\u0e2d\u0e31\u0e15\u0e42\u0e19\u0e21\u0e31\u0e15\u0e34 (Trickle Charger)"}, {"id": "FT-10", "category": "\u0e01\u0e32\u0e23\u0e2a\u0e15\u0e32\u0e23\u0e4c\u0e17", "symptom": "\u0e21\u0e2d\u0e40\u0e15\u0e2d\u0e23\u0e4c\u0e2a\u0e15\u0e32\u0e23\u0e4c\u0e17\u0e2b\u0e21\u0e38\u0e19\u0e0a\u0e49\u0e32\u0e21\u0e32\u0e01 \u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e44\u0e21\u0e48\u0e15\u0e34\u0e14 (Slow Crank)", "root_cause": "\u0e41\u0e23\u0e07\u0e14\u0e31\u0e19\u0e41\u0e1a\u0e15\u0e40\u0e15\u0e2d\u0e23\u0e35\u0e48\u0e15\u0e01\u0e27\u0e39\u0e1a (< 9.6V) \u0e02\u0e13\u0e30\u0e2a\u0e15\u0e32\u0e23\u0e4c\u0e17 \u0e2b\u0e23\u0e37\u0e2d\u0e2a\u0e32\u0e22\u0e01\u0e23\u0e32\u0e27\u0e14\u0e4c\u0e2b\u0e25\u0e27\u0e21\u0e21\u0e35\u0e04\u0e27\u0e32\u0e21\u0e15\u0e49\u0e32\u0e19\u0e17\u0e32\u0e19\u0e2a\u0e39\u0e07", "system": "\u0e23\u0e30\u0e1a\u0e1a\u0e2a\u0e15\u0e32\u0e23\u0e4c\u0e17\u0e41\u0e25\u0e30\u0e44\u0e1f\u0e1f\u0e49\u0e32", "diagnostic": "1. \u0e17\u0e33 Voltage Drop Test \u0e02\u0e31\u0e49\u0e27\u0e1a\u0e27\u0e01\u0e41\u0e25\u0e30\u0e02\u0e31\u0e49\u0e27\u0e25\u0e1a\n2. \u0e17\u0e14\u0e2a\u0e2d\u0e1a\u0e04\u0e48\u0e32 CCA \u0e41\u0e1a\u0e15\u0e40\u0e15\u0e2d\u0e23\u0e35\u0e48", "action": "\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e41\u0e1a\u0e15\u0e40\u0e15\u0e2d\u0e23\u0e35\u0e48\u0e43\u0e2b\u0e21\u0e48, \u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e2a\u0e32\u0e22\u0e44\u0e1f\u0e41\u0e1a\u0e15\u0e40\u0e15\u0e2d\u0e23\u0e35\u0e48\u0e17\u0e35\u0e48\u0e02\u0e36\u0e49\u0e19\u0e02\u0e35\u0e49\u0e40\u0e01\u0e25\u0e37\u0e2d\u0e2b\u0e23\u0e37\u0e2d\u0e44\u0e2b\u0e21\u0e49", "prevention": "\u0e15\u0e23\u0e27\u0e08\u0e27\u0e31\u0e14\u0e04\u0e48\u0e32 CCA \u0e02\u0e2d\u0e07\u0e41\u0e1a\u0e15\u0e40\u0e15\u0e2d\u0e23\u0e35\u0e48\u0e17\u0e38\u0e01 3 \u0e40\u0e14\u0e37\u0e2d\u0e19"}, {"id": "FT-11", "category": "\u0e01\u0e32\u0e23\u0e2a\u0e15\u0e32\u0e23\u0e4c\u0e17", "symptom": "\u0e44\u0e14\u0e2b\u0e21\u0e38\u0e19\u0e1b\u0e01\u0e15\u0e34\u0e41\u0e15\u0e48\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e44\u0e21\u0e48\u0e15\u0e34\u0e14 \u0e21\u0e35\u0e25\u0e21\u0e43\u0e19\u0e23\u0e30\u0e1a\u0e1a (Air in Fuel)", "root_cause": "\u0e21\u0e35\u0e1f\u0e2d\u0e07\u0e2d\u0e32\u0e01\u0e32\u0e28\u0e40\u0e25\u0e47\u0e14\u0e25\u0e2d\u0e14\u0e40\u0e02\u0e49\u0e32\u0e2a\u0e39\u0e48\u0e17\u0e48\u0e2d\u0e17\u0e32\u0e07\u0e40\u0e14\u0e34\u0e19\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e14\u0e49\u0e32\u0e19\u0e41\u0e23\u0e07\u0e14\u0e31\u0e19\u0e15\u0e48\u0e33 \u0e17\u0e33\u0e43\u0e2b\u0e49\u0e1b\u0e31\u0e4a\u0e21\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e41\u0e23\u0e07\u0e14\u0e31\u0e19\u0e44\u0e21\u0e48\u0e44\u0e14\u0e49", "system": "\u0e23\u0e30\u0e1a\u0e1a\u0e40\u0e0a\u0e37\u0e49\u0e2d\u0e40\u0e1e\u0e25\u0e34\u0e07", "diagnostic": "1. \u0e2a\u0e31\u0e07\u0e40\u0e01\u0e15\u0e1f\u0e2d\u0e07\u0e2d\u0e32\u0e01\u0e32\u0e28\u0e43\u0e19\u0e2a\u0e32\u0e22\u0e22\u0e32\u0e07\u0e43\u0e2a\n2. \u0e01\u0e14\u0e1b\u0e31\u0e4a\u0e21\u0e41\u0e22\u0e4a\u0e01\u0e21\u0e37\u0e2d\u0e14\u0e39\u0e27\u0e48\u0e32\u0e22\u0e27\u0e1a\u0e2b\u0e23\u0e37\u0e2d\u0e44\u0e21\u0e48", "action": "\u0e2b\u0e32\u0e08\u0e38\u0e14\u0e23\u0e31\u0e48\u0e27\u0e15\u0e32\u0e21\u0e02\u0e49\u0e2d\u0e15\u0e48\u0e2d\u0e17\u0e48\u0e2d\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19 \u0e42\u0e2d\u0e23\u0e34\u0e07\u0e01\u0e23\u0e2d\u0e07\u0e14\u0e31\u0e01\u0e19\u0e49\u0e33 \u0e41\u0e25\u0e49\u0e27\u0e17\u0e33\u0e01\u0e32\u0e23\u0e41\u0e22\u0e4a\u0e01\u0e44\u0e25\u0e48\u0e25\u0e21 (Bleeding)", "prevention": "\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e42\u0e2d\u0e23\u0e34\u0e07\u0e41\u0e25\u0e30\u0e41\u0e2b\u0e27\u0e19\u0e17\u0e2d\u0e07\u0e41\u0e14\u0e07\u0e23\u0e2d\u0e07\u0e19\u0e47\u0e2d\u0e15\u0e17\u0e38\u0e01\u0e04\u0e23\u0e31\u0e49\u0e07\u0e17\u0e35\u0e48\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e01\u0e23\u0e2d\u0e07"}, {"id": "FT-12", "category": "\u0e01\u0e32\u0e23\u0e2a\u0e15\u0e32\u0e23\u0e4c\u0e17", "symptom": "\u0e2a\u0e15\u0e32\u0e23\u0e4c\u0e17\u0e25\u0e32\u0e01\u0e22\u0e32\u0e27\u0e21\u0e32\u0e01 \u0e41\u0e23\u0e07\u0e14\u0e31\u0e19\u0e23\u0e32\u0e07\u0e15\u0e01 (Long Crank, Rail Pressure Drop)", "root_cause": "\u0e41\u0e23\u0e07\u0e14\u0e31\u0e19\u0e23\u0e32\u0e07\u0e04\u0e2d\u0e21\u0e21\u0e2d\u0e19\u0e40\u0e23\u0e25\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e44\u0e14\u0e49\u0e44\u0e21\u0e48\u0e16\u0e36\u0e07\u0e1e\u0e34\u0e01\u0e31\u0e14\u0e2a\u0e15\u0e32\u0e23\u0e4c\u0e17 (\u0e15\u0e49\u0e2d\u0e07 > 200 bar) \u0e40\u0e19\u0e37\u0e48\u0e2d\u0e07\u0e08\u0e32\u0e01\u0e2b\u0e31\u0e27\u0e09\u0e35\u0e14\u0e23\u0e31\u0e48\u0e27\u0e01\u0e25\u0e31\u0e1a", "system": "\u0e23\u0e30\u0e1a\u0e1a\u0e40\u0e0a\u0e37\u0e49\u0e2d\u0e40\u0e1e\u0e25\u0e34\u0e07\u0e04\u0e2d\u0e21\u0e21\u0e2d\u0e19\u0e40\u0e23\u0e25", "diagnostic": "1. \u0e14\u0e39\u0e01\u0e23\u0e32\u0e1f Actual vs Desired Rail Pressure \u0e02\u0e13\u0e30\u0e2a\u0e15\u0e32\u0e23\u0e4c\u0e17\n2. \u0e1a\u0e25\u0e47\u0e2d\u0e01\u0e23\u0e32\u0e07\u0e17\u0e35\u0e25\u0e30\u0e2a\u0e39\u0e1a", "action": "\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e2b\u0e31\u0e27\u0e09\u0e35\u0e14\u0e15\u0e31\u0e27\u0e17\u0e35\u0e48\u0e23\u0e31\u0e48\u0e27\u0e44\u0e2b\u0e25\u0e01\u0e25\u0e31\u0e1a\u0e21\u0e32\u0e01\u0e40\u0e01\u0e34\u0e19, \u0e25\u0e49\u0e32\u0e07\u0e2b\u0e23\u0e37\u0e2d\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e27\u0e32\u0e25\u0e4c\u0e27 SCV", "prevention": "\u0e25\u0e49\u0e32\u0e07\u0e16\u0e31\u0e07\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e40\u0e0a\u0e37\u0e49\u0e2d\u0e40\u0e1e\u0e25\u0e34\u0e07 \u0e41\u0e25\u0e30\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e44\u0e2a\u0e49\u0e01\u0e23\u0e2d\u0e07\u0e25\u0e30\u0e40\u0e2d\u0e35\u0e22\u0e14\u0e15\u0e32\u0e21\u0e23\u0e30\u0e22\u0e30"}, {"id": "FT-15", "category": "\u0e01\u0e33\u0e25\u0e31\u0e07\u0e41\u0e25\u0e30\u0e2a\u0e21\u0e23\u0e23\u0e16\u0e19\u0e30", "symptom": "\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e22\u0e19\u0e15\u0e4c\u0e44\u0e21\u0e48\u0e21\u0e35\u0e41\u0e23\u0e07 \u0e1a\u0e39\u0e2a\u0e15\u0e4c\u0e44\u0e21\u0e48\u0e02\u0e36\u0e49\u0e19 \u0e2d\u0e31\u0e15\u0e23\u0e32\u0e40\u0e23\u0e48\u0e07\u0e15\u0e01 (Low Power / Turbo Lag)", "root_cause": "\u0e01\u0e4a\u0e32\u0e0b\u0e44\u0e2d\u0e40\u0e2a\u0e35\u0e22\u0e23\u0e31\u0e48\u0e27\u0e01\u0e48\u0e2d\u0e19\u0e40\u0e02\u0e49\u0e32\u0e40\u0e17\u0e2d\u0e23\u0e4c\u0e42\u0e1a \u0e2b\u0e23\u0e37\u0e2d\u0e40\u0e27\u0e2a\u0e15\u0e4c\u0e40\u0e01\u0e15\u0e04\u0e49\u0e32\u0e07\u0e40\u0e1b\u0e34\u0e14 \u0e2b\u0e23\u0e37\u0e2d\u0e17\u0e48\u0e2d\u0e44\u0e2d\u0e14\u0e35\u0e23\u0e31\u0e48\u0e27", "system": "\u0e23\u0e30\u0e1a\u0e1a\u0e44\u0e2d\u0e14\u0e35\u0e41\u0e25\u0e30\u0e44\u0e2d\u0e40\u0e2a\u0e35\u0e22", "diagnostic": "1. \u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a\u0e01\u0e32\u0e23\u0e40\u0e04\u0e25\u0e37\u0e48\u0e2d\u0e19\u0e17\u0e35\u0e48\u0e02\u0e2d\u0e07\u0e41\u0e01\u0e19\u0e40\u0e27\u0e2a\u0e15\u0e4c\u0e40\u0e01\u0e15/VGT Actuator\n2. \u0e15\u0e23\u0e27\u0e08\u0e23\u0e2d\u0e22\u0e23\u0e31\u0e48\u0e27\u0e17\u0e48\u0e2d\u0e44\u0e2d\u0e40\u0e2a\u0e35\u0e22", "action": "\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e1b\u0e23\u0e30\u0e40\u0e01\u0e47\u0e19\u0e17\u0e48\u0e2d\u0e23\u0e48\u0e27\u0e21\u0e44\u0e2d\u0e40\u0e2a\u0e35\u0e22, \u0e0b\u0e48\u0e2d\u0e21\u0e40\u0e27\u0e2a\u0e15\u0e4c\u0e40\u0e01\u0e15, \u0e25\u0e49\u0e32\u0e07\u0e40\u0e02\u0e21\u0e48\u0e32\u0e04\u0e23\u0e35\u0e1a\u0e41\u0e1b\u0e23\u0e1c\u0e31\u0e19\u0e40\u0e17\u0e2d\u0e23\u0e4c\u0e42\u0e1a", "prevention": "\u0e2b\u0e25\u0e35\u0e01\u0e40\u0e25\u0e35\u0e48\u0e22\u0e07\u0e01\u0e32\u0e23\u0e40\u0e14\u0e34\u0e19\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e15\u0e31\u0e27\u0e40\u0e1b\u0e25\u0e48\u0e32\u0e40\u0e1b\u0e47\u0e19\u0e40\u0e27\u0e25\u0e32\u0e19\u0e32\u0e19"}, {"id": "FT-17", "category": "\u0e01\u0e33\u0e25\u0e31\u0e07\u0e41\u0e25\u0e30\u0e2a\u0e21\u0e23\u0e23\u0e16\u0e19\u0e30", "symptom": "\u0e23\u0e2d\u0e1a\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e41\u0e01\u0e27\u0e48\u0e07\u0e2a\u0e27\u0e34\u0e07\u0e02\u0e36\u0e49\u0e19\u0e25\u0e07\u0e44\u0e21\u0e48\u0e2b\u0e22\u0e38\u0e14 (Engine Hunting / Surging)", "root_cause": "\u0e23\u0e30\u0e1a\u0e1a\u0e04\u0e27\u0e1a\u0e04\u0e38\u0e21\u0e23\u0e2d\u0e1a (Electronic Governor / Actuator) \u0e2a\u0e01\u0e1b\u0e23\u0e01\u0e15\u0e2d\u0e1a\u0e2a\u0e19\u0e2d\u0e07\u0e0a\u0e49\u0e32 \u0e2b\u0e23\u0e37\u0e2d\u0e21\u0e35\u0e25\u0e21\u0e43\u0e19\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19", "system": "\u0e23\u0e30\u0e1a\u0e1a\u0e04\u0e27\u0e1a\u0e04\u0e38\u0e21\u0e44\u0e1f\u0e1f\u0e49\u0e32 / \u0e40\u0e0a\u0e37\u0e49\u0e2d\u0e40\u0e1e\u0e25\u0e34\u0e07", "diagnostic": "1. \u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a\u0e01\u0e32\u0e23\u0e02\u0e22\u0e31\u0e1a\u0e02\u0e2d\u0e07\u0e01\u0e49\u0e32\u0e19\u0e40\u0e23\u0e48\u0e07 Actuator\n2. \u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a\u0e1f\u0e2d\u0e07\u0e2d\u0e32\u0e01\u0e32\u0e28\u0e43\u0e19\u0e23\u0e30\u0e1a\u0e1a\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19", "action": "\u0e16\u0e2d\u0e14\u0e25\u0e49\u0e32\u0e07\u0e01\u0e32\u0e27\u0e32\u0e19\u0e32, \u0e1b\u0e23\u0e31\u0e1a\u0e08\u0e39\u0e19\u0e04\u0e48\u0e32 Gain/Stability \u0e43\u0e19\u0e04\u0e2d\u0e19\u0e42\u0e17\u0e23\u0e25\u0e40\u0e25\u0e2d\u0e23\u0e4c, \u0e44\u0e25\u0e48\u0e1f\u0e2d\u0e07\u0e2d\u0e32\u0e01\u0e32\u0e28", "prevention": "\u0e1b\u0e23\u0e31\u0e1a\u0e08\u0e39\u0e19\u0e1e\u0e32\u0e23\u0e32\u0e21\u0e34\u0e40\u0e15\u0e2d\u0e23\u0e4c PID \u0e02\u0e2d\u0e07\u0e04\u0e2d\u0e19\u0e42\u0e17\u0e23\u0e25\u0e40\u0e25\u0e2d\u0e23\u0e4c\u0e43\u0e2b\u0e49\u0e40\u0e2b\u0e21\u0e32\u0e30\u0e2a\u0e21\u0e01\u0e31\u0e1a\u0e42\u0e2b\u0e25\u0e14"}, {"id": "FT-20", "category": "\u0e01\u0e33\u0e25\u0e31\u0e07\u0e41\u0e25\u0e30\u0e2a\u0e21\u0e23\u0e23\u0e16\u0e19\u0e30", "symptom": "\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e22\u0e19\u0e15\u0e4c\u0e40\u0e23\u0e48\u0e07\u0e23\u0e2d\u0e1a\u0e40\u0e2d\u0e07\u0e08\u0e19\u0e04\u0e38\u0e21\u0e44\u0e21\u0e48\u0e2d\u0e22\u0e39\u0e48 (Diesel Engine Runaway)", "root_cause": "\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e23\u0e31\u0e48\u0e27\u0e40\u0e02\u0e49\u0e32\u0e17\u0e48\u0e2d\u0e23\u0e48\u0e27\u0e21\u0e44\u0e2d\u0e14\u0e35\u0e17\u0e32\u0e07\u0e40\u0e17\u0e2d\u0e23\u0e4c\u0e42\u0e1a \u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e22\u0e19\u0e15\u0e4c\u0e43\u0e0a\u0e49\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e40\u0e1b\u0e47\u0e19\u0e40\u0e0a\u0e37\u0e49\u0e2d\u0e40\u0e1e\u0e25\u0e34\u0e07", "system": "\u0e23\u0e30\u0e1a\u0e1a\u0e2b\u0e25\u0e48\u0e2d\u0e25\u0e37\u0e48\u0e19\u0e41\u0e25\u0e30\u0e44\u0e2d\u0e14\u0e35", "diagnostic": "1. \u0e2a\u0e31\u0e07\u0e40\u0e01\u0e15\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e22\u0e19\u0e15\u0e4c\u0e40\u0e23\u0e48\u0e07\u0e23\u0e2d\u0e1a\u0e2a\u0e38\u0e14\u0e02\u0e35\u0e14 \u0e1a\u0e34\u0e14\u0e01\u0e38\u0e0d\u0e41\u0e08\u0e14\u0e31\u0e1a\u0e44\u0e21\u0e48\u0e44\u0e14\u0e49 \u0e41\u0e25\u0e30\u0e04\u0e27\u0e31\u0e19\u0e02\u0e32\u0e27\u0e17\u0e48\u0e27\u0e21", "action": "**\u0e27\u0e34\u0e01\u0e24\u0e15\u0e2a\u0e39\u0e07\u0e2a\u0e38\u0e14:** \u0e2b\u0e32\u0e17\u0e32\u0e07\u0e2d\u0e38\u0e14\u0e1b\u0e34\u0e14\u0e1b\u0e32\u0e01\u0e17\u0e48\u0e2d\u0e44\u0e2d\u0e14\u0e35\u0e17\u0e31\u0e19\u0e17\u0e35\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e15\u0e31\u0e14\u0e2d\u0e2d\u0e01\u0e0b\u0e34\u0e40\u0e08\u0e19! \u0e2b\u0e49\u0e32\u0e21\u0e43\u0e0a\u0e49\u0e19\u0e49\u0e33\u0e09\u0e35\u0e14", "prevention": "\u0e15\u0e23\u0e27\u0e08\u0e40\u0e0a\u0e47\u0e01\u0e17\u0e48\u0e2d\u0e2b\u0e32\u0e22\u0e43\u0e08\u0e2b\u0e49\u0e2d\u0e07\u0e41\u0e04\u0e23\u0e49\u0e07\u0e01\u0e4c (PCV) \u0e41\u0e25\u0e30\u0e0b\u0e35\u0e25\u0e41\u0e01\u0e19\u0e40\u0e17\u0e2d\u0e23\u0e4c\u0e42\u0e1a\u0e2a\u0e21\u0e48\u0e33\u0e40\u0e2a\u0e21\u0e2d"}, {"id": "FT-21", "category": "\u0e04\u0e27\u0e32\u0e21\u0e23\u0e49\u0e2d\u0e19\u0e41\u0e25\u0e30\u0e02\u0e2d\u0e07\u0e40\u0e2b\u0e25\u0e27", "symptom": "\u0e04\u0e27\u0e32\u0e21\u0e23\u0e49\u0e2d\u0e19\u0e02\u0e36\u0e49\u0e19\u0e2a\u0e39\u0e07\u0e1c\u0e34\u0e14\u0e1b\u0e01\u0e15\u0e34\u0e02\u0e13\u0e30\u0e42\u0e2b\u0e25\u0e14\u0e2b\u0e19\u0e31\u0e01 (Engine Overheating)", "root_cause": "\u0e01\u0e32\u0e23\u0e16\u0e48\u0e32\u0e22\u0e40\u0e17\u0e04\u0e27\u0e32\u0e21\u0e23\u0e49\u0e2d\u0e19\u0e1a\u0e01\u0e1e\u0e23\u0e48\u0e2d\u0e07 \u0e27\u0e32\u0e25\u0e4c\u0e27\u0e19\u0e49\u0e33\u0e40\u0e1b\u0e34\u0e14\u0e44\u0e21\u0e48\u0e2a\u0e38\u0e14 \u0e2b\u0e23\u0e37\u0e2d\u0e04\u0e23\u0e35\u0e1a\u0e2b\u0e21\u0e49\u0e2d\u0e19\u0e49\u0e33\u0e20\u0e32\u0e22\u0e19\u0e2d\u0e01\u0e2d\u0e38\u0e14\u0e15\u0e31\u0e19", "system": "\u0e23\u0e30\u0e1a\u0e1a\u0e23\u0e30\u0e1a\u0e32\u0e22\u0e04\u0e27\u0e32\u0e21\u0e23\u0e49\u0e2d\u0e19", "diagnostic": "1. \u0e27\u0e31\u0e14\u0e2d\u0e38\u0e13\u0e2b\u0e20\u0e39\u0e21\u0e34\u0e17\u0e48\u0e2d\u0e22\u0e32\u0e07\u0e1a\u0e19-\u0e25\u0e48\u0e32\u0e07\u0e14\u0e49\u0e27\u0e22\u0e1b\u0e37\u0e19\u0e2d\u0e34\u0e19\u0e1f\u0e23\u0e32\u0e40\u0e23\u0e14\n2. \u0e15\u0e23\u0e27\u0e08\u0e01\u0e32\u0e23\u0e2b\u0e21\u0e38\u0e19\u0e02\u0e2d\u0e07\u0e1e\u0e31\u0e14\u0e25\u0e21", "action": "\u0e25\u0e49\u0e32\u0e07\u0e04\u0e23\u0e35\u0e1a\u0e2b\u0e21\u0e49\u0e2d\u0e19\u0e49\u0e33\u0e20\u0e32\u0e22\u0e19\u0e2d\u0e01, \u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e27\u0e32\u0e25\u0e4c\u0e27\u0e19\u0e49\u0e33\u0e43\u0e2b\u0e21\u0e48, \u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e16\u0e48\u0e32\u0e22\u0e19\u0e49\u0e33\u0e22\u0e32\u0e2b\u0e25\u0e48\u0e2d\u0e40\u0e22\u0e47\u0e19", "prevention": "\u0e40\u0e1b\u0e48\u0e32\u0e17\u0e33\u0e04\u0e27\u0e32\u0e21\u0e2a\u0e30\u0e2d\u0e32\u0e14\u0e04\u0e23\u0e35\u0e1a\u0e2b\u0e21\u0e49\u0e2d\u0e19\u0e49\u0e33\u0e17\u0e38\u0e01\u0e40\u0e14\u0e37\u0e2d\u0e19"}, {"id": "FT-24", "category": "\u0e04\u0e27\u0e32\u0e21\u0e23\u0e49\u0e2d\u0e19\u0e41\u0e25\u0e30\u0e02\u0e2d\u0e07\u0e40\u0e2b\u0e25\u0e27", "symptom": "\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e01\u0e25\u0e32\u0e22\u0e40\u0e1b\u0e47\u0e19\u0e2a\u0e35\u0e01\u0e32\u0e41\u0e1f\u0e43\u0e2a\u0e48\u0e19\u0e21 (Emulsified / Milky Oil)", "root_cause": "\u0e19\u0e49\u0e33\u0e2b\u0e25\u0e48\u0e2d\u0e40\u0e22\u0e47\u0e19\u0e23\u0e31\u0e48\u0e27\u0e1c\u0e2a\u0e21\u0e01\u0e31\u0e1a\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07 \u0e40\u0e01\u0e34\u0e14\u0e01\u0e32\u0e23\u0e01\u0e27\u0e19\u0e08\u0e19\u0e40\u0e1b\u0e47\u0e19\u0e2d\u0e34\u0e21\u0e31\u0e25\u0e0a\u0e31\u0e19", "system": "\u0e23\u0e30\u0e1a\u0e1a\u0e2b\u0e25\u0e48\u0e2d\u0e25\u0e37\u0e48\u0e19 / \u0e23\u0e30\u0e1a\u0e32\u0e22\u0e04\u0e27\u0e32\u0e21\u0e23\u0e49\u0e2d\u0e19", "diagnostic": "1. \u0e0a\u0e31\u0e01\u0e01\u0e49\u0e32\u0e19\u0e27\u0e31\u0e14\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e14\u0e39\u0e2a\u0e35\n2. \u0e17\u0e14\u0e2a\u0e2d\u0e1a\u0e41\u0e23\u0e07\u0e14\u0e31\u0e19\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e43\u0e19\u0e2d\u0e2d\u0e22\u0e25\u0e4c\u0e04\u0e39\u0e25\u0e40\u0e25\u0e2d\u0e23\u0e4c", "action": "\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e41\u0e1c\u0e07\u0e44\u0e2a\u0e49\u0e2d\u0e2d\u0e22\u0e25\u0e4c\u0e04\u0e39\u0e25\u0e40\u0e25\u0e2d\u0e23\u0e4c\u0e43\u0e2b\u0e21\u0e48 \u0e2b\u0e23\u0e37\u0e2d\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e1b\u0e30\u0e40\u0e01\u0e47\u0e19\u0e1d\u0e32\u0e2a\u0e39\u0e1a \u0e1e\u0e23\u0e49\u0e2d\u0e21\u0e1f\u0e25\u0e31\u0e0a\u0e0a\u0e34\u0e48\u0e07\u0e23\u0e30\u0e1a\u0e1a\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19", "prevention": "\u0e43\u0e0a\u0e49\u0e19\u0e49\u0e33\u0e22\u0e32\u0e2b\u0e25\u0e48\u0e2d\u0e40\u0e22\u0e47\u0e19\u0e17\u0e35\u0e48\u0e21\u0e35\u0e2a\u0e32\u0e23\u0e22\u0e31\u0e1a\u0e22\u0e31\u0e49\u0e07\u0e01\u0e32\u0e23\u0e01\u0e31\u0e14\u0e01\u0e23\u0e48\u0e2d\u0e19\u0e42\u0e25\u0e2b\u0e30"}, {"id": "FT-27", "category": "\u0e40\u0e2a\u0e35\u0e22\u0e07\u0e1c\u0e34\u0e14\u0e1b\u0e01\u0e15\u0e34\u0e40\u0e0a\u0e34\u0e07\u0e01\u0e25", "symptom": "\u0e40\u0e2a\u0e35\u0e22\u0e07\u0e40\u0e04\u0e32\u0e30\u0e15\u0e36\u0e49\u0e01\u0e46 \u0e14\u0e31\u0e07\u0e2b\u0e19\u0e31\u0e01\u0e41\u0e19\u0e48\u0e19\u0e43\u0e15\u0e49\u0e17\u0e49\u0e2d\u0e07\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07 (Deep Heavy Knock / Rod Knock)", "root_cause": "\u0e0a\u0e32\u0e23\u0e4c\u0e1b\u0e2d\u0e01\u0e2b\u0e23\u0e37\u0e2d\u0e0a\u0e32\u0e23\u0e4c\u0e1b\u0e01\u0e49\u0e32\u0e19\u0e25\u0e30\u0e25\u0e32\u0e22 \u0e40\u0e01\u0e34\u0e14\u0e0a\u0e48\u0e2d\u0e07\u0e27\u0e48\u0e32\u0e07\u0e01\u0e23\u0e30\u0e41\u0e17\u0e01\u0e40\u0e1e\u0e25\u0e32\u0e02\u0e49\u0e2d\u0e40\u0e2b\u0e27\u0e35\u0e48\u0e22\u0e07\u0e15\u0e32\u0e21\u0e23\u0e2d\u0e1a", "system": "\u0e01\u0e25\u0e44\u0e01\u0e40\u0e1e\u0e25\u0e32\u0e02\u0e49\u0e2d\u0e40\u0e2b\u0e27\u0e35\u0e48\u0e22\u0e07\u0e41\u0e25\u0e30\u0e01\u0e49\u0e32\u0e19\u0e2a\u0e39\u0e1a", "diagnostic": "1. \u0e43\u0e0a\u0e49\u0e2b\u0e39\u0e1f\u0e31\u0e07\u0e2a\u0e40\u0e15\u0e47\u0e17\u0e42\u0e17\u0e2a\u0e42\u0e04\u0e1b\u0e1f\u0e31\u0e07\u0e15\u0e33\u0e41\u0e2b\u0e19\u0e48\u0e07\u0e17\u0e49\u0e2d\u0e07\u0e2d\u0e48\u0e32\u0e07\n2. \u0e16\u0e2d\u0e14\u0e01\u0e23\u0e2d\u0e07\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e15\u0e31\u0e14\u0e14\u0e39\u0e40\u0e28\u0e29\u0e17\u0e2d\u0e07\u0e41\u0e14\u0e07", "action": "**\u0e2b\u0e22\u0e38\u0e14\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e17\u0e31\u0e19\u0e17\u0e35!** \u0e23\u0e37\u0e49\u0e2d\u0e2d\u0e48\u0e32\u0e07\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07 \u0e40\u0e08\u0e35\u0e22\u0e23\u0e04\u0e2d\u0e40\u0e1e\u0e25\u0e32\u0e02\u0e49\u0e2d\u0e40\u0e2b\u0e27\u0e35\u0e48\u0e22\u0e07 \u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e0a\u0e32\u0e23\u0e4c\u0e1b\u0e43\u0e2b\u0e21\u0e48", "prevention": "\u0e2b\u0e49\u0e32\u0e21\u0e40\u0e14\u0e34\u0e19\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e02\u0e13\u0e30\u0e44\u0e1f\u0e41\u0e23\u0e07\u0e14\u0e31\u0e19\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e42\u0e0a\u0e27\u0e4c\u0e41\u0e21\u0e49\u0e41\u0e15\u0e48\u0e27\u0e34\u0e19\u0e32\u0e17\u0e35\u0e40\u0e14\u0e35\u0e22\u0e27"}];
+        const dtcs = [{"code": "P0087", "j1939": "SPN 94 FMI 1", "en": "Fuel Rail/System Pressure - Too Low", "th": "\u0e41\u0e23\u0e07\u0e14\u0e31\u0e19\u0e43\u0e19\u0e23\u0e32\u0e07\u0e04\u0e2d\u0e21\u0e21\u0e2d\u0e19\u0e40\u0e23\u0e25\u0e15\u0e48\u0e33\u0e01\u0e27\u0e48\u0e32\u0e04\u0e48\u0e32\u0e40\u0e1b\u0e49\u0e32\u0e2b\u0e21\u0e32\u0e22", "system": "Fuel System", "criteria": "\u0e41\u0e23\u0e07\u0e14\u0e31\u0e19\u0e23\u0e32\u0e07\u0e08\u0e23\u0e34\u0e07\u0e15\u0e48\u0e33\u0e01\u0e27\u0e48\u0e32\u0e40\u0e1b\u0e49\u0e32\u0e2b\u0e21\u0e32\u0e22 > 200 bar \u0e19\u0e32\u0e19\u0e40\u0e01\u0e34\u0e19 3 \u0e27\u0e34", "action": "\u0e40\u0e0a\u0e47\u0e01\u0e01\u0e23\u0e2d\u0e07\u0e14\u0e35\u0e40\u0e0b\u0e25\u0e15\u0e31\u0e19, \u0e27\u0e31\u0e14 Backleak \u0e2b\u0e31\u0e27\u0e09\u0e35\u0e14, \u0e40\u0e0a\u0e47\u0e01 SCV \u0e41\u0e25\u0e30\u0e27\u0e32\u0e25\u0e4c\u0e27 PLV \u0e17\u0e49\u0e32\u0e22\u0e23\u0e32\u0e07"}, {"code": "P0088", "j1939": "SPN 157 FMI 0", "en": "Fuel Rail/System Pressure - Too High", "th": "\u0e41\u0e23\u0e07\u0e14\u0e31\u0e19\u0e43\u0e19\u0e23\u0e32\u0e07\u0e04\u0e2d\u0e21\u0e21\u0e2d\u0e19\u0e40\u0e23\u0e25\u0e2a\u0e39\u0e07\u0e40\u0e01\u0e34\u0e19\u0e1e\u0e34\u0e01\u0e31\u0e14\u0e04\u0e27\u0e32\u0e21\u0e1b\u0e25\u0e2d\u0e14\u0e20\u0e31\u0e22", "system": "Fuel System", "criteria": "\u0e41\u0e23\u0e07\u0e14\u0e31\u0e19\u0e23\u0e32\u0e07\u0e1e\u0e38\u0e48\u0e07\u0e2a\u0e39\u0e07\u0e40\u0e01\u0e34\u0e19\u0e02\u0e35\u0e14\u0e08\u0e33\u0e01\u0e31\u0e14 (> 2,200 bar)", "action": "\u0e40\u0e0a\u0e47\u0e01 SCV \u0e04\u0e49\u0e32\u0e07\u0e1b\u0e34\u0e14, \u0e40\u0e0b\u0e19\u0e40\u0e0b\u0e2d\u0e23\u0e4c\u0e41\u0e23\u0e07\u0e14\u0e31\u0e19\u0e23\u0e32\u0e07\u0e40\u0e1e\u0e35\u0e49\u0e22\u0e19, \u0e17\u0e48\u0e2d\u0e44\u0e2b\u0e25\u0e01\u0e25\u0e31\u0e1a\u0e15\u0e31\u0e19"}, {"code": "P0299", "j1939": "SPN 102 FMI 18", "en": "Turbocharger Underboost Condition", "th": "\u0e41\u0e23\u0e07\u0e14\u0e31\u0e19\u0e1a\u0e39\u0e2a\u0e15\u0e4c\u0e40\u0e17\u0e2d\u0e23\u0e4c\u0e42\u0e1a\u0e15\u0e48\u0e33\u0e01\u0e27\u0e48\u0e32\u0e04\u0e48\u0e32\u0e17\u0e35\u0e48\u0e01\u0e33\u0e2b\u0e19\u0e14", "system": "Intake & Turbo", "criteria": "\u0e41\u0e23\u0e07\u0e14\u0e31\u0e19 MAP \u0e15\u0e48\u0e33\u0e01\u0e27\u0e48\u0e32\u0e40\u0e1b\u0e49\u0e32\u0e2b\u0e21\u0e32\u0e22 > 30-50 kPa \u0e02\u0e13\u0e30\u0e42\u0e2b\u0e25\u0e14", "action": "\u0e2a\u0e42\u0e21\u0e01\u0e40\u0e17\u0e2a\u0e15\u0e4c\u0e2b\u0e32\u0e08\u0e38\u0e14\u0e23\u0e31\u0e48\u0e27\u0e17\u0e48\u0e2d\u0e2d\u0e34\u0e19\u0e40\u0e15\u0e2d\u0e23\u0e4c\u0e04\u0e39\u0e25\u0e40\u0e25\u0e2d\u0e23\u0e4c, \u0e40\u0e0a\u0e47\u0e01\u0e41\u0e01\u0e19\u0e40\u0e27\u0e2a\u0e15\u0e4c\u0e40\u0e01\u0e15/VGT, \u0e40\u0e0a\u0e47\u0e01\u0e43\u0e1a\u0e1e\u0e31\u0e14\u0e40\u0e17\u0e2d\u0e23\u0e4c\u0e42\u0e1a"}, {"code": "P0234", "j1939": "SPN 102 FMI 16", "en": "Turbocharger Overboost Condition", "th": "\u0e41\u0e23\u0e07\u0e14\u0e31\u0e19\u0e1a\u0e39\u0e2a\u0e15\u0e4c\u0e40\u0e17\u0e2d\u0e23\u0e4c\u0e42\u0e1a\u0e2a\u0e39\u0e07\u0e40\u0e01\u0e34\u0e19\u0e02\u0e35\u0e14\u0e08\u0e33\u0e01\u0e31\u0e14", "system": "Intake & Turbo", "criteria": "\u0e41\u0e23\u0e07\u0e14\u0e31\u0e19\u0e44\u0e2d\u0e14\u0e35\u0e2a\u0e39\u0e07\u0e40\u0e01\u0e34\u0e19\u0e04\u0e48\u0e32\u0e1b\u0e25\u0e2d\u0e14\u0e20\u0e31\u0e22 \u0e40\u0e2a\u0e35\u0e48\u0e22\u0e07\u0e17\u0e48\u0e2d\u0e41\u0e15\u0e01\u0e2b\u0e23\u0e37\u0e2d\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e1e\u0e31\u0e07", "action": "\u0e15\u0e23\u0e27\u0e08\u0e42\u0e0b\u0e25\u0e34\u0e19\u0e2d\u0e22\u0e14\u0e4c\u0e04\u0e27\u0e1a\u0e04\u0e38\u0e21\u0e40\u0e27\u0e2a\u0e15\u0e4c\u0e40\u0e01\u0e15, \u0e25\u0e49\u0e32\u0e07\u0e40\u0e02\u0e21\u0e48\u0e32\u0e04\u0e23\u0e35\u0e1a\u0e41\u0e1b\u0e23\u0e1c\u0e31\u0e19 VGT, \u0e40\u0e0a\u0e47\u0e01\u0e40\u0e0b\u0e19\u0e40\u0e0b\u0e2d\u0e23\u0e4c MAP"}, {"code": "P0524", "j1939": "SPN 100 FMI 1", "en": "Engine Oil Pressure Too Low (Critical)", "th": "\u0e41\u0e23\u0e07\u0e14\u0e31\u0e19\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e15\u0e48\u0e33\u0e40\u0e01\u0e34\u0e19\u0e23\u0e30\u0e14\u0e31\u0e1a\u0e27\u0e34\u0e01\u0e24\u0e15 (\u0e27\u0e34\u0e01\u0e24\u0e15\u0e2a\u0e39\u0e07\u0e2a\u0e38\u0e14)", "system": "Lubrication", "criteria": "\u0e41\u0e23\u0e07\u0e14\u0e31\u0e19\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e15\u0e48\u0e33\u0e01\u0e27\u0e48\u0e32 0.5 - 0.8 bar \u0e02\u0e13\u0e30\u0e17\u0e33\u0e07\u0e32\u0e19", "action": "\u0e14\u0e31\u0e1a\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e17\u0e31\u0e19\u0e17\u0e35! \u0e15\u0e23\u0e27\u0e08\u0e23\u0e30\u0e14\u0e31\u0e1a\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19, \u0e27\u0e31\u0e14\u0e41\u0e23\u0e07\u0e14\u0e31\u0e19\u0e14\u0e49\u0e27\u0e22\u0e40\u0e01\u0e08\u0e0a\u0e48\u0e32\u0e07, \u0e15\u0e23\u0e27\u0e08\u0e0a\u0e32\u0e23\u0e4c\u0e1b\u0e41\u0e25\u0e30\u0e1b\u0e31\u0e4a\u0e21\u0e19\u0e49\u0e33\u0e21\u0e31\u0e19"}, {"code": "P0335", "j1939": "SPN 636 FMI 2", "en": "Crankshaft Position Sensor Circuit", "th": "\u0e2a\u0e31\u0e0d\u0e0d\u0e32\u0e13\u0e40\u0e0b\u0e19\u0e40\u0e0b\u0e2d\u0e23\u0e4c\u0e15\u0e33\u0e41\u0e2b\u0e19\u0e48\u0e07\u0e40\u0e1e\u0e25\u0e32\u0e02\u0e49\u0e2d\u0e40\u0e2b\u0e27\u0e35\u0e48\u0e22\u0e07\u0e02\u0e32\u0e14\u0e2b\u0e32\u0e22", "system": "Electrical / ECU", "criteria": "ECU \u0e44\u0e21\u0e48\u0e44\u0e14\u0e49\u0e23\u0e31\u0e1a\u0e2a\u0e31\u0e0d\u0e0d\u0e32\u0e13\u0e1e\u0e31\u0e25\u0e2a\u0e4c\u0e08\u0e32\u0e01\u0e1f\u0e31\u0e19\u0e40\u0e1f\u0e37\u0e2d\u0e07\u0e02\u0e49\u0e2d\u0e40\u0e2b\u0e27\u0e35\u0e48\u0e22\u0e07\u0e02\u0e13\u0e30\u0e2b\u0e21\u0e38\u0e19", "action": "\u0e27\u0e31\u0e14\u0e04\u0e27\u0e32\u0e21\u0e15\u0e49\u0e32\u0e19\u0e17\u0e32\u0e19\u0e40\u0e0b\u0e19\u0e40\u0e0b\u0e2d\u0e23\u0e4c (800-1200 Ohm), \u0e17\u0e33\u0e04\u0e27\u0e32\u0e21\u0e2a\u0e30\u0e2d\u0e32\u0e14\u0e1b\u0e25\u0e32\u0e22\u0e40\u0e0b\u0e19\u0e40\u0e0b\u0e2d\u0e23\u0e4c, \u0e15\u0e23\u0e27\u0e08\u0e2a\u0e32\u0e22\u0e44\u0e1f"}, {"code": "P2463", "j1939": "SPN 3251 FMI 0", "en": "DPF Restriction - Soot Accumulation High", "th": "\u0e1b\u0e23\u0e34\u0e21\u0e32\u0e13\u0e40\u0e02\u0e21\u0e48\u0e32\u0e2a\u0e30\u0e2a\u0e21\u0e43\u0e19\u0e2b\u0e21\u0e49\u0e2d DPF \u0e2a\u0e39\u0e07\u0e40\u0e01\u0e34\u0e19\u0e1e\u0e34\u0e01\u0e31\u0e14", "system": "Aftertreatment", "criteria": "\u0e04\u0e27\u0e32\u0e21\u0e14\u0e31\u0e19\u0e15\u0e01\u0e04\u0e23\u0e48\u0e2d\u0e21 DPF \u0e2a\u0e39\u0e07\u0e40\u0e01\u0e34\u0e19\u0e40\u0e01\u0e13\u0e11\u0e4c \u0e2b\u0e23\u0e37\u0e2d\u0e40\u0e02\u0e21\u0e48\u0e32\u0e2a\u0e30\u0e2a\u0e21 > 100%", "action": "\u0e2a\u0e31\u0e48\u0e07\u0e23\u0e31\u0e19 Forced DPF Regeneration \u0e14\u0e49\u0e27\u0e22\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e2a\u0e41\u0e01\u0e19 \u0e2b\u0e23\u0e37\u0e2d\u0e16\u0e2d\u0e14\u0e25\u0e49\u0e32\u0e07\u0e20\u0e32\u0e22\u0e19\u0e2d\u0e01"}];
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('text-slate-400', 'hover:bg-slate-800');
+            });
+            
+            document.getElementById('view-' + tabId).classList.remove('hidden');
+            const activeBtn = document.getElementById('tab-' + tabId);
+            activeBtn.classList.add('bg-blue-600', 'text-white');
+            activeBtn.classList.remove('text-slate-400', 'hover:bg-slate-800');
+        }
+
+        function renderDiagnostics(items) {
+            const grid = document.getElementById('diagGrid');
+            grid.innerHTML = items.map(item => `
+                <div class="bg-slate-900 border border-slate-800 hover:border-slate-700 transition p-5 rounded-2xl space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">${item.category}</span>
+                        <span class="font-mono text-xs text-slate-500">${item.id}</span>
+                    </div>
+                    <h3 class="text-base font-bold text-white">${item.symptom}</h3>
+                    <div class="text-xs space-y-1.5 text-slate-300">
+                        <p><strong class="text-rose-400">สาเหตุรากเหง้า:</strong> ${item.root_cause}</p>
+                        <p><strong class="text-cyan-400">ระบบที่เกี่ยวข้อง:</strong> ${item.system}</p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-800/80 text-xs space-y-2">
+                        <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800/50">
+                            <span class="font-semibold text-amber-400 block mb-1">ขั้นตอนตรวจเช็ก:</span>
+                            <span class="text-slate-400 whitespace-pre-line">${item.diagnostic}</span>
+                        </div>
+                        <div class="text-slate-400">
+                            <strong class="text-emerald-400">วิธีซ่อมแซม:</strong> ${item.action}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterDiagnostics() {
+            const q = document.getElementById('diagSearchInput').value.toLowerCase();
+            const cat = document.getElementById('diagCatSelect').value;
+            const filtered = troubleshoots.filter(t => {
+                const matchQ = t.symptom.toLowerCase().includes(q) || t.root_cause.toLowerCase().includes(q) || t.action.toLowerCase().includes(q);
+                const matchCat = cat === 'ALL' || t.category === cat;
+                return matchQ && matchCat;
+            });
+            renderDiagnostics(filtered);
+        }
+
+        function renderDTC(items) {
+            const tbody = document.getElementById('dtcTableBody');
+            tbody.innerHTML = items.map(d => `
+                <tr class="hover:bg-slate-800/30 transition">
+                    <td class="py-3 px-4 font-mono font-bold text-blue-400">${d.code}</td>
+                    <td class="py-3 px-4 font-mono text-slate-400 text-xs">${d.j1939}</td>
+                    <td class="py-3 px-4 font-medium text-slate-200">${d.th}<br><span class="text-xs text-slate-500 font-mono">${d.en}</span></td>
+                    <td class="py-3 px-4 text-xs text-slate-400">${d.system}</td>
+                    <td class="py-3 px-4 text-xs text-slate-300">${d.action}</td>
+                </tr>
+            `).join('');
+        }
+
+        function filterDTC() {
+            const q = document.getElementById('dtcInput').value.toLowerCase();
+            const filtered = dtcs.filter(d => d.code.toLowerCase().includes(q) || d.j1939.toLowerCase().includes(q) || d.th.toLowerCase().includes(q) || d.en.toLowerCase().includes(q));
+            renderDTC(filtered);
+        }
+
+        function updateSimulator(cad) {
+            cad = parseInt(cad);
+            document.getElementById('cadValue').innerText = cad + '° CAD';
+            
+            const strokeEl = document.getElementById('simStroke');
+            const pistonEl = document.getElementById('simPistonDir');
+            const valvesEl = document.getElementById('simValves');
+            const pressEl = document.getElementById('simPressure');
+            const tempEl = document.getElementById('simTemp');
+            const descEl = document.getElementById('simDescription');
+
+            if (cad >= 0 && cad < 180) {
+                strokeEl.innerText = "1. จังหวะดูด (Intake Stroke)";
+                pistonEl.innerText = "ลูกสูบเคลื่อนที่ลง (TDC -> BDC)";
+                valvesEl.innerHTML = '<div>ไอดี: <span class="text-green-400 font-bold">เปิด</span></div><div>ไอเสีย: <span class="text-rose-400 font-bold">ปิดสนิท</span></div>';
+                pressEl.innerText = "~ 1.0 - 2.5 bar (Boost)";
+                tempEl.innerText = "35°C - 50°C";
+                descEl.innerText = "วาล์วไอดีเปิด ลูกสูบเลื่อนลงจากศูนย์ตายบนสู่ศูนย์ตายล่าง สร้างแรงสุญญากาศนำพาอากาศบริสุทธิ์ที่มีมวลออกซิเจนหนาแน่นเข้าสู่กระบอกสูบ";
+            } else if (cad >= 180 && cad < 360) {
+                strokeEl.innerText = "2. จังหวะอัด (Compression Stroke)";
+                pistonEl.innerText = "ลูกสูบเคลื่อนที่ขึ้น (BDC -> TDC)";
+                valvesEl.innerHTML = '<div>ไอดี: <span class="text-rose-400 font-bold">ปิดสนิท</span></div><div>ไอเสีย: <span class="text-rose-400 font-bold">ปิดสนิท</span></div>';
+                pressEl.innerText = "35 - 55 bar (อัดแน่น)";
+                tempEl.innerText = "550°C - 800°C (ร้อนจัด)";
+                descEl.innerText = "วาล์วทั้งสองปิดสนิท ลูกสูบอัดมวลอากาศจนมีปริมาตรเล็กลง ความดันและอุณหภูมิพุ่งสูงเกินจุดติดไฟของดีเซล เตรียมพร้อมรับการฉีดน้ำมัน";
+            } else if (cad >= 360 && cad < 540) {
+                strokeEl.innerText = "3. จังหวะระเบิด / งาน (Power Stroke)";
+                pistonEl.innerText = "ลูกสูบเคลื่อนที่ลง (TDC -> BDC รับแรงระเบิด)";
+                valvesEl.innerHTML = '<div>ไอดี: <span class="text-rose-400 font-bold">ปิดสนิท</span></div><div>ไอเสีย: <span class="text-rose-400 font-bold">ปิดสนิท</span></div>';
+                pressEl.innerText = "120 - 220 bar (Pmax)";
+                tempEl.innerText = "1,800°C - 2,200°C";
+                descEl.innerText = "หัวฉีดจ่ายน้ำมันแรงดันสูงเกิดการลุกไหม้เองทันที แรงดันก๊าซระเบิดมหาศาลผลักหัวลูกสูบลงสู่ด้านล่าง ส่งกำลังผ่านก้านสูบไปหมุนเพลาข้อเหวี่ยง";
+            } else {
+                strokeEl.innerText = "4. จังหวะคาย (Exhaust Stroke)";
+                pistonEl.innerText = "ลูกสูบเคลื่อนที่ขึ้น (BDC -> TDC)";
+                valvesEl.innerHTML = '<div>ไอดี: <span class="text-rose-400 font-bold">ปิดสนิท</span></div><div>ไอเสีย: <span class="text-green-400 font-bold">เปิดเต็มที่</span></div>';
+                pressEl.innerText = "2.0 - 4.5 bar (ขับเทอร์ไบน์)";
+                tempEl.innerText = "450°C - 650°C (EGT)";
+                descEl.innerText = "วาล์วไอเสียเปิด ลูกสูบดันก๊าซไอเสียร้อนจัดออกจากห้องเผาไหม้ ส่งไปปั่นกังหันเทอร์โบชาร์จเจอร์และระบายผ่านท่อไอเสีย";
+            }
+        }
+
+        function calculateCR() {
+            const bore = parseFloat(document.getElementById('calcBore').value);
+            const stroke = parseFloat(document.getElementById('calcStroke').value);
+            const vc = parseFloat(document.getElementById('calcVc').value);
+            
+            // Vd = (pi / 4) * (bore/10)^2 * (stroke/10) in cc
+            const vd = (Math.PI / 4) * Math.pow(bore / 10, 2) * (stroke / 10);
+            const cr = (vd + vc) / vc;
+            document.getElementById('resCR').innerText = cr.toFixed(2) + ' : 1 (Vd = ' + vd.toFixed(1) + ' cc)';
+        }
+
+        function calculatePower() {
+            const rpm = parseFloat(document.getElementById('calcRPM').value);
+            const torque = parseFloat(document.getElementById('calcTorque').value);
+            
+            // Power (kW) = (2 * pi * N * T) / 60000
+            const kw = (2 * Math.PI * rpm * torque) / 60000;
+            const hp = kw * 1.34102;
+            document.getElementById('resKW').innerText = kw.toFixed(1) + ' kW';
+            document.getElementById('resHP').innerText = '(' + hp.toFixed(1) + ' HP)';
+        }
+
+        // Init
+        renderDiagnostics(troubleshoots);
+        renderDTC(dtcs);
+        calculateCR();
+        calculatePower();
+    </script>
+</body>
+</html>
