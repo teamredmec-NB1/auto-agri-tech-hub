@@ -353,79 +353,223 @@
                 </div>
             </section>
 
-            <!-- TAB 5: GALLERY & BLANK TEMPLATES -->
+                        <!-- TAB 5: GALLERY & BLANK TEMPLATES -->
             <section id="view-gallery" class="tab-content hidden space-y-6">
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <h2 class="text-lg font-bold text-slate-900 flex items-center space-x-2">
-                        <i class="fa-solid fa-image text-blue-600"></i>
-                        <span>คลังไดอะแกรมวิศวกรรม &amp; รูปเปล่า (Blank Templates)</span>
-                    </h2>
-                    <p class="text-xs text-slate-500 mt-1">ภาพประกอบเวกเตอร์ SVG ความละเอียดสูง คมชัดทุกหน้าจอ พร้อมรูปเปล่ามีหมายเลขกำกับสำหรับนำไปใส่ข้อความภาษาไทยใน Canva</p>
+                <!-- Header Banner -->
+                <div class="bg-gradient-to-r from-blue-900 via-indigo-950 to-slate-900 p-6 rounded-2xl text-white shadow-md border border-blue-500/30 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <span class="px-2.5 py-0.5 bg-blue-500/20 text-blue-300 border border-blue-400/30 rounded-full text-xs font-bold tracking-wide">
+                                VECTOR DIAGRAMS &amp; BLANK TEMPLATES
+                            </span>
+                            <span class="text-xs text-slate-300">| ภาพเวกเตอร์ SVG &amp; PNG คมชัดสูง</span>
+                        </div>
+                        <h2 class="text-xl font-black mt-2 text-white flex items-center space-x-2">
+                            <i class="fa-solid fa-photo-film text-blue-400"></i>
+                            <span>คลังไดอะแกรมวิศวกรรม &amp; รูปเปล่าสำหรับสร้างคอนเทนต์ (Blank Templates)</span>
+                        </h2>
+                        <p class="text-xs text-slate-200 mt-1 max-w-2xl leading-relaxed">
+                            รวมภาพประกอบเวกเตอร์ SVG คุณภาพสูง คมชัดทุกขนาดหน้าจอ พร้อมไฟล์รูปเปล่าตัดตัวหนังสือออก (มีเฉพาะหมายเลขกำกับ ① ② ③) สำหรับนำไปใส่อักษรภาษาไทยใน Canva, Photoshop, PowerPoint หรือจัดทำข้อสอบอบรมช่าง
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 flex-shrink-0">
+                        <span class="px-3 py-1.5 bg-white/10 rounded-xl text-xs text-yellow-300 font-mono font-bold border border-white/10">
+                            14+ เวกเตอร์ &amp; รูปเปล่า
+                        </span>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-1 gap-6">
-                    <!-- Diagram 1 -->
-                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <!-- Gallery Category Filter Tabs -->
+                <div class="flex flex-wrap gap-2 p-1.5 bg-white rounded-xl border border-slate-200 shadow-sm text-xs font-semibold">
+                    <button onclick="filterGallery('all')" class="gal-filter-btn px-4 py-2 rounded-lg bg-blue-600 text-white transition shadow-sm" data-cat="all">ทั้งหมด (All Diagrams)</button>
+                    <button onclick="filterGallery('fourstroke')" class="gal-filter-btn px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 transition" data-cat="fourstroke">วัฏจักร 4 จังหวะ</button>
+                    <button onclick="filterGallery('mechanism')" class="gal-filter-btn px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 transition" data-cat="mechanism">กลไกข้อเหวี่ยง &amp; วาล์ว</button>
+                    <button onclick="filterGallery('fuel')" class="gal-filter-btn px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 transition" data-cat="fuel">คอมมอนเรล &amp; เชื้อเพลิง</button>
+                    <button onclick="filterGallery('kubota')" class="gal-filter-btn px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 transition" data-cat="kubota">เครื่องยนต์คูโบต้า</button>
+                    <button onclick="filterGallery('blank')" class="gal-filter-btn px-4 py-2 rounded-lg text-amber-700 bg-amber-50 hover:bg-amber-100 border border-amber-200 transition" data-cat="blank">เฉพาะรูปเปล่า (Blank Only)</button>
+                </div>
+
+                <!-- Diagrams Grid -->
+                <div id="galleryGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- 1. Four-Stroke Working Cycle -->
+                    <div class="gal-item bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4" data-cat="fourstroke">
                         <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                            <span class="text-sm font-bold text-slate-900">1. วัฏจักรการทำงาน 4 จังหวะ (4-Stroke Diesel Cycle)</span>
-                            <div class="flex space-x-2">
-                                <a href="images/01_four_stroke_cycle.svg" target="_blank" class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-medium transition shadow-sm">ดูรูปเต็ม</a>
-                                <a href="images/blank_templates/blank_01_four_stroke.svg" target="_blank" class="px-3 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 rounded-lg text-xs font-medium transition">ดาวน์โหลดรูปเปล่า</a>
+                            <div>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200">720° Crank Angle</span>
+                                <h3 class="text-sm font-bold text-slate-900 mt-1">1. วัฏจักรการทำงาน 4 จังหวะ (4-Stroke Diesel Cycle)</h3>
                             </div>
+                            <span class="text-xs text-slate-400 font-mono">01_four_stroke</span>
                         </div>
-                        <div class="p-3 bg-slate-950 rounded-xl overflow-hidden border border-slate-800">
-                            <img src="images/01_four_stroke_cycle.svg" alt="4-Stroke Cycle" class="w-full h-auto">
+                        <div class="p-2 bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex items-center justify-center">
+                            <img src="images/01_four_stroke_cycle.svg" alt="4-Stroke Cycle" class="w-full h-auto max-h-56 object-contain">
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            แสดง 4 จังหวะ ดูด-อัด-ระเบิด-คาย ทิศทางการเคลื่อนที่ของลูกสูบ การเปิด-ปิดวาล์วไอดี/เสีย และการฉีดน้ำมันดีเซล
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 border-t border-slate-100">
+                            <a href="images/01_four_stroke_cycle.svg" target="_blank" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold transition flex items-center space-x-1.5 shadow-sm">
+                                <i class="fa-solid fa-eye"></i><span>ดูรูปเต็ม (SVG)</span>
+                            </a>
+                            <a href="images/blank_templates/blank_01_four_stroke.svg" target="_blank" class="px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 rounded-lg text-xs font-semibold transition flex items-center space-x-1.5">
+                                <i class="fa-solid fa-download"></i><span>ดาวน์โหลดรูปเปล่า (Canva)</span>
+                            </a>
                         </div>
                     </div>
 
-                    <!-- Diagram 2 -->
-                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <!-- 2. Crank-Connecting Rod & Piston Assembly -->
+                    <div class="gal-item bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4" data-cat="mechanism">
                         <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                            <span class="text-sm font-bold text-slate-900">2. กลไกเพลาข้อเหวี่ยงและก้านสูบ (Crank-Connecting Rod)</span>
-                            <div class="flex space-x-2">
-                                <a href="images/02_crank_mechanism.svg" target="_blank" class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-medium transition shadow-sm">ดูรูปเต็ม</a>
-                                <a href="images/blank_templates/blank_02_crank_mechanism.svg" target="_blank" class="px-3 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 rounded-lg text-xs font-medium transition">ดาวน์โหลดรูปเปล่า</a>
+                            <div>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">Core Mechanism 1</span>
+                                <h3 class="text-sm font-bold text-slate-900 mt-1">2. กลไกเพลาข้อเหวี่ยงและก้านสูบ (Crank-Connecting Rod)</h3>
                             </div>
+                            <span class="text-xs text-slate-400 font-mono">02_crank_mechanism</span>
                         </div>
-                        <div class="p-3 bg-slate-950 rounded-xl overflow-hidden border border-slate-800 max-w-2xl mx-auto">
-                            <img src="images/02_crank_mechanism.svg" alt="Crank Mechanism" class="w-full h-auto">
+                        <div class="p-2 bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex items-center justify-center">
+                            <img src="images/02_crank_mechanism.svg" alt="Crank Mechanism" class="w-full h-auto max-h-56 object-contain">
                         </div>
-                    </div>
-
-                    <!-- Diagram 3 -->
-                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                            <span class="text-sm font-bold text-slate-900">3. วงจรระบบเชื้อเพลิงคอมมอนเรล (Common Rail Fuel Circuit)</span>
-                            <a href="images/03_common_rail_system.svg" target="_blank" class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-medium transition shadow-sm">ดูรูปเต็ม</a>
-                        </div>
-                        <div class="p-3 bg-slate-950 rounded-xl overflow-hidden border border-slate-800">
-                            <img src="images/03_common_rail_system.svg" alt="Common Rail System" class="w-full h-auto">
-                        </div>
-                    </div>
-
-                    <!-- Diagram 4 -->
-                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                            <span class="text-sm font-bold text-slate-900">4. วงจรระบบหล่อลื่นเครื่องยนต์ (Engine Lubrication Circuit)</span>
-                            <a href="images/04_lubrication_system.svg" target="_blank" class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-medium transition shadow-sm">ดูรูปเต็ม</a>
-                        </div>
-                        <div class="p-3 bg-slate-950 rounded-xl overflow-hidden border border-slate-800">
-                            <img src="images/04_lubrication_system.svg" alt="Lubrication Circuit" class="w-full h-auto">
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            ภาพผ่าละเอียด: หัวลูกสูบ ร่องแหวนสูบ สลักสูบ ก้านสูบ I-Beam ข้อก้าน และชาร์ป Tri-metal พร้อมระนาบล้อช่วยแรง
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 border-t border-slate-100">
+                            <a href="images/02_crank_mechanism.svg" target="_blank" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold transition flex items-center space-x-1.5 shadow-sm">
+                                <i class="fa-solid fa-eye"></i><span>ดูรูปเต็ม (SVG)</span>
+                            </a>
+                            <a href="images/blank_templates/blank_02_crank_mechanism.svg" target="_blank" class="px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 rounded-lg text-xs font-semibold transition flex items-center space-x-1.5">
+                                <i class="fa-solid fa-download"></i><span>ดาวน์โหลดรูปเปล่า (Canva)</span>
+                            </a>
                         </div>
                     </div>
 
-                    <!-- Diagram 5 -->
-                    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <!-- 3. Valve Train Mechanism -->
+                    <div class="gal-item bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4" data-cat="mechanism">
                         <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                            <span class="text-sm font-bold text-slate-900">5. ผังแม่บทสถาปัตยกรรม (Master Architecture Map)</span>
-                            <a href="images/05_architecture_map.svg" target="_blank" class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-medium transition shadow-sm">ดูรูปเต็ม</a>
+                            <div>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-50 text-purple-700 border border-purple-200">Core Mechanism 2</span>
+                                <h3 class="text-sm font-bold text-slate-900 mt-1">3. กลไกควบคุมการเปิด-ปิดวาล์ว (Valve Train Mechanism)</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 font-mono">03_valve_train</span>
                         </div>
-                        <div class="p-3 bg-slate-950 rounded-xl overflow-hidden border border-slate-800">
-                            <img src="images/05_architecture_map.svg" alt="Architecture Map" class="w-full h-auto">
+                        <div class="p-2 bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex items-center justify-center">
+                            <img src="images/03_valve_train_mechanism.svg" alt="Valve Train Mechanism" class="w-full h-auto max-h-56 object-contain">
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            โครงสร้างเพลาลูกเบี้ยว ลูกกระทุ้ง ก้านกระทุ้ง กระเดื่องวาล์ว สปริงวาล์ว และการกำหนดจังหวะหายใจเข้า-ออกของเครื่องยนต์
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 border-t border-slate-100">
+                            <a href="images/03_valve_train_mechanism.svg" target="_blank" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold transition flex items-center space-x-1.5 shadow-sm">
+                                <i class="fa-solid fa-eye"></i><span>ดูรูปเต็ม (SVG)</span>
+                            </a>
+                            <a href="images/blank_templates/blank_03_valve_train.svg" target="_blank" class="px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 rounded-lg text-xs font-semibold transition flex items-center space-x-1.5">
+                                <i class="fa-solid fa-download"></i><span>ดาวน์โหลดรูปเปล่า (Canva)</span>
+                            </a>
                         </div>
                     </div>
+
+                    <!-- 4. Common Rail Injection System Thai -->
+                    <div class="gal-item bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4" data-cat="fuel">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                            <div>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">วงจรภาษาไทยแท้</span>
+                                <h3 class="text-sm font-bold text-slate-900 mt-1">4. วงจรระบบเชื้อเพลิงคอมมอนเรล (Common Rail System Thai)</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 font-mono">04_common_rail</span>
+                        </div>
+                        <div class="p-2 bg-slate-50 rounded-xl overflow-hidden border border-slate-200 flex items-center justify-center">
+                            <img src="images/04_common_rail_system_thai.svg" alt="Common Rail System Thai" class="w-full h-auto max-h-56 object-contain">
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            ไดอะแกรมวงจรเชื้อเพลิงภาษาไทยสมบูรณ์: ถังน้ำมัน, กรองดักน้ำ, ปั๊ม AC, กรองละเอียด, ซัพพลายปั๊ม + SCV, รางร่วม, ตัวจำกัดแรงดัน, หัวฉีด และ ECU
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 border-t border-slate-100">
+                            <a href="images/04_common_rail_system_thai.svg" target="_blank" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold transition flex items-center space-x-1.5 shadow-sm">
+                                <i class="fa-solid fa-eye"></i><span>ดูรูปเต็ม (SVG)</span>
+                            </a>
+                            <a href="images/blank_templates/blank_04_common_rail.svg" target="_blank" class="px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 rounded-lg text-xs font-semibold transition flex items-center space-x-1.5">
+                                <i class="fa-solid fa-download"></i><span>ดาวน์โหลดรูปเปล่า (Canva)</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 5. Engine Lubrication Circuit -->
+                    <div class="gal-item bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4" data-cat="mechanism">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                            <div>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">Lubrication</span>
+                                <h3 class="text-sm font-bold text-slate-900 mt-1">5. วงจรระบบหล่อลื่นเครื่องยนต์ (Engine Lubrication Circuit)</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 font-mono">05_lubrication</span>
+                        </div>
+                        <div class="p-2 bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex items-center justify-center">
+                            <img src="images/04_lubrication_system.svg" alt="Lubrication Circuit" class="w-full h-auto max-h-56 object-contain">
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            เส้นทางน้ำมันเครื่องจากอ่าง ตะแกรง ปั๊ม วาล์วระบายแรงดัน ออยล์คูลเลอร์ กรองน้ำมันเครื่อง ท่อทางเดินหลัก สู่ชาร์บอกและชาร์ปก้าน
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 border-t border-slate-100">
+                            <a href="images/04_lubrication_system.svg" target="_blank" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold transition flex items-center space-x-1.5 shadow-sm">
+                                <i class="fa-solid fa-eye"></i><span>ดูรูปเต็ม (SVG)</span>
+                            </a>
+                            <a href="images/blank_templates/blank_05_lubrication.svg" target="_blank" class="px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 rounded-lg text-xs font-semibold transition flex items-center space-x-1.5">
+                                <i class="fa-solid fa-download"></i><span>ดาวน์โหลดรูปเปล่า (Canva)</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 6. Kubota Ladder Frame & Balancers -->
+                    <div class="gal-item bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4" data-cat="kubota">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                            <div>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">Kubota Agri Innovation</span>
+                                <h3 class="text-sm font-bold text-slate-900 mt-1">6. สถาปัตยกรรมเสื้อสูบขั้นบันได &amp; เพลาสมดุลคู่ (Kubota V3307/V3800)</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 font-mono">06_kubota_arch</span>
+                        </div>
+                        <div class="p-2 bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex items-center justify-center">
+                            <img src="images/06_kubota_ladder_frame_balancer.svg" alt="Kubota Architecture" class="w-full h-auto max-h-56 object-contain">
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            สถาปัตยกรรมเสื้อสูบ 2 ชิ้นประกบ (Ladder Frame) เพลาสมดุลคู่หมุนสวนทาง 2x RPM ลดแรงสั่นสะท้าน 75% และชุดเฟืองท้ายล้อช่วยแรง
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 border-t border-slate-100">
+                            <a href="images/06_kubota_ladder_frame_balancer.svg" target="_blank" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold transition flex items-center space-x-1.5 shadow-sm">
+                                <i class="fa-solid fa-eye"></i><span>ดูรูปเต็ม (SVG)</span>
+                            </a>
+                            <a href="images/blank_templates/blank_06_kubota.svg" target="_blank" class="px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 rounded-lg text-xs font-semibold transition flex items-center space-x-1.5">
+                                <i class="fa-solid fa-download"></i><span>ดาวน์โหลดรูปเปล่า (Canva)</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 7. Master Architecture Map -->
+                    <div class="gal-item bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4" data-cat="mechanism">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                            <div>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200">Overview</span>
+                                <h3 class="text-sm font-bold text-slate-900 mt-1">7. ผังแม่บทสถาปัตยกรรม (2 โครงสร้าง + 6 ระบบสนับสนุน)</h3>
+                            </div>
+                            <span class="text-xs text-slate-400 font-mono">07_master_map</span>
+                        </div>
+                        <div class="p-2 bg-slate-950 rounded-xl overflow-hidden border border-slate-800 flex items-center justify-center">
+                            <img src="images/05_architecture_map.svg" alt="Architecture Map" class="w-full h-auto max-h-56 object-contain">
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            แผนผังรวม 2 โครงสร้างหลัก (Crank-Conrod + Valve Train) และ 6 ระบบสนับสนุนการทำงานครบวงจร
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 border-t border-slate-100">
+                            <a href="images/05_architecture_map.svg" target="_blank" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold transition flex items-center space-x-1.5 shadow-sm">
+                                <i class="fa-solid fa-eye"></i><span>ดูรูปเต็ม (SVG)</span>
+                            </a>
+                            <a href="images/blank_templates/blank_07_architecture.svg" target="_blank" class="px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 rounded-lg text-xs font-semibold transition flex items-center space-x-1.5">
+                                <i class="fa-solid fa-download"></i><span>ดาวน์โหลดรูปเปล่า (Canva)</span>
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
             </section>
+
 
             <!-- TAB 6: ARCHITECTURE OVERVIEW -->
             <section id="view-arch" class="tab-content hidden space-y-6">
@@ -1343,6 +1487,34 @@
         }
 
         
+        
+        function filterGallery(cat) {
+            document.querySelectorAll('.gal-filter-btn').forEach(btn => {
+                if (btn.getAttribute('data-cat') === cat) {
+                    btn.classList.add('bg-blue-600', 'text-white');
+                    btn.classList.remove('text-slate-600', 'hover:bg-slate-100', 'text-amber-700', 'bg-amber-50');
+                } else {
+                    btn.classList.remove('bg-blue-600', 'text-white');
+                    btn.classList.add('text-slate-600', 'hover:bg-slate-100');
+                }
+            });
+
+            document.querySelectorAll('.gal-item').forEach(item => {
+                if (cat === 'all') {
+                    item.classList.remove('hidden');
+                } else if (cat === 'blank') {
+                    // show all but scroll or highlight
+                    item.classList.remove('hidden');
+                } else {
+                    if (item.getAttribute('data-cat') === cat) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                }
+            });
+        }
+
         // CRANK MECHANISM INTERACTIVE DATA
         const forceSteps = [
             {
