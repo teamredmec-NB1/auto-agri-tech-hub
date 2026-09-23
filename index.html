@@ -79,6 +79,10 @@
                 <i class="fa-solid fa-sitemap"></i>
                 <span>โครงสร้าง & สถาปัตยกรรม</span>
             </button>
+                    <button onclick="switchTab('gallery')" id="tab-gallery" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 flex items-center space-x-2 whitespace-nowrap">
+                <i class="fa-solid fa-image"></i>
+                <span>คลังรูปภาพ &amp; รูปเปล่า (Templates)</span>
+            </button>
         </div>
     </div>
 
@@ -308,6 +312,84 @@
                         <h4 class="font-bold text-indigo-400">8. ระบบสตาร์ทและควบคุมไฟฟ้า (Starting & ECU Control)</h4>
                         <p class="text-xs text-slate-300 mt-2">หน้าที่: หมุนฉุดเครื่องยนต์ในเสี้ยววินาที ประมวลผลเซนเซอร์ และระบบตัดดับนิรภัย (Overspeed / Low Oil)</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+            <!-- VIEW 6: GALLERY & BLANK TEMPLATES -->
+        <section id="view-gallery" class="tab-content hidden space-y-8">
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+                            <i class="fa-solid fa-photo-film text-purple-400"></i>
+                            <span>คลังรูปภาพไดอะแกรมวิศวกรรม &amp; รูปเปล่า (Blank Templates)</span>
+                        </h2>
+                        <p class="text-sm text-slate-400 mt-1">
+                            ภาพประกอบเวกเตอร์ SVG ความละเอียดสูง คมชัดทุกหน้าจอ พร้อม "รูปเปล่า" มีตัวเลขกำกับสำหรับนำไปใส่ข้อความใน Canva / PowerPoint
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diagram 1: 4-Stroke Cycle -->
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <h3 class="text-lg font-bold text-blue-400">1. วัฏจักร 4 จังหวะ (The 4-Stroke Diesel Cycle)</h3>
+                    <div class="flex space-x-2">
+                        <a href="images/01_four_stroke_cycle.svg" target="_blank" class="px-3 py-1 bg-blue-600 hover:bg-blue-500 rounded-lg text-xs font-medium text-white transition">เปิดรูปเต็ม</a>
+                        <a href="images/blank_templates/blank_01_four_stroke.svg" target="_blank" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-xs font-medium text-purple-300 transition">เปิดรูปเปล่า (Template)</a>
+                    </div>
+                </div>
+                <div class="rounded-xl overflow-hidden border border-slate-800 bg-slate-950 p-2">
+                    <img src="images/01_four_stroke_cycle.svg" alt="4-Stroke Cycle Diagram" class="w-full h-auto rounded-lg">
+                </div>
+            </div>
+
+            <!-- Diagram 2: Crank Mechanism -->
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <h3 class="text-lg font-bold text-blue-400">2. กลไกเพลาข้อเหวี่ยงและก้านสูบ (Crank-Connecting Rod)</h3>
+                    <div class="flex space-x-2">
+                        <a href="images/02_crank_mechanism.svg" target="_blank" class="px-3 py-1 bg-blue-600 hover:bg-blue-500 rounded-lg text-xs font-medium text-white transition">เปิดรูปเต็ม</a>
+                        <a href="images/blank_templates/blank_02_crank_mechanism.svg" target="_blank" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-xs font-medium text-purple-300 transition">เปิดรูปเปล่า (Template)</a>
+                    </div>
+                </div>
+                <div class="rounded-xl overflow-hidden border border-slate-800 bg-slate-950 p-2 max-w-2xl mx-auto">
+                    <img src="images/02_crank_mechanism.svg" alt="Crank Mechanism Diagram" class="w-full h-auto rounded-lg">
+                </div>
+            </div>
+
+            <!-- Diagram 3: Common Rail System -->
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <h3 class="text-lg font-bold text-blue-400">3. วงจรระบบเชื้อเพลิงคอมมอนเรล (Common Rail Fuel Circuit)</h3>
+                    <a href="images/03_common_rail_system.svg" target="_blank" class="px-3 py-1 bg-blue-600 hover:bg-blue-500 rounded-lg text-xs font-medium text-white transition">เปิดรูปเต็ม</a>
+                </div>
+                <div class="rounded-xl overflow-hidden border border-slate-800 bg-slate-950 p-2">
+                    <img src="images/03_common_rail_system.svg" alt="Common Rail System Diagram" class="w-full h-auto rounded-lg">
+                </div>
+            </div>
+
+            <!-- Diagram 4: Lubrication Circuit -->
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <h3 class="text-lg font-bold text-blue-400">4. วงจรระบบหล่อลื่นเครื่องยนต์ (Engine Lubrication Circuit)</h3>
+                    <a href="images/04_lubrication_system.svg" target="_blank" class="px-3 py-1 bg-blue-600 hover:bg-blue-500 rounded-lg text-xs font-medium text-white transition">เปิดรูปเต็ม</a>
+                </div>
+                <div class="rounded-xl overflow-hidden border border-slate-800 bg-slate-950 p-2">
+                    <img src="images/04_lubrication_system.svg" alt="Lubrication Circuit Diagram" class="w-full h-auto rounded-lg">
+                </div>
+            </div>
+
+            <!-- Diagram 5: Architecture Map -->
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <h3 class="text-lg font-bold text-blue-400">5. ผังสถาปัตยกรรม 2 โครงสร้างหลัก + 6 ระบบสนับสนุน (Master Architecture Map)</h3>
+                    <a href="images/05_architecture_map.svg" target="_blank" class="px-3 py-1 bg-blue-600 hover:bg-blue-500 rounded-lg text-xs font-medium text-white transition">เปิดรูปเต็ม</a>
+                </div>
+                <div class="rounded-xl overflow-hidden border border-slate-800 bg-slate-950 p-2">
+                    <img src="images/05_architecture_map.svg" alt="Architecture Map Diagram" class="w-full h-auto rounded-lg">
                 </div>
             </div>
         </section>
